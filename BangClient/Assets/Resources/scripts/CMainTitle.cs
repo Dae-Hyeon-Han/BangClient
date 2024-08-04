@@ -31,6 +31,7 @@ public class CMainTitle : MonoBehaviour
 
 		this.network_manager = GameObject.Find("NetworkManager").GetComponent<CNetworkManager>();
 
+		// 파일 변경할 것
 		this.waiting_img = Resources.Load("images/waiting") as Texture;
 
 		this.user_state = USER_STATE.NOT_CONNECTED;
