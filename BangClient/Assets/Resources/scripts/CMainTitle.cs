@@ -93,22 +93,22 @@ public class CMainTitle : MonoBehaviour
 	// GUI 그리는 부분
 	void OnGUI()
 	{
-		switch (this.user_state)
-		{
-			case USER_STATE.NOT_CONNECTED:
-				break;
+        switch (this.user_state)
+        {
+            case USER_STATE.NOT_CONNECTED:
+                break;
 
-			case USER_STATE.CONNECTED:
-				GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), this.bg);
-				break;
+            case USER_STATE.CONNECTED:
+                GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), this.bg);
+                break;
 
-			case USER_STATE.WAITING_MATCHING:
-				GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), this.bg);
-				GUI.DrawTexture(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 82),
-					this.waiting_img);
-				break;
-		}
-	}
+            case USER_STATE.WAITING_MATCHING:
+                GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), this.bg);
+                GUI.DrawTexture(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 82),
+                    this.waiting_img);
+                break;
+        }
+    }
 
 
 	/// <summary>
