@@ -34,7 +34,7 @@ namespace FreeNetUnity
 
 		public CFreeNetEventManager()
 		{
-			this.network_events = new Queue<NETWORK_EVENT>();
+			this.network_events = new Queue<NETWORK_EVENT>();			// 立加, 楷搬秦力, 场
 			this.network_message_events = new Queue<CPacket>();
 			this.cs_event = new object();
 		}

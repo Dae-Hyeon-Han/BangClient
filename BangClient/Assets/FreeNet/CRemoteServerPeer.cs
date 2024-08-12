@@ -7,6 +7,9 @@ using FreeNetUnity;
 
 namespace FreeNetUnity
 {
+	/// <summary>
+	/// 클라이언트에서 통신을 수행할 대상이 되는 서버 객체
+	/// </summary>
 	public class CRemoteServerPeer : IPeer
 	{
 		public CUserToken token { get; private set; }
