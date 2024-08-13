@@ -10,6 +10,7 @@ public class NetworkManager : MonoBehaviour
     string received_msg;
 
     public MonoBehaviour message_receiver;
+	public MainTitle title;
 
 	void Awake()
 	{
@@ -51,7 +52,7 @@ public class NetworkManager : MonoBehaviour
 					CLogManager.log("on connected");
 					this.received_msg += "on connected\n";
 
-					GameObject.Find("MainTitle").GetComponent<CMainTitle>().on_connected();
+					//GameObject.Find("MainTitle").GetComponent<CMainTitle>().on_connected();
 				}
 				break;
 
