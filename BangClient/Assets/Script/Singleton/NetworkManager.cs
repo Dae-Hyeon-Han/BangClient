@@ -26,8 +26,7 @@ public class NetworkManager : MonoBehaviour
 		this.gameserver.appcallback_on_message += on_message;
 	}
 
-
-	public void connect()
+    public void connect()
 	{
 		this.gameserver.connect("218.232.182.83", 7979);
 		//this.gameserver.connect("127.0.0.1", 7979);

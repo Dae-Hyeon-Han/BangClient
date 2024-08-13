@@ -2,7 +2,7 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-BangClient/[Ll]ibrary/
+BangClient/Library/
 BangClient/[Tt]emp/
 BangClient/[Oo]bj/
 BangClient/[Bb]uild/

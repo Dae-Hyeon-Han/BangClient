@@ -66,6 +66,24 @@ public class MainTitle : MonoBehaviour
         }
     }
 
+    // GUI 그리는 부분
+    void OnGUI()
+    {
+        switch (this.user_state)
+        {
+            case USER_STATE.NOT_CONNECTED:
+                break;
+
+            case USER_STATE.CONNECTED:
+                Debug.Log("연결 중");
+                break;
+
+            case USER_STATE.WAITING_MATCHING:
+                Debug.Log("매칭 됨");
+                break;
+        }
+    }
+
     public void on_connected()
     {
         this.user_state = USER_STATE.CONNECTED;
