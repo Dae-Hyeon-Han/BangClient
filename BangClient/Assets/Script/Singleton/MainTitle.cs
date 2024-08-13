@@ -66,28 +66,52 @@ public class MainTitle : MonoBehaviour
         }
     }
 
-    // GUI 그리는 부분
-    void OnGUI()
-    {
-        switch (this.user_state)
-        {
-            case USER_STATE.NOT_CONNECTED:
-                break;
+    //// GUI 그리는 부분
+    //void OnGUI()
+    //{
+    //    switch (this.user_state)
+    //    {
+    //        case USER_STATE.NOT_CONNECTED:
+    //            break;
 
-            case USER_STATE.CONNECTED:
-                Debug.Log("연결 중");
-                break;
+    //        case USER_STATE.CONNECTED:
+    //            Debug.Log("연결 중");
+    //            break;
 
-            case USER_STATE.WAITING_MATCHING:
-                Debug.Log("매칭 됨");
-                break;
-        }
-    }
+    //        case USER_STATE.WAITING_MATCHING:
+    //            Debug.Log("매칭 됨");
+    //            break;
+    //    }
+    //}
 
     public void on_connected()
     {
         this.user_state = USER_STATE.CONNECTED;
 
         StartCoroutine("after_connected");
+    }
+
+    /// <summary>
+	/// 패킷을 수신 했을 때 호출됨.
+	/// </summary>
+	/// <param name="protocol"></param>
+	/// <param name="msg"></param>
+	public void on_recv(CPacket msg)
+    {
+        // 제일 먼저 프로토콜 아이디를 꺼내온다.
+        PROTOCOL protocol_id = (PROTOCOL)msg.pop_protocol_id();
+
+        switch (protocol_id)
+        {
+            case PROTOCOL.START_LOADING:
+                {
+                    byte player_index = msg.pop_byte();
+
+                    //this.gamePlayManager.gameObject.SetActive(true);
+                    //this.gamePlayManager.start_loading(player_index);
+                    gameObject.SetActive(false);
+                }
+                break;
+        }
     }
 }
