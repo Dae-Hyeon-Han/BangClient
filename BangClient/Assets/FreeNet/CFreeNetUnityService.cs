@@ -105,6 +105,7 @@ namespace FreeNetUnity
 			}
 		}
 
+		// 서버에 패킷 보내기
 		public void send(CPacket msg)
 		{
 			try

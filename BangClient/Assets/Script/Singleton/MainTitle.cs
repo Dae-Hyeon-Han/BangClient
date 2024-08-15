@@ -55,6 +55,7 @@ public class MainTitle : MonoBehaviour
                 {
                     user_state = USER_STATE.WAITING_MATCHING;
 
+                    // 패킷 to server 예시?
                     CPacket msg = CPacket.create((short)PROTOCOL.ENTER_GAME_ROOM_REQ);
                     networkManager.send(msg);
 

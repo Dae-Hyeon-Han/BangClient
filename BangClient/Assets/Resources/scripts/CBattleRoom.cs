@@ -171,7 +171,7 @@ public class CBattleRoom : MonoBehaviour {
 				on_game_start(msg);
 				break;
 
-			case PROTOCOL.PLAYER_MOVED:
+			case PROTOCOL.PLAYER_MOVED:			// 다른 플레이어가 움직였을 때?
 				on_player_moved(msg);
 				break;
 
@@ -414,6 +414,8 @@ public class CBattleRoom : MonoBehaviour {
 	}
 
 	short selected_cell = short.MaxValue;
+
+	// 플레이어가 버튼(?) 클릭 할 때
 	void on_click(short cell)
 	{
 		// 자신의 차례가 아니면 처리하지 않고 리턴한다.
@@ -427,7 +429,7 @@ public class CBattleRoom : MonoBehaviour {
 		switch(this.step)
 		{
 		case 0:
-			if (validate_begin_cell(cell))
+			if (validate_begin_cell(cell))			// 이게 뭔지?
 			{
 				this.selected_cell = cell;
 				Debug.Log("go to step2");
@@ -463,6 +465,7 @@ public class CBattleRoom : MonoBehaviour {
 					return;
 				}
 
+				// 플레이어의 움직임 요청
 				CPacket msg = CPacket.create((short)PROTOCOL.MOVING_REQ);
 				msg.push(this.selected_cell);
 				msg.push(cell);
@@ -474,6 +477,7 @@ public class CBattleRoom : MonoBehaviour {
 		}
 	}
 
+	// 적 셀 공격을 택했을 때
 	IEnumerator on_selected_cell_to_attack(byte player_index, short from, short to)
 	{
 		byte distance = CHelper.howfar_from_clicked_cell(from, to);
@@ -543,6 +547,7 @@ public class CBattleRoom : MonoBehaviour {
 		}
 	}
 	
+	// 이게 뭔지?
 	bool validate_begin_cell(short cell)
 	{
 		return this.players[this.current_player_index].cell_indexes.Exists(obj => obj == cell);

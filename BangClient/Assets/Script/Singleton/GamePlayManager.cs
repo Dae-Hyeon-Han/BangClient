@@ -141,6 +141,6 @@ public class GamePlayManager : MonoBehaviour
     // 턴 시작 전 주사위 굴리기에 대한 코드
     IEnumerator GambleDice(byte playerIndex, short number)
     {
-
+        yield return null;
     }
 }
