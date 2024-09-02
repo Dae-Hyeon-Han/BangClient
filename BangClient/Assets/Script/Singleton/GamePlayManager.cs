@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FreeNet;
 using BangGameServer;
+using TMPro;
 
 
 public class GamePlayManager : MonoBehaviour
@@ -25,35 +26,28 @@ public class GamePlayManager : MonoBehaviour
     public MainTitle mainTitle;
 
     // 네트워크 데이터 송,수신을 위한 네트워크 매니저 레퍼런스
-    public CNetworkManager networkManager;
+    public NetworkManager networkManager;
+
+    // 대화용 텍스트
+    public TextMeshProUGUI RecvText;        // 대화내역이 기록되는 창
+    public TextMeshProUGUI SendText;        // 내가 입력한 텍스트
 
     // 게임 상태에 따라 각각 다른 GUI 모습을 구현하기 위해 필요한 상태 변수
     GAME_STATE game_state;
 
     // OnGui 메서드에서 호출할 델리게이트
     // 여러종류의 메서드를 만들어 놓고 상황에 맞게 draw에 대입해 주는 방식으로 gui를 변경시킨다.
-    delegate void GUIFUNC();
-    GUIFUNC draw;
+    //delegate void GUIFUNC();
+    //GUIFUNC draw;
 
     // 승리한 플레이어 인덱스
     byte winPlayerIndex;
 
     // 현재 진행 중인 플레이어를 나타내는 객체. 안 쓸듯?
-    CBattleInfoPanel battleInfo;
+    //CBattleInfoPanel battleInfo;
 
     // 게임이 종료 되었는지를 나타내는 플래그
     bool isGameFinished;
-
-    private void Awake()
-    {
-        
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -106,6 +100,9 @@ public class GamePlayManager : MonoBehaviour
                 break;
             case BangProtocol.GAME_OVER:
                 break;
+            case BangProtocol.PLAYER_CHAT_RECV:
+                TextRecv(msg);
+                break;
         }
     }
 
@@ -142,5 +139,19 @@ public class GamePlayManager : MonoBehaviour
     IEnumerator GambleDice(byte playerIndex, short number)
     {
         yield return null;
+    }
+
+    // 채팅 보내기에 대한 메서드
+    public void TextSend()
+    {
+        //Debug.Log($"{SendText.text}를 보냄");
+        CPacket msg = CPacket.create((short)BangProtocol.PLAYER_CHAT_SEND);
+        msg.push(SendText.text);
+    }
+
+    // 채팅 받기에 대한 메서드
+    void TextRecv(CPacket msg)
+    {
+        //RecvText.text = msg.pop_string();
     }
 }

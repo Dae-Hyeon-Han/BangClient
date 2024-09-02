@@ -56,7 +56,7 @@ public class MainTitle : MonoBehaviour
                     user_state = USER_STATE.WAITING_MATCHING;
 
                     // 패킷 to server 예시?
-                    CPacket msg = CPacket.create((short)PROTOCOL.ENTER_GAME_ROOM_REQ);
+                    CPacket msg = CPacket.create((short)BangProtocol.ENTER_GAME_ROOM_REQ);
                     networkManager.send(msg);
 
                     StopCoroutine("after_connected");
@@ -100,11 +100,11 @@ public class MainTitle : MonoBehaviour
 	public void on_recv(CPacket msg)
     {
         // 제일 먼저 프로토콜 아이디를 꺼내온다.
-        PROTOCOL protocol_id = (PROTOCOL)msg.pop_protocol_id();
+        BangProtocol protocol_id = (BangProtocol)msg.pop_protocol_id();
 
         switch (protocol_id)
         {
-            case PROTOCOL.START_LOADING:
+            case BangProtocol.START_LOADING:
                 {
                     byte player_index = msg.pop_byte();
 
