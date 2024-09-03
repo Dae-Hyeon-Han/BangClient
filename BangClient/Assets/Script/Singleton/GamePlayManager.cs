@@ -5,7 +5,7 @@ using FreeNet;
 using BangGameServer;
 using TMPro;
 
-
+// BattleRoom 역할
 public class GamePlayManager : MonoBehaviour
 {
     enum GAME_STATE
@@ -35,11 +35,6 @@ public class GamePlayManager : MonoBehaviour
     // 게임 상태에 따라 각각 다른 GUI 모습을 구현하기 위해 필요한 상태 변수
     GAME_STATE game_state;
 
-    // OnGui 메서드에서 호출할 델리게이트
-    // 여러종류의 메서드를 만들어 놓고 상황에 맞게 draw에 대입해 주는 방식으로 gui를 변경시킨다.
-    //delegate void GUIFUNC();
-    //GUIFUNC draw;
-
     // 승리한 플레이어 인덱스
     byte winPlayerIndex;
 
@@ -52,7 +47,7 @@ public class GamePlayManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isGameFinished)
+        if (isGameFinished)
         {
             if (Input.GetMouseButtonDown(0))
                 BackToMain();
@@ -86,9 +81,12 @@ public class GamePlayManager : MonoBehaviour
     {
         BangProtocol protocol_id = (BangProtocol)msg.pop_protocol_id();
 
-        switch(protocol_id)
+        Debug.Log($"{protocol_id}");
+
+        switch (protocol_id)
         {
             case BangProtocol.GAME_START:
+
                 break;
             case BangProtocol.PLAYER_FIRST_ACT:
                 break;
@@ -132,7 +130,7 @@ public class GamePlayManager : MonoBehaviour
         byte playerIndex = msg.pop_byte();
         short from = msg.pop_int16();
 
-        
+
     }
 
     // 턴 시작 전 주사위 굴리기에 대한 코드
@@ -144,9 +142,10 @@ public class GamePlayManager : MonoBehaviour
     // 채팅 보내기에 대한 메서드
     public void TextSend()
     {
-        //Debug.Log($"{SendText.text}를 보냄");
+        Debug.Log($"{SendText.text}를 보냄");
         CPacket msg = CPacket.create((short)BangProtocol.PLAYER_CHAT_SEND);
         msg.push(SendText.text);
+        networkManager.send(msg);
     }
 
     // 채팅 받기에 대한 메서드

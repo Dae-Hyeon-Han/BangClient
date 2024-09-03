@@ -51,7 +51,7 @@ public class NetworkManager : MonoBehaviour
 					CLogManager.log("on connected");
 					this.received_msg += "on connected\n";
 
-					//GameObject.Find("MainTitle").GetComponent<CMainTitle>().on_connected();
+					title.on_connected();
 				}
 				break;
 

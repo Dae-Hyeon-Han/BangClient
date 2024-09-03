@@ -21,9 +21,9 @@ public class MainTitle : MonoBehaviour
     // 게임이 시작되면 서버 연결 전까지 초기화할 작업.
     void Start()
     {
-        this.user_state = USER_STATE.NOT_CONNECTED;
+        user_state = USER_STATE.NOT_CONNECTED;
         gamePlayManager.gameObject.SetActive(false);
-        this.user_state = USER_STATE.NOT_CONNECTED;
+        user_state = USER_STATE.NOT_CONNECTED;
         Enter();
     }
 
@@ -32,7 +32,7 @@ public class MainTitle : MonoBehaviour
         StopCoroutine("after_connected");
         networkManager.message_receiver = this;
 
-        if(!this.networkManager.is_connected())
+        if (!networkManager.is_connected())
         {
             user_state = USER_STATE.CONNECTED;
             networkManager.connect();
@@ -47,9 +47,9 @@ public class MainTitle : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        while(true)
+        while (true)
         {
-            if(user_state == USER_STATE.CONNECTED)
+            if (user_state == USER_STATE.CONNECTED)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -59,6 +59,8 @@ public class MainTitle : MonoBehaviour
                     CPacket msg = CPacket.create((short)BangProtocol.ENTER_GAME_ROOM_REQ);
                     networkManager.send(msg);
 
+                    Debug.Log("연결!");
+
                     StopCoroutine("after_connected");
                 }
             }
@@ -67,27 +69,9 @@ public class MainTitle : MonoBehaviour
         }
     }
 
-    //// GUI 그리는 부분
-    //void OnGUI()
-    //{
-    //    switch (this.user_state)
-    //    {
-    //        case USER_STATE.NOT_CONNECTED:
-    //            break;
-
-    //        case USER_STATE.CONNECTED:
-    //            Debug.Log("연결 중");
-    //            break;
-
-    //        case USER_STATE.WAITING_MATCHING:
-    //            Debug.Log("매칭 됨");
-    //            break;
-    //    }
-    //}
-
     public void on_connected()
     {
-        this.user_state = USER_STATE.CONNECTED;
+        user_state = USER_STATE.CONNECTED;
 
         StartCoroutine("after_connected");
     }
@@ -101,15 +85,15 @@ public class MainTitle : MonoBehaviour
     {
         // 제일 먼저 프로토콜 아이디를 꺼내온다.
         BangProtocol protocol_id = (BangProtocol)msg.pop_protocol_id();
+        Debug.Log($"{protocol_id}");
 
         switch (protocol_id)
         {
             case BangProtocol.START_LOADING:
                 {
                     byte player_index = msg.pop_byte();
-
-                    //this.gamePlayManager.gameObject.SetActive(true);
-                    //this.gamePlayManager.start_loading(player_index);
+                    gamePlayManager.gameObject.SetActive(true);
+                    gamePlayManager.StartLoading(player_index);
                     gameObject.SetActive(false);
                 }
                 break;
