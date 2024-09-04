@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using FreeNet;
 using BangGameServer;
+using TMPro;
 
 public class MainTitle : MonoBehaviour
 {
     public NetworkManager networkManager;
     public GamePlayManager gamePlayManager;
+    public Canvas LogInCanvas;
+    public TextMeshProUGUI id;
+    bool isInput;
 
     USER_STATE user_state;
 
@@ -49,20 +53,18 @@ public class MainTitle : MonoBehaviour
 
         while (true)
         {
-            if (user_state == USER_STATE.CONNECTED)
+            // 연결 시도 중이며, 인풋이 트루면 접속함
+            if (user_state == USER_STATE.CONNECTED && isInput)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    user_state = USER_STATE.WAITING_MATCHING;
+                user_state = USER_STATE.WAITING_MATCHING;
 
-                    // 패킷 to server 예시?
-                    CPacket msg = CPacket.create((short)BangProtocol.ENTER_GAME_ROOM_REQ);
-                    networkManager.send(msg);
+                // 패킷 to server 예시?
+                CPacket msg = CPacket.create((short)BangProtocol.ENTER_GAME_ROOM_REQ);
+                networkManager.send(msg);
 
-                    Debug.Log("연결!");
+                Debug.Log("연결!");
 
-                    StopCoroutine("after_connected");
-                }
+                StopCoroutine("after_connected");
             }
 
             yield return 0;
@@ -85,18 +87,27 @@ public class MainTitle : MonoBehaviour
     {
         // 제일 먼저 프로토콜 아이디를 꺼내온다.
         BangProtocol protocol_id = (BangProtocol)msg.pop_protocol_id();
-        Debug.Log($"{protocol_id}");
+        //Debug.Log($"{protocol_id}");
 
         switch (protocol_id)
         {
             case BangProtocol.START_LOADING:
                 {
                     byte player_index = msg.pop_byte();
-                    gamePlayManager.gameObject.SetActive(true);
+                    //gamePlayManager.gameObject.SetActive(true);
                     gamePlayManager.StartLoading(player_index);
                     gameObject.SetActive(false);
                 }
                 break;
         }
+    }
+
+    public void InputId()
+    {
+        // 대기 중 화면을 그리는 메서드 추가 요망
+        gamePlayManager.gameObject.SetActive(true);
+        gamePlayManager.MyId = id.text;
+        LogInCanvas.gameObject.SetActive(false);
+        isInput = true;
     }
 }

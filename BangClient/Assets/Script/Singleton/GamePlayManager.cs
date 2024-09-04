@@ -28,9 +28,12 @@ public class GamePlayManager : MonoBehaviour
     // 네트워크 데이터 송,수신을 위한 네트워크 매니저 레퍼런스
     public NetworkManager networkManager;
 
+    // 로그인 용
+
     // 대화용 텍스트
     public TextMeshProUGUI RecvText;        // 대화내역이 기록되는 창
     public TextMeshProUGUI SendText;        // 내가 입력한 텍스트
+    private string myId;                     // 챗 할 때 이 아이디 값을 보낼 것
 
     // 게임 상태에 따라 각각 다른 GUI 모습을 구현하기 위해 필요한 상태 변수
     GAME_STATE game_state;
@@ -43,6 +46,12 @@ public class GamePlayManager : MonoBehaviour
 
     // 게임이 종료 되었는지를 나타내는 플래그
     bool isGameFinished;
+
+    public string MyId
+    {
+        get { return myId; }
+        set { myId = value; }
+    }
 
     // Update is called once per frame
     void Update()
@@ -99,7 +108,9 @@ public class GamePlayManager : MonoBehaviour
             case BangProtocol.GAME_OVER:
                 break;
             case BangProtocol.PLAYER_CHAT_RECV:
-                TextRecv(msg);
+                {
+                    TextRecv(msg);
+                }
                 break;
         }
     }
@@ -144,13 +155,13 @@ public class GamePlayManager : MonoBehaviour
     {
         Debug.Log($"{SendText.text}를 보냄");
         CPacket msg = CPacket.create((short)BangProtocol.PLAYER_CHAT_SEND);
-        msg.push(SendText.text);
+        msg.push(myId+SendText.text);               // 아이디와 메시지 사이에 프로토콜을 넣을 필요 있음
         networkManager.send(msg);
     }
 
     // 채팅 받기에 대한 메서드
     void TextRecv(CPacket msg)
     {
-        //RecvText.text = msg.pop_string();
+        RecvText.text += msg.pop_string() + "\n";
     }
 }
