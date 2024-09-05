@@ -74,6 +74,7 @@ public class GamePlayManager : MonoBehaviour
     /// </summary>
     public void StartLoading(byte playerMeIndex)
     {
+        Debug.Log("로딩 시작");
         Clear();
         networkManager.message_receiver = this;
         player_me_index = playerMeIndex;

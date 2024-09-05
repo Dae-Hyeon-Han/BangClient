@@ -87,8 +87,9 @@ public class MainTitle : MonoBehaviour
     {
         // 제일 먼저 프로토콜 아이디를 꺼내온다.
         BangProtocol protocol_id = (BangProtocol)msg.pop_protocol_id();
-        //Debug.Log($"{protocol_id}");
+        Debug.Log($"{protocol_id}");
 
+        // 현재 문제 : StartLoading 이 먼저 와야함
         switch (protocol_id)
         {
             case BangProtocol.START_LOADING:
