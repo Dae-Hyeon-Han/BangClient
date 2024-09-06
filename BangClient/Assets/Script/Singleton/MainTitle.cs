@@ -27,8 +27,26 @@ public class MainTitle : MonoBehaviour
     {
         user_state = USER_STATE.NOT_CONNECTED;
         gamePlayManager.gameObject.SetActive(false);
-        user_state = USER_STATE.NOT_CONNECTED;
+        //user_state = USER_STATE.NOT_CONNECTED;        // 왜 한번 더 있는지?
         Enter();
+    }
+
+    private void Update()
+    {
+        switch (user_state)
+        {
+            // 연결 전
+            case USER_STATE.NOT_CONNECTED:
+                break;
+
+            // 연결 후
+            case USER_STATE.CONNECTED:
+                break;
+
+            // 매칭 대기 중일 때
+            case USER_STATE.WAITING_MATCHING:
+                break;
+        }
     }
 
     public void Enter()
