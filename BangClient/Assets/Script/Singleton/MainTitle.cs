@@ -10,6 +10,7 @@ public class MainTitle : MonoBehaviour
     public NetworkManager networkManager;
     public GamePlayManager gamePlayManager;
     public Canvas LogInCanvas;
+    public Canvas WatingMatching;
     public TextMeshProUGUI id;
     bool isInput;
 
@@ -27,26 +28,44 @@ public class MainTitle : MonoBehaviour
     {
         user_state = USER_STATE.NOT_CONNECTED;
         gamePlayManager.gameObject.SetActive(false);
-        //user_state = USER_STATE.NOT_CONNECTED;        // 왜 한번 더 있는지?
+        user_state = USER_STATE.NOT_CONNECTED;        // 왜 한번 더 있는지?
         Enter();
     }
 
     private void Update()
     {
-        switch (user_state)
-        {
-            // 연결 전
-            case USER_STATE.NOT_CONNECTED:
-                break;
+        //switch (user_state)
+        //{
+        //    // 연결 전
+        //    case USER_STATE.NOT_CONNECTED:
+        //        {
+        //            LogInCanvas.gameObject.SetActive(true);
+        //            gamePlayManager.gameObject.SetActive(false);
+        //            WatingMatching.gameObject.SetActive(false);
+        //            Debug.Log("연결1");
+        //        }
+        //        break;
 
-            // 연결 후
-            case USER_STATE.CONNECTED:
-                break;
+        //    // 연결 후
+        //    case USER_STATE.CONNECTED:
+        //        {
+        //            LogInCanvas.gameObject.SetActive(false);
+        //            gamePlayManager.gameObject.SetActive(true);
+        //            WatingMatching.gameObject.SetActive(false);
+        //            Debug.Log("연결2");
+        //        }
+        //        break;
 
-            // 매칭 대기 중일 때
-            case USER_STATE.WAITING_MATCHING:
-                break;
-        }
+        //    // 매칭 대기 중일 때
+        //    case USER_STATE.WAITING_MATCHING:
+        //        {
+        //            LogInCanvas.gameObject.SetActive(false);
+        //            gamePlayManager.gameObject.SetActive(false);
+        //            WatingMatching.gameObject.SetActive(true);
+        //            Debug.Log("연결3");
+        //        }
+        //        break;
+        //}
     }
 
     public void Enter()
