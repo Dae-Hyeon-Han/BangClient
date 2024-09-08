@@ -28,6 +28,7 @@ public class MainTitle : MonoBehaviour
     {
         user_state = USER_STATE.NOT_CONNECTED;
         gamePlayManager.gameObject.SetActive(false);
+        WatingMatching.gameObject.SetActive(false);
         user_state = USER_STATE.NOT_CONNECTED;        // 왜 한번 더 있는지?
         Enter();
     }
@@ -90,6 +91,8 @@ public class MainTitle : MonoBehaviour
 
         while (true)
         {
+            Debug.Log($"isInput: {isInput}");
+
             // 연결 시도 중이며, 인풋이 트루면 접속함
             if (user_state == USER_STATE.CONNECTED && isInput)
             {
@@ -120,7 +123,7 @@ public class MainTitle : MonoBehaviour
 	/// </summary>
 	/// <param name="protocol"></param>
 	/// <param name="msg"></param>
-	public void on_recv(CPacket msg)
+	public void OnRecv(CPacket msg)
     {
         // 제일 먼저 프로토콜 아이디를 꺼내온다.
         BangProtocol protocol_id = (BangProtocol)msg.pop_protocol_id();
@@ -132,8 +135,10 @@ public class MainTitle : MonoBehaviour
             case BangProtocol.START_LOADING:
                 {
                     byte player_index = msg.pop_byte();
-                    //gamePlayManager.gameObject.SetActive(true);
+
+                    gamePlayManager.gameObject.SetActive(true);
                     gamePlayManager.StartLoading(player_index);
+                    WatingMatching.gameObject.SetActive(false);
                     gameObject.SetActive(false);
                 }
                 break;
@@ -143,9 +148,10 @@ public class MainTitle : MonoBehaviour
     public void InputId()
     {
         // 대기 중 화면을 그리는 메서드 추가 요망
-        gamePlayManager.gameObject.SetActive(true);
+        //gamePlayManager.gameObject.SetActive(true);
         gamePlayManager.MyId = id.text;
         LogInCanvas.gameObject.SetActive(false);
+        WatingMatching.gameObject.SetActive(true);
         isInput = true;
     }
 }

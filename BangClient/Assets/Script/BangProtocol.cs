@@ -20,9 +20,9 @@ namespace BangGameServer
 		START_PLAYER_TURN = 4,
 
 		// 채팅 입력
-		PLAYER_CHAT_SEND = 5,
+		PLAYER_CHAT = 5,
 
-		// 채팅 받음
+		// 채팅 받음(삭제 필요)
 		PLAYER_CHAT_RECV = 6,
 
 		// 플레이어의 턴에 선행할 행동

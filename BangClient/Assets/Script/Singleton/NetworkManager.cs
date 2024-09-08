@@ -65,7 +65,8 @@ public class NetworkManager : MonoBehaviour
 
 	void on_message(CPacket msg)
 	{
-		this.message_receiver.SendMessage("on_recv", msg);
+		Debug.Log("메시지 받음");
+		this.message_receiver.SendMessage("OnRecv", msg);
 	}
 
 	public void send(CPacket msg)

@@ -66,7 +66,10 @@ public class GamePlayManager : MonoBehaviour
     // 게임 시작 시에 초기화용 메서드
     public void Clear()
     {
-
+        this.current_player_index = 0;
+        //this.step = 0;
+        //this.draw = this.on_gui_playing;
+        //this.is_game_finished = false;
     }
 
     /// <summary>
@@ -96,20 +99,32 @@ public class GamePlayManager : MonoBehaviour
         switch (protocol_id)
         {
             case BangProtocol.GAME_START:
-
+                Debug.Log("게임 시작");
                 break;
             case BangProtocol.PLAYER_FIRST_ACT:
+                Debug.Log("플레이어 선행 작업");
                 break;
             case BangProtocol.PLAYER_NORMAL_ACT:
+                Debug.Log("플레이어 턴 작업");
                 break;
             case BangProtocol.START_PLAYER_TURN:
+                Debug.Log("ㅁ?ㄹ");
                 break;
             case BangProtocol.ROOM_REMOVED:
+                {
+                    OnRoomRemoved();
+                    Debug.Log("방 파괴");
+                }
                 break;
             case BangProtocol.GAME_OVER:
-                break;
-            case BangProtocol.PLAYER_CHAT_RECV:
                 {
+                    //OnGameOver();
+                    Debug.Log("유다희");
+                }
+                break;
+            case BangProtocol.PLAYER_CHAT:
+                {
+                    Debug.Log("메시지 받음");
                     TextRecv(msg);
                 }
                 break;
@@ -155,7 +170,7 @@ public class GamePlayManager : MonoBehaviour
     public void TextSend()
     {
         Debug.Log($"{SendText.text}를 보냄");
-        CPacket msg = CPacket.create((short)BangProtocol.PLAYER_CHAT_SEND);
+        CPacket msg = CPacket.create((short)BangProtocol.PLAYER_CHAT);
         msg.push(myId+SendText.text);               // 아이디와 메시지 사이에 프로토콜을 넣을 필요 있음
         networkManager.send(msg);
     }
