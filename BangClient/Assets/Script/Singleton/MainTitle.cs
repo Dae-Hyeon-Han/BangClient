@@ -19,8 +19,8 @@ public class MainTitle : MonoBehaviour
     enum USER_STATE
     {
         NOT_CONNECTED,
-        CONNECTED,
-        WAITING_MATCHING
+        CONNECTED,              // 연결 완료 후
+        WAITING_MATCHING        // 매칭 대기 중
     }
 
     // 게임이 시작되면 서버 연결 전까지 초기화할 작업.

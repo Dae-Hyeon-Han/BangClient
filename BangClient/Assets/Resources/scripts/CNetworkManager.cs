@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using FreeNet;
 using FreeNetUnity;
-using VirusWarGameServer;
+using BangGameServer;
 
 // 서버에 접속하고 수신된 메시지를 다른 오브젝트로 전달하는 역할의 클래스
 public class CNetworkManager : MonoBehaviour 

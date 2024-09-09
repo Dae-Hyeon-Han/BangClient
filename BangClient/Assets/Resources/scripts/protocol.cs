@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VirusWarGameServer
+namespace BangGameServer
 {
 	public enum PROTOCOL : short
 	{

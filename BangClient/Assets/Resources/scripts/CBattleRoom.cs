@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using FreeNet;
-using VirusWarGameServer;
+using BangGameServer;
 
 public class CBattleRoom : MonoBehaviour {
 
