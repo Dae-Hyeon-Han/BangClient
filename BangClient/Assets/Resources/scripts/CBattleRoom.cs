@@ -169,22 +169,27 @@ public class CBattleRoom : MonoBehaviour {
 		{
 			case PROTOCOL.GAME_START:
 				on_game_start(msg);
+				Debug.Log("게임 시작!");
 				break;
 
 			case PROTOCOL.PLAYER_MOVED:			// 다른 플레이어가 움직였을 때?
 				on_player_moved(msg);
+				Debug.Log("움직임!");
 				break;
 
 			case PROTOCOL.START_PLAYER_TURN:
 				on_start_player_turn(msg);
+				Debug.Log("플레이어 턴 시작!");
 				break;
 
 			case PROTOCOL.ROOM_REMOVED:
 				on_room_removed();
+				Debug.Log("방 파괴!");
 				break;
 
 			case PROTOCOL.GAME_OVER:
 				on_game_over(msg);
+				Debug.Log("게임 오버!");
 				break;
 		}
 	}

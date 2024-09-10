@@ -80,25 +80,14 @@ public class CMainTitle : MonoBehaviour
 
         while (true)
         {
-            if (this.user_state == USER_STATE.CONNECTED)
+            if (this.user_state == USER_STATE.WAITING_MATCHING && isInput)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    this.user_state = USER_STATE.WAITING_MATCHING;
-
-                    CPacket msg = CPacket.create((short)PROTOCOL.ENTER_GAME_ROOM_REQ);
-                    this.network_manager.send(msg);
-
-                    StopCoroutine("after_connected");
-                }
-
-
-
-                //CPacket msg = CPacket.create((short)PROTOCOL.ENTER_GAME_ROOM_REQ);
-                //this.network_manager.send(msg);
+                #region
+                CPacket msg = CPacket.create((short)PROTOCOL.ENTER_GAME_ROOM_REQ);
+                this.network_manager.send(msg);
 
                 StopCoroutine("after_connected");
-
+                #endregion
             }
 
             yield return 0;
@@ -130,11 +119,12 @@ public class CMainTitle : MonoBehaviour
     /// 서버에 접속이 완료되면 호출됨.
     /// </summary>
     public void on_connected()
-    {
-        this.user_state = USER_STATE.CONNECTED;
+	{
+		this.user_state = USER_STATE.CONNECTED;
+		Debug.Log("연결됨");
 
-        StartCoroutine("after_connected");
-    }
+		StartCoroutine("after_connected");
+	}
 
 
     /// <summary>
@@ -166,8 +156,8 @@ public class CMainTitle : MonoBehaviour
         // 대기 중 화면을 그리는 메서드 추가 요망
         //gamePlayManager.gameObject.SetActive(true);
         //CBattleRoom.MyId = id.text;
-        //this.user_state = USER_STATE.WAITING_MATCHING;
-        //LogInCanvas.gameObject.SetActive(false);
-        //isInput = true;
+        this.user_state = USER_STATE.WAITING_MATCHING;
+        LogInCanvas.gameObject.SetActive(false);
+        isInput = true;
     }
 }
