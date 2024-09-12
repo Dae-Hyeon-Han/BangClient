@@ -245,7 +245,7 @@ public class CBattleRoom : MonoBehaviour {
 	//float ratio = 1.0f;
 	void OnGUI()
 	{
-		this.draw();
+		//this.draw();
 	}
 
 
@@ -354,4 +354,10 @@ public class CBattleRoom : MonoBehaviour {
 	{
 		return this.players[this.current_player_index].cell_indexes.Exists(obj => obj == cell);
 	}
+
+	// 여기서부터 뱅용 메서드
+	public void ShotTarget()
+    {
+
+    }
 }

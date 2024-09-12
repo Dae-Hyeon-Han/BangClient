@@ -30,6 +30,7 @@ public class CPlayer : MonoBehaviour {
 	public void initialize(byte player_index)
 	{
 		this.player_index = player_index;
+		Debug.Log($"{gameObject.name},{this.player_index}");
 	}
 	
 	public void add(short cell)
@@ -67,4 +68,7 @@ public class CPlayer : MonoBehaviour {
 	{
 		return this.cell_indexes.Count;
 	}
+
+	// 여기서부터 뱅용
+
 }
