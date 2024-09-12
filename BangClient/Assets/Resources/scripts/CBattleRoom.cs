@@ -18,13 +18,13 @@ public class CBattleRoom : MonoBehaviour {
 	List<CPlayer> players;
 
 	// 진행중인 게임 보드판의 상태를 나타내는 데이터.
-	List<short> board;
+	//List<short> board;
 
 	// 0~49까지의 인덱스를 갖고 있는 보드판 데이터.
-	List<short> table_board;
+	//List<short> table_board;
 
 	// 공격 가능한 범위를 나타낼 때 사용하는 리스트.
-	List<short> available_attack_cells;
+	//List<short> available_attack_cells;
 
 	// 현재 턴을 진행중인 플레이어 인덱스.
 	byte current_player_index;
@@ -55,7 +55,7 @@ public class CBattleRoom : MonoBehaviour {
 
 	// 점수를 표시하기 위한 이미지 숫자 객체.
 	// 선명하고 예쁘게 표현하기 위해 폰트 대신 이미지로 만들어 사용한다.
-	CImageNumber score_images;
+	//CImageNumber score_images;
 
 	// 현재 진행중인 플레이어를 나타내는 객체.
 	CBattleInfoPanel battle_info;
@@ -64,80 +64,40 @@ public class CBattleRoom : MonoBehaviour {
 	bool is_game_finished;
 
 	// 각종 이미지 텍스쳐들.
-	List<Texture> img_players;
-	Texture background;
-	Texture blank_image;
-	Texture game_board;
+	//List<Texture> img_players;
+	//Texture background;
+	//Texture blank_image;
+	//Texture game_board;
 
-	Texture graycell;
-	Texture focus_cell;
+	//Texture graycell;
+	//Texture focus_cell;
 
-	Texture win_img;
-	Texture lose_img;
-	Texture draw_img;
-	Texture gray_transparent;
+	//Texture win_img;
+	//Texture lose_img;
+	//Texture draw_img;
+	//Texture gray_transparent;
 
 	void Awake()
 	{
-		this.table_board = new List<short>();
-		this.available_attack_cells = new List<short>();
-
-		this.graycell = Resources.Load("images/graycell") as Texture;
-		this.focus_cell = Resources.Load("images/border") as Texture;
-		
-		this.blank_image = Resources.Load("images/blank") as Texture;
-		this.game_board = Resources.Load("images/gameboard") as Texture;
-		this.background = Resources.Load("images/gameboard_bg") as Texture;
-		this.img_players = new List<Texture>();
-		this.img_players.Add(Resources.Load("images/red") as Texture);
-		this.img_players.Add(Resources.Load("images/blue") as Texture);
-		
-		this.win_img = Resources.Load("images/win") as Texture;
-		this.lose_img = Resources.Load("images/lose") as Texture;
-		this.draw_img = Resources.Load("images/draw") as Texture;
-		this.gray_transparent = Resources.Load("images/gray_transparent") as Texture;
-		
-		this.board = new List<short>();
-
 		this.network_manager = GameObject.Find("NetworkManager").GetComponent<CNetworkManager>();
 
 		this.game_state = GAME_STATE.READY;
 
 		this.main_title = GameObject.Find("MainTitle").GetComponent<CMainTitle>();
-		this.score_images = gameObject.AddComponent<CImageNumber>();
 
 		this.win_player_index = byte.MaxValue;
-		this.draw = this.on_gui_playing;
 		this.battle_info = gameObject.AddComponent<CBattleInfoPanel>();
 	}
 	
 	void reset()
 	{
 		// 보드판 데이터를 모두 초기화 한다.
-		this.board.Clear();
-		this.table_board.Clear();
-		for (int i = 0; i < COL_COUNT * COL_COUNT; ++i)
-		{
-			this.board.Add(short.MaxValue);
-			this.table_board.Add((short)i);
-		}
-
-		// 보드판에 각 플레이어들의 위치를 입력한다.
-		this.players.ForEach(obj =>
-		{
-			obj.cell_indexes.ForEach(cell =>
-			{
-				this.board[cell] = obj.player_index;
-			});
-		});
 	}
 
 
 	void clear()
 	{
 		this.current_player_index = 0;
-		this.step = 0;
-		this.draw = this.on_gui_playing;
 		this.is_game_finished = false;
 	}
 
@@ -282,7 +242,7 @@ public class CBattleRoom : MonoBehaviour {
 
 
 
-	float ratio = 1.0f;
+	//float ratio = 1.0f;
 	void OnGUI()
 	{
 		this.draw();
@@ -299,8 +259,6 @@ public class CBattleRoom : MonoBehaviour {
 			return;
 		}
 
-		this.ratio = Screen.width / 800.0f;
-
 		draw_board();
 	}
 
@@ -311,114 +269,12 @@ public class CBattleRoom : MonoBehaviour {
 	void on_gui_game_result()
 	{
 		on_gui_playing();
-
-		GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), this.gray_transparent);
-		GUI.BeginGroup(new Rect(Screen.width / 2 - 173, Screen.height / 2 - 84, 
-			this.win_img.width, this.win_img.height));
-		{
-			if (this.win_player_index == byte.MaxValue)
-			{
-				GUI.DrawTexture(new Rect(0, 0, this.draw_img.width, this.draw_img.height), this.draw_img);
-			}
-			else
-			{
-				// win, lose이미지 출력.
-				if (this.player_me_index == this.win_player_index)
-				{
-					GUI.DrawTexture(new Rect(0, 0, 346, 169), this.win_img);
-				}
-				else
-				{
-					GUI.DrawTexture(new Rect(0, 0, 346, 169), this.lose_img);
-				}
-			}
-
-			// 자기 자신의 플레이어 이미지 출력.
-			Texture character = this.img_players[this.player_me_index];
-			GUI.DrawTexture(new Rect(28, 43, character.width, character.height), character);
-		}
-		GUI.EndGroup();
 	}
 	
 	void draw_board()
 	{
-		float scaled_height = 480.0f * ratio;
-		float gap_height = Screen.height - scaled_height;
 		
-		float outline_left = 0;
-		float outline_top = gap_height * 0.5f;
-		float outline_width = Screen.width;
-		float outline_height = scaled_height;
-		
-		float hor_center = outline_width * 0.5f;
-		float ver_center = outline_height * 0.5f;
-
-		GUI.BeginGroup(new Rect(0, 0, outline_width, Screen.height));
-		
-		// Draw background to full of the screen.
-		GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), this.background);
-
-		// 점수 표시.
-		// red(index 0)팀은 왼쪽,
-		// blue(index 1)팀은 오른쪽에 표시.
-		Rect redteam_rect = new Rect(outline_left + 20 * ratio, ver_center - 60 * ratio, 100 * ratio, 60 * ratio);
-		Rect blueteam_rect = new Rect(outline_width - 120 * ratio, ver_center - 60 * ratio, 100 * ratio, 60 * ratio);
-		this.score_images.print(this.players[0].get_virus_count(), redteam_rect.xMin, redteam_rect.yMin, ratio);
-		this.score_images.print(this.players[1].get_virus_count(), blueteam_rect.xMin, blueteam_rect.yMin, ratio);
-
-		// Draw a board(alignment : center).
-		GUI.DrawTexture(new Rect(0, outline_top, outline_width, outline_height), this.game_board);
-
-		// 현재 진행중인 턴 표시.
-		this.battle_info.draw_turn_info(this.current_player_index, ratio);
-		this.battle_info.draw_myinfo(this.player_me_index, ratio);
-
-		int width = (int)(60 * ratio);
-		int celloutline_width = width * CBattleRoom.COL_COUNT;
-		float half_celloutline_width = celloutline_width*0.5f;
-		
-		GUI.BeginGroup(new Rect(hor_center-half_celloutline_width, 
-			ver_center-half_celloutline_width + outline_top, celloutline_width, celloutline_width));
-		
-		List<int> current_turn = new List<int>();
-		short index = 0;
-		for (int row=0; row<CBattleRoom.COL_COUNT; ++row)
-		{
-			int gap_y = 0;//(row * 1);
-			for (int col=0; col<CBattleRoom.COL_COUNT; ++col)
-			{
-				int gap_x = 0;//(col * 1);
-				
-				Rect cell_rect = new Rect(col * width + gap_x, row * width + gap_y, width, width);
-				if (GUI.Button(cell_rect, ""))
-				{
-					on_click(index);
-				}
-				
-				if (this.board[index] != short.MaxValue)
-				{
-					int player_index = this.board[index];
-					GUI.DrawTexture(cell_rect, this.img_players[player_index]);
-					
-					if (this.current_player_index == player_index)
-					{
-						GUI.DrawTexture(cell_rect, this.focus_cell);
-					}
-				}
-				
-				if (this.available_attack_cells.Contains(index))
-				{
-					GUI.DrawTexture(cell_rect, this.focus_cell);
-				}
-				
-				++index;
-			}
-		}
-		GUI.EndGroup();
-		GUI.EndGroup();
 	}
-
-	short selected_cell = short.MaxValue;
 
 	// 플레이어가 버튼(?) 클릭 할 때
 	void on_click(short cell)
@@ -427,58 +283,6 @@ public class CBattleRoom : MonoBehaviour {
 		if (this.player_me_index != this.current_player_index)
 		{
 			return;
-		}
-
-		//Debug.Log(cell);
-		
-		switch(this.step)
-		{
-		case 0:
-			if (validate_begin_cell(cell))			// 이게 뭔지?
-			{
-				this.selected_cell = cell;
-				Debug.Log("go to step2");
-				this.step = 1;
-				
-				refresh_available_cells(this.selected_cell);
-			}
-			break;
-
-		case 1:
-			{
-				// When you touched your cell again.
-				if (this.players[this.current_player_index].cell_indexes.Exists(obj => obj == cell))
-				{
-					this.selected_cell = cell;
-					refresh_available_cells(this.selected_cell);
-					break;
-				}
-
-				// Cannot touch other player's cell.
-				foreach (CPlayer player in this.players)
-				{
-					if (player.cell_indexes.Exists(obj => obj == cell))
-					{
-						return;
-					}
-				}
-
-
-				if (CHelper.get_distance(this.selected_cell, cell) > 2)
-				{
-					// 2칸을 초과하는 거리는 이동할 수 없다.
-					return;
-				}
-
-				// 플레이어의 움직임 요청
-				CPacket msg = CPacket.create((short)PROTOCOL.MOVING_REQ);
-				msg.push(this.selected_cell);
-				msg.push(cell);
-				this.network_manager.send(msg);
-
-				this.step = 2;
-			}
-			break;
 		}
 	}
 
@@ -494,7 +298,7 @@ public class CBattleRoom : MonoBehaviour {
 		else if (distance == 2)
 		{
 			// move
-			this.board[from] = short.MaxValue;
+			//this.board[from] = short.MaxValue;
 			this.players[player_index].remove(from);
 			yield return StartCoroutine(reproduce(to));
 		}
@@ -508,23 +312,18 @@ public class CBattleRoom : MonoBehaviour {
 	void phase_end()
 	{
 		this.step = 0;
-		this.available_attack_cells.Clear();
 	}
 	
 
 	void refresh_available_cells(short cell)
 	{
-		this.available_attack_cells = CHelper.find_available_cells(cell, this.table_board, this.players);
+		
 	}
 	
 	void clear_available_attacking_cells()
 	{
-		this.available_attack_cells.Clear();
+		
 	}
-	
-	//IEnumerator moving()
-	//{
-	//}
 	
 	IEnumerator reproduce(short cell)
 	{
@@ -534,7 +333,6 @@ public class CBattleRoom : MonoBehaviour {
 		clear_available_attacking_cells();
 		//yield return new WaitForSeconds(0.5f);
 		
-		this.board[cell] = current_player.player_index;
 		current_player.add(cell);
 
 		yield return new WaitForSeconds(0.5f);
@@ -543,7 +341,6 @@ public class CBattleRoom : MonoBehaviour {
 		List<short> neighbors = CHelper.find_neighbor_cells(cell, other_player.cell_indexes, 1);
 		foreach (short obj in neighbors)
 		{
-			this.board[obj] = current_player.player_index;
 			current_player.add(obj);
 			
 			other_player.remove(obj);
