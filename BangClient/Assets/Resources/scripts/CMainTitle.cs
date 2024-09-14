@@ -84,6 +84,7 @@ public class CMainTitle : MonoBehaviour
             {
                 #region
                 CPacket msg = CPacket.create((short)PROTOCOL.ENTER_GAME_ROOM_REQ);
+                msg.push(id.text);
                 this.network_manager.send(msg);
 
                 StopCoroutine("after_connected");
