@@ -63,19 +63,9 @@ public class CBattleRoom : MonoBehaviour {
 	// 게임이 종료되었는지를 나타내는 플래그.
 	bool is_game_finished;
 
-	// 각종 이미지 텍스쳐들.
-	//List<Texture> img_players;
-	//Texture background;
-	//Texture blank_image;
-	//Texture game_board;
 
-	//Texture graycell;
-	//Texture focus_cell;
-
-	//Texture win_img;
-	//Texture lose_img;
-	//Texture draw_img;
-	//Texture gray_transparent;
+	// 캐릭터 선택창
+	[SerializeField] Canvas CharacterPick;
 
 	void Awake()
 	{
@@ -88,8 +78,14 @@ public class CBattleRoom : MonoBehaviour {
 		this.win_player_index = byte.MaxValue;
 		this.battle_info = gameObject.AddComponent<CBattleInfoPanel>();
 	}
-	
-	void reset()
+
+	// 게임 매칭이 되면 게임룸 오브젝트가 자동으로 활성화되므로, 사실상 매칭 완료 후 첫 페이지 액션.
+    private void OnEnable()
+    {
+		CharacterPick.gameObject.SetActive(true);
+    }
+
+    void reset()
 	{
 		// 보드판 데이터를 모두 초기화 한다.
 	}
@@ -356,6 +352,14 @@ public class CBattleRoom : MonoBehaviour {
 	}
 
 	// 여기서부터 뱅용 메서드
+	public void CharacterChoice(string characterName)
+    {
+		Debug.Log($"캐릭터 이름: {characterName}");
+		CPacket msg = CPacket.create((short)PROTOCOL.GAME_START);       // 프로토콜 확실히 정리 후 다시 작성할 것
+		msg.push(characterName);
+		this.network_manager.send(msg);
+    }
+
 	public void ShotTarget()
     {
 
