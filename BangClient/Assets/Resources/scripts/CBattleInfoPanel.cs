@@ -14,14 +14,14 @@ public class CBattleInfoPanel : MonoBehaviour {
 	void Awake()
 	{
 		this.turn_info = new List<Texture>();
-		this.turn_info.Add(Resources.Load("images/red_playing") as Texture);
-		this.turn_info.Add(Resources.Load("images/blue_playing") as Texture);
+		//this.turn_info.Add(Resources.Load("images/red_playing") as Texture);
+		//this.turn_info.Add(Resources.Load("images/blue_playing") as Texture);
 
 		this.width = this.turn_info[0].width;
 		this.height = this.turn_info[0].height;
 
-		this.myteam_mark = Resources.Load("images/me") as Texture;
-		this.otherteam_mark = Resources.Load("images/other") as Texture;
+		//this.myteam_mark = Resources.Load("images/me") as Texture;
+		//this.otherteam_mark = Resources.Load("images/other") as Texture;
 	}
 
 	public void draw_turn_info(int player_index, float ratio)

@@ -76,7 +76,7 @@ public class CBattleRoom : MonoBehaviour {
 		this.main_title = GameObject.Find("MainTitle").GetComponent<CMainTitle>();
 
 		this.win_player_index = byte.MaxValue;
-		this.battle_info = gameObject.AddComponent<CBattleInfoPanel>();
+		//this.battle_info = gameObject.AddComponent<CBattleInfoPanel>();
 	}
 
 	// 게임 매칭이 되면 게임룸 오브젝트가 자동으로 활성화되므로, 사실상 매칭 완료 후 첫 페이지 액션.
