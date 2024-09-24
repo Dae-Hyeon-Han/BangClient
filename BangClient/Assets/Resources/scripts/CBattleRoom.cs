@@ -66,6 +66,14 @@ public class CBattleRoom : MonoBehaviour {
 
 	// 캐릭터 선택창
 	[SerializeField] Canvas CharacterPick;
+	string characterNameLeft;
+	string characterNameRight;
+
+	//public enum Characters
+ //   {
+	//	character1,
+	//	character2
+ //   }
 
 	void Awake()
 	{
@@ -352,11 +360,19 @@ public class CBattleRoom : MonoBehaviour {
 	}
 
 	// 여기서부터 뱅용 메서드
-	public void CharacterChoice(string characterName)
+	public void CharacterChoice(int characterName)
     {
+		string charName;		// 실제 서버에 전송될 캐릭터 이름 변수
+
 		Debug.Log($"캐릭터 이름: {characterName}");
 		CPacket msg = CPacket.create((short)PROTOCOL.GAME_START);       // 프로토콜 확실히 정리 후 다시 작성할 것
-		msg.push(characterName);
+
+		if (characterName == 0)
+			charName = characterNameLeft;
+		else
+			charName = characterNameRight;
+
+		msg.push(charName);
 		this.network_manager.send(msg);
     }
 
