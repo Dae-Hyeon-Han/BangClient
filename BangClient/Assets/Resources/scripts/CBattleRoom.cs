@@ -201,24 +201,24 @@ public class CBattleRoom : MonoBehaviour {
 		this.players = new List<CPlayer>();
 
 		byte count = msg.pop_byte();
-		for (byte i = 0; i < count; ++i)
-		{
-			byte player_index = msg.pop_byte();
+		//for (byte i = 0; i < count; ++i)
+		//{
+		//	byte player_index = msg.pop_byte();
 
-			GameObject obj = new GameObject(string.Format("player{0}", i));
-			CPlayer player = obj.AddComponent<CPlayer>();
-			player.initialize(player_index);
-			player.clear();
+		//	GameObject obj = new GameObject(string.Format("player{0}", i));
+		//	CPlayer player = obj.AddComponent<CPlayer>();
+		//	player.initialize(player_index);
+		//	player.clear();
 
-			byte virus_count = msg.pop_byte();
-			for (byte index = 0; index < virus_count; ++index)
-			{
-				short position = msg.pop_int16();
-				player.add(position);
-			}
+		//	byte virus_count = msg.pop_byte();
+		//	for (byte index = 0; index < virus_count; ++index)
+		//	{
+		//		short position = msg.pop_int16();
+		//		player.add(position);
+		//	}
 
-			this.players.Add(player);
-		}
+		//	this.players.Add(player);
+		//}
 
 		this.current_player_index = msg.pop_byte();
 		reset();
