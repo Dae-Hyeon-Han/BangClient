@@ -17,15 +17,6 @@ public class CBattleRoom : MonoBehaviour {
 
 	List<CPlayer> players;
 
-	// 진행중인 게임 보드판의 상태를 나타내는 데이터.
-	//List<short> board;
-
-	// 0~49까지의 인덱스를 갖고 있는 보드판 데이터.
-	//List<short> table_board;
-
-	// 공격 가능한 범위를 나타낼 때 사용하는 리스트.
-	//List<short> available_attack_cells;
-
 	// 현재 턴을 진행중인 플레이어 인덱스.
 	byte current_player_index;
 
@@ -63,19 +54,20 @@ public class CBattleRoom : MonoBehaviour {
 	// 게임이 종료되었는지를 나타내는 플래그.
 	bool is_game_finished;
 
-
-	// 캐릭터 선택창
-	[SerializeField] Canvas CharacterPick;
+    #region 뱅 용
+    // 캐릭터 선택창
+    [SerializeField] Canvas CharacterPick;
 	string characterNameLeft;
 	string characterNameRight;
 
-	//public enum Characters
- //   {
-	//	character1,
-	//	character2
- //   }
+    #endregion
+    //public enum Characters
+    //   {
+    //	character1,
+    //	character2
+    //   }
 
-	void Awake()
+    void Awake()
 	{
 		this.network_manager = GameObject.Find("NetworkManager").GetComponent<CNetworkManager>();
 
@@ -87,10 +79,10 @@ public class CBattleRoom : MonoBehaviour {
 		//this.battle_info = gameObject.AddComponent<CBattleInfoPanel>();
 	}
 
-	// 게임 매칭이 되면 게임룸 오브젝트가 자동으로 활성화되므로, 사실상 매칭 완료 후 첫 페이지 액션.
+    // 게임 매칭이 되면 게임룸 오브젝트가 자동으로 활성화되므로, 사실상 매칭 완료 후 첫 페이지 액션.
     private void OnEnable()
     {
-		CharacterPick.gameObject.SetActive(true);
+		//CharacterPick.gameObject.SetActive(true);
     }
 
     void reset()
@@ -201,26 +193,28 @@ public class CBattleRoom : MonoBehaviour {
 		this.players = new List<CPlayer>();
 
 		byte count = msg.pop_byte();
-		//for (byte i = 0; i < count; ++i)
-		//{
-		//	byte player_index = msg.pop_byte();
+        for (byte i = 0; i < count; ++i)
+        {
+            byte player_index = msg.pop_byte();
 
-		//	GameObject obj = new GameObject(string.Format("player{0}", i));
-		//	CPlayer player = obj.AddComponent<CPlayer>();
-		//	player.initialize(player_index);
-		//	player.clear();
+            GameObject obj = new GameObject(string.Format("player{0}", i));
+            CPlayer player = obj.AddComponent<CPlayer>();
+            player.initialize(player_index);
+            player.clear();
 
-		//	byte virus_count = msg.pop_byte();
-		//	for (byte index = 0; index < virus_count; ++index)
-		//	{
-		//		short position = msg.pop_int16();
-		//		player.add(position);
-		//	}
+            byte virus_count = msg.pop_byte();
+            for (byte index = 0; index < virus_count; ++index)
+            {
+                short position = msg.pop_int16();
+                player.add(position);
+            }
 
-		//	this.players.Add(player);
-		//}
+            this.players.Add(player);
+        }
 
-		this.current_player_index = msg.pop_byte();
+
+
+        this.current_player_index = msg.pop_byte();
 		reset();
 
 		this.game_state = GAME_STATE.STARTED;
@@ -359,8 +353,9 @@ public class CBattleRoom : MonoBehaviour {
 		return this.players[this.current_player_index].cell_indexes.Exists(obj => obj == cell);
 	}
 
-	// 여기서부터 뱅용 메서드
-	public void CharacterChoice(int characterName)
+    // 여기서부터 뱅용 메서드
+    #region
+    public void CharacterChoice(int characterName)
     {
 		string charName;		// 실제 서버에 전송될 캐릭터 이름 변수
 
@@ -373,11 +368,17 @@ public class CBattleRoom : MonoBehaviour {
 			charName = characterNameRight;
 
 		msg.push(charName);
-		this.network_manager.send(msg);
+		//this.network_manager.send(msg);
     }
+
+	private void CharNameSet()
+    {
+		List<string> charName = new List<string>();
+	}
 
 	public void ShotTarget()
     {
 
     }
+    #endregion
 }

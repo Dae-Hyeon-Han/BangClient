@@ -14,8 +14,12 @@ public class CPlayer : MonoBehaviour {
 	public byte player_index { get; private set; }
 	public PLAYER_STATE state { get; private set; }
 	CPlayerAgent agent;
-	
-	void Awake()
+
+	#region ¹ð ¿ë
+	public string charName;
+    #endregion
+
+    void Awake()
 	{
 		this.cell_indexes = new List<short>();
 		this.agent = new CPlayerAgent();

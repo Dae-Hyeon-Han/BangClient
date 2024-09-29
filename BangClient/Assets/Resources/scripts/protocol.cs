@@ -35,8 +35,8 @@ namespace BangGameServer
 		// 게임 종료.
 		GAME_OVER = 10,
 
-        #region 뱅용도
-		CharacterChoice = 11,
+		#region 뱅용도
+		CHARACTERCHOICE = 11,
         #endregion
 
         END
