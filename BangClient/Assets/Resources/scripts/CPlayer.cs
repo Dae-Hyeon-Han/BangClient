@@ -16,7 +16,10 @@ public class CPlayer : MonoBehaviour {
 	CPlayerAgent agent;
 
 	#region 뱅 용
-	public string charName;
+	public string charName;				// 캐릭터 이름
+	public int cardInHand;				// 손패
+	public string weapon;				// 장착중인 무기
+	public List<string> Equipment;		// 술통, 야생마, 조준경
     #endregion
 
     void Awake()

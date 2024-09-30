@@ -202,12 +202,12 @@ public class CBattleRoom : MonoBehaviour {
             player.initialize(player_index);
             player.clear();
 
-            byte virus_count = msg.pop_byte();
-            for (byte index = 0; index < virus_count; ++index)
-            {
-                short position = msg.pop_int16();
-                player.add(position);
-            }
+            //byte virus_count = msg.pop_byte();
+            //for (byte index = 0; index < virus_count; ++index)
+            //{
+            //    short position = msg.pop_int16();
+            //    player.add(position);
+            //}
 
             this.players.Add(player);
         }
