@@ -19,10 +19,11 @@ public class CPlayer : MonoBehaviour {
 	public string charName;				// 캐릭터 이름
 	public int cardInHand;				// 손패
 	public string weapon;				// 장착중인 무기
-	public List<string> Equipment;		// 술통, 야생마, 조준경
-    #endregion
+	public List<string> Equipment;      // 술통, 야생마, 조준경
+	public int positionFlag;            // 게임 중 거리 계산용으로 사용할 것.
+	#endregion
 
-    void Awake()
+	void Awake()
 	{
 		this.cell_indexes = new List<short>();
 		this.agent = new CPlayerAgent();
@@ -39,8 +40,9 @@ public class CPlayer : MonoBehaviour {
 		this.player_index = player_index;
 		Debug.Log($"{gameObject.name},{this.player_index}");
 	}
-	
-	public void add(short cell)
+
+    #region 추후 삭제 요망
+    public void add(short cell)
 	{
 		if (this.cell_indexes.Contains(cell))
 		{
@@ -75,7 +77,8 @@ public class CPlayer : MonoBehaviour {
 	{
 		return this.cell_indexes.Count;
 	}
+    #endregion
 
-	// 여기서부터 뱅용
+    // 여기서부터 뱅용
 
 }
