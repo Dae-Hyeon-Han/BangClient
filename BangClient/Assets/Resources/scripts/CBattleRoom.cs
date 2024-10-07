@@ -60,14 +60,17 @@ public class CBattleRoom : MonoBehaviour {
 	string characterNameLeft;
 	string characterNameRight;
 
-    #endregion
-    //public enum Characters
-    //   {
-    //	character1,
-    //	character2
-    //   }
+	// 플레잉 카드 사용시 구분용
+	string useCard;
 
-    void Awake()
+	#endregion
+	//public enum Characters
+	//   {
+	//	character1,
+	//	character2
+	//   }
+
+	void Awake()
 	{
 		this.network_manager = GameObject.Find("NetworkManager").GetComponent<CNetworkManager>();
 
@@ -121,6 +124,16 @@ public class CBattleRoom : MonoBehaviour {
 	{
 		PROTOCOL protocol_id = (PROTOCOL)msg.pop_protocol_id();
 
+
+		//if (msg.pop_string()!=null)
+		if (string.IsNullOrEmpty(msg.pop_string()))
+		{
+			Debug.Log("Using Card");
+			useCard = msg.pop_string();
+		}
+
+		// USECARD 프로토콜의 경우, 어떻게 받아올지?
+
 		switch (protocol_id)
 		{
 			case PROTOCOL.GAME_START:
@@ -131,6 +144,12 @@ public class CBattleRoom : MonoBehaviour {
 			case PROTOCOL.PLAYER_MOVED:			// 다른 플레이어가 움직였을 때?
 				on_player_moved(msg);
 				Debug.Log("움직임!");
+				break;
+
+			case PROTOCOL.USECARD:
+                {
+					Debug.Log("카드 사용!");
+                }
 				break;
 
 			case PROTOCOL.START_PLAYER_TURN:
