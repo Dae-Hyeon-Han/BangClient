@@ -146,6 +146,12 @@ public class CMainTitle : MonoBehaviour
 
                     this.battle_room.gameObject.SetActive(true);
                     this.battle_room.start_loading(player_index);
+                    Debug.Log($"내 번호는 {player_index}번");
+
+                    #region 서버에서 받은 플레이어 정보를 표현하는 코드
+                    //this.battle_room.
+
+                    #endregion
                     gameObject.SetActive(false);
                 }
                 break;
