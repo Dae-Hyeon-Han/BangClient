@@ -214,7 +214,12 @@ public class CBattleRoom : MonoBehaviour {
 	{
 		this.players = new List<CPlayer>();
 
+
 		byte count = msg.pop_byte();
+
+		Debug.Log($"카운트: {count}");
+
+		// 왜 여기로 안 들감?
         for (byte i = 0; i < count; ++i)
         {
             byte player_index = msg.pop_byte();
@@ -224,12 +229,12 @@ public class CBattleRoom : MonoBehaviour {
             player.initialize(player_index);
             player.clear();
 
-            //byte virus_count = msg.pop_byte();
-            //for (byte index = 0; index < virus_count; ++index)
-            //{
-            //    short position = msg.pop_int16();
-            //    player.add(position);
-            //}
+            byte virus_count = msg.pop_byte();
+            for (byte index = 0; index < virus_count; ++index)
+            {
+                short position = msg.pop_int16();
+                player.add(position);
+            }
 
             this.players.Add(player);
         }
