@@ -79,6 +79,16 @@ public class CPlayer : MonoBehaviour {
 	}
     #endregion
 
-    // 여기서부터 뱅용
+    #region 여기서부터 뱅용. 이 플랜이 맞나...
+    // 뱅 사용
+    public void UseBang()
+	{ 
+	}
 
+	// 빗나감 사용
+	public void UseMissed()
+    {
+
+    }
+    #endregion
 }

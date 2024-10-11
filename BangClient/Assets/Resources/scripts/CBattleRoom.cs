@@ -380,8 +380,7 @@ public class CBattleRoom : MonoBehaviour
         return this.players[this.current_player_index].cell_indexes.Exists(obj => obj == cell);
     }
 
-    // 여기서부터 뱅용 메서드
-    #region
+    #region 여기서부터 뱅용 메서드
     public void CharacterChoice(int characterName)
     {
         string charName;        // 실제 서버에 전송될 캐릭터 이름 변수
@@ -402,6 +401,8 @@ public class CBattleRoom : MonoBehaviour
     {
         List<string> charName = new List<string>();
     }
+
+
 
     public void ShotTarget()
     {
