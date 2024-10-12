@@ -58,9 +58,10 @@ public class CBattleRoom : MonoBehaviour
     #region 뱅 용
     // 캐릭터 선택창
     [SerializeField] Canvas CharacterPick;
-    public GameObject playerGroup;
+    public Transform playerGroup;
     string characterNameLeft;
     string characterNameRight;
+    Dictionary<string, Transform> playerObjs = new Dictionary<string, Transform>();
 
     // 플레잉 카드 사용시 구분용
     string useCard;
@@ -83,7 +84,11 @@ public class CBattleRoom : MonoBehaviour
         this.win_player_index = byte.MaxValue;
         //this.battle_info = gameObject.AddComponent<CBattleInfoPanel>();
 
-
+        // 이거 쓸모 없나?
+        foreach (Transform players in playerGroup)
+        {
+            playerObjs[players.name] = players;
+        }
     }
 
     // 게임 매칭이 되면 게임룸 오브젝트가 자동으로 활성화되므로, 사실상 매칭 완료 후 첫 페이지 액션.
@@ -314,22 +319,22 @@ public class CBattleRoom : MonoBehaviour
     // 적 셀 공격을 택했을 때
     IEnumerator on_selected_cell_to_attack(byte player_index, short from, short to)
     {
-        byte distance = CHelper.howfar_from_clicked_cell(from, to);
-        if (distance == 1)
-        {
-            // copy to cell
-            yield return StartCoroutine(reproduce(to));
-        }
-        else if (distance == 2)
-        {
-            // move
-            //this.board[from] = short.MaxValue;
-            this.players[player_index].remove(from);
-            yield return StartCoroutine(reproduce(to));
-        }
+        //byte distance = CHelper.howfar_from_clicked_cell(from, to);
+        //if (distance == 1)
+        //{
+        //    // copy to cell
+        //    yield return StartCoroutine(reproduce(to));
+        //}
+        //else if (distance == 2)
+        //{
+        //    // move
+        //    //this.board[from] = short.MaxValue;
+        //    this.players[player_index].remove(from);
+        //    yield return StartCoroutine(reproduce(to));
+        //}
 
-        CPacket msg = CPacket.create((short)PROTOCOL.TURN_FINISHED_REQ);
-        this.network_manager.send(msg);
+        //CPacket msg = CPacket.create((short)PROTOCOL.TURN_FINISHED_REQ);
+        //this.network_manager.send(msg);
 
         yield return 0;
     }
@@ -403,10 +408,10 @@ public class CBattleRoom : MonoBehaviour
     }
 
 
-
-    public void ShotTarget()
+    // 내가 받은 인덱스 번호를 기준으로 정리할 것.
+    public void PlayerSet(byte myIndex)
     {
-
+        
     }
     #endregion
 }
