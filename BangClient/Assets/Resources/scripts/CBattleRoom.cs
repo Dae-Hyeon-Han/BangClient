@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FreeNet;
 using BangGameServer;
+using TMPro;
 
 public class CBattleRoom : MonoBehaviour
 {
@@ -87,7 +88,7 @@ public class CBattleRoom : MonoBehaviour
         // 이거 쓸모 없나?
         foreach (Transform players in playerGroup)
         {
-            playerObjs[players.name] = players;
+            playerObjs[players.name] = players.GetChild(0);
         }
     }
 
@@ -121,6 +122,51 @@ public class CBattleRoom : MonoBehaviour
 
         CPacket msg = CPacket.create((short)PROTOCOL.LOADING_COMPLETED);
         this.network_manager.send(msg);
+
+
+        // 나와 다른 플레이어의 인덱스 번호 시각화
+        #region 노가다 타입 코드
+        //switch (player_me_index)
+        //{
+        //    case 0:
+        //        //playerObjs["playerUser"].GetComponent<TextMeshProUGUI>().text = player_me_index.ToString() + "번 플레이어";
+        //        for (int i = 0; i < 7; i++)
+        //        {
+        //            playerObjs["player" + i].GetComponent<TextMeshProUGUI>().text = player_me_index + i + "번 플레이어";
+        //        }
+        //        break;
+        //    case 1:
+        //        playerObjs["player0"].GetComponent<TextMeshProUGUI>().text = player_me_index + 0 + "번 플레이어";
+        //        playerObjs["player1"].GetComponent<TextMeshProUGUI>().text = player_me_index + 1 +  "번 플레이어";
+        //        playerObjs["player2"].GetComponent<TextMeshProUGUI>().text = player_me_index + 2 + "번 플레이어";
+        //        playerObjs["player3"].GetComponent<TextMeshProUGUI>().text = player_me_index + 3 + "번 플레이어";
+        //        playerObjs["player4"].GetComponent<TextMeshProUGUI>().text = player_me_index + 4 + "번 플레이어";
+        //        playerObjs["player5"].GetComponent<TextMeshProUGUI>().text = player_me_index + 5 + "번 플레이어";
+        //        playerObjs["player6"].GetComponent<TextMeshProUGUI>().text = player_me_index + 6 + "번 플레이어";
+        //        break;
+        //    case 2:
+        //        break;
+        //    case 3:
+        //        break;
+        //    case 4:
+        //        break;
+        //    case 5:
+        //        break;
+        //    case 6:
+        //        break;
+        //}
+        #endregion
+
+        int j=0;
+        
+        for(int i=0; i<7; i++)
+        {
+            j = player_me_index + i;
+            if (j < 7)
+                playerObjs["player" + i].GetComponent<TextMeshProUGUI>().text = j + "번 플레이어";
+            else
+                playerObjs["player" + i].GetComponent<TextMeshProUGUI>().text = j - 7 + "번 플레이어";
+        }
     }
 
 
@@ -411,7 +457,7 @@ public class CBattleRoom : MonoBehaviour
     // 내가 받은 인덱스 번호를 기준으로 정리할 것.
     public void PlayerSet(byte myIndex)
     {
-        
+
     }
     #endregion
 }
