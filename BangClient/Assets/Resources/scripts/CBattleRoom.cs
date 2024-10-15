@@ -63,9 +63,11 @@ public class CBattleRoom : MonoBehaviour
     string characterNameLeft;
     string characterNameRight;
     Dictionary<string, Transform> playerObjs = new Dictionary<string, Transform>();
+    //List<>
 
     // 플레잉 카드 사용시 구분용
-    string useCard;
+    List<GameObject> Cards = new List<GameObject>();
+    List<string> HandCard = new List<string>();
 
     #endregion
     //public enum Characters
@@ -125,38 +127,6 @@ public class CBattleRoom : MonoBehaviour
 
 
         // 나와 다른 플레이어의 인덱스 번호 시각화
-        #region 노가다 타입 코드
-        //switch (player_me_index)
-        //{
-        //    case 0:
-        //        //playerObjs["playerUser"].GetComponent<TextMeshProUGUI>().text = player_me_index.ToString() + "번 플레이어";
-        //        for (int i = 0; i < 7; i++)
-        //        {
-        //            playerObjs["player" + i].GetComponent<TextMeshProUGUI>().text = player_me_index + i + "번 플레이어";
-        //        }
-        //        break;
-        //    case 1:
-        //        playerObjs["player0"].GetComponent<TextMeshProUGUI>().text = player_me_index + 0 + "번 플레이어";
-        //        playerObjs["player1"].GetComponent<TextMeshProUGUI>().text = player_me_index + 1 +  "번 플레이어";
-        //        playerObjs["player2"].GetComponent<TextMeshProUGUI>().text = player_me_index + 2 + "번 플레이어";
-        //        playerObjs["player3"].GetComponent<TextMeshProUGUI>().text = player_me_index + 3 + "번 플레이어";
-        //        playerObjs["player4"].GetComponent<TextMeshProUGUI>().text = player_me_index + 4 + "번 플레이어";
-        //        playerObjs["player5"].GetComponent<TextMeshProUGUI>().text = player_me_index + 5 + "번 플레이어";
-        //        playerObjs["player6"].GetComponent<TextMeshProUGUI>().text = player_me_index + 6 + "번 플레이어";
-        //        break;
-        //    case 2:
-        //        break;
-        //    case 3:
-        //        break;
-        //    case 4:
-        //        break;
-        //    case 5:
-        //        break;
-        //    case 6:
-        //        break;
-        //}
-        #endregion
-
         int j=0;
         
         for(int i=0; i<7; i++)
@@ -298,7 +268,7 @@ public class CBattleRoom : MonoBehaviour
         this.game_state = GAME_STATE.STARTED;
     }
 
-
+    #region 기존 코드
     void on_player_moved(CPacket msg)
     {
         byte player_index = msg.pop_byte();
@@ -352,15 +322,6 @@ public class CBattleRoom : MonoBehaviour
 
     }
 
-    // 플레이어가 버튼(?) 클릭 할 때
-    void on_click(short cell)
-    {
-        // 자신의 차례가 아니면 처리하지 않고 리턴한다.
-        if (this.player_me_index != this.current_player_index)
-        {
-            return;
-        }
-    }
 
     // 적 셀 공격을 택했을 때
     IEnumerator on_selected_cell_to_attack(byte player_index, short from, short to)
@@ -430,8 +391,19 @@ public class CBattleRoom : MonoBehaviour
     {
         return this.players[this.current_player_index].cell_indexes.Exists(obj => obj == cell);
     }
+    #endregion
 
     #region 여기서부터 뱅용 메서드
+    // 플레이어가 버튼(?) 클릭 할 때
+    void on_click(short cell)
+    {
+        // 자신의 차례가 아니면 처리하지 않고 리턴한다.
+        if (this.player_me_index != this.current_player_index)
+        {
+            return;
+        }
+    }
+
     public void CharacterChoice(int characterName)
     {
         string charName;        // 실제 서버에 전송될 캐릭터 이름 변수
@@ -453,11 +425,31 @@ public class CBattleRoom : MonoBehaviour
         List<string> charName = new List<string>();
     }
 
-
-    // 내가 받은 인덱스 번호를 기준으로 정리할 것.
-    public void PlayerSet(byte myIndex)
+    // 이게 아닌거 같은디....;;
+    public void PlayerHandCardSet(string cardName)
     {
+        // HandCards obj
+        for(int i=0; i< playerObjs["player0"].GetChild(4).childCount; i++)
+        {
+            Cards.Add(playerObjs["player0"].GetChild(4).GetChild(i).gameObject);
+        }
+    }
 
+    public void OtherPlayerCardSet(CPacket msg)
+    {
+        // 프로토콜 확정 시 작성
+    }
+
+    public void UseCardEvent()
+    {
+        CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+
+        //if()
+    }
+
+    public void TurnEnd()
+    {
+        Debug.Log("턴 엔드 버튼 이벤트 등록 필요");
     }
     #endregion
 }

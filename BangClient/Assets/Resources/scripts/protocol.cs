@@ -42,7 +42,7 @@ namespace BangGameServer
         // 카드 사용(string과 연계하여 사용할 것)
         USECARD = 12,
 
-        SHOT_REQ = 13,
+        DRAWCARD = 13,
 
         // 인디언 사용
         INDIANS_REQ = 15,
