@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using FreeNet;
 using BangGameServer;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CBattleRoom : MonoBehaviour
 {
@@ -62,13 +64,19 @@ public class CBattleRoom : MonoBehaviour
     public Transform playerGroup;
     string characterNameLeft;
     string characterNameRight;
-    Dictionary<string, Transform> playerObjs = new Dictionary<string, Transform>();
+    Dictionary<string, Transform> playerIndex = new Dictionary<string, Transform>();        // 숫자 출력용
+    Dictionary<string, Transform> playerObj = new Dictionary<string, Transform>();          // 실제 제어용
     //List<>
 
     // 플레잉 카드 사용시 구분용
-    List<GameObject> Cards = new List<GameObject>();
-    List<string> HandCard = new List<string>();
+    public List<GameObject> Cards = new List<GameObject>();
+    List<Card> HandCard = new List<Card>();
 
+    // 디버그 용
+    Card card;
+    EventTrigger trigger;
+    EventTrigger.Entry entry_PointerEnter = new EventTrigger.Entry();
+    
     #endregion
     //public enum Characters
     //   {
@@ -90,7 +98,8 @@ public class CBattleRoom : MonoBehaviour
         // 이거 쓸모 없나?
         foreach (Transform players in playerGroup)
         {
-            playerObjs[players.name] = players.GetChild(0);
+            playerIndex[players.name] = players.GetChild(0);
+            playerObj[players.name] = players;
         }
     }
 
@@ -133,9 +142,9 @@ public class CBattleRoom : MonoBehaviour
         {
             j = player_me_index + i;
             if (j < 7)
-                playerObjs["player" + i].GetComponent<TextMeshProUGUI>().text = j + "번 플레이어";
+                playerIndex["player" + i].GetComponent<TextMeshProUGUI>().text = j + "번 플레이어";
             else
-                playerObjs["player" + i].GetComponent<TextMeshProUGUI>().text = j - 7 + "번 플레이어";
+                playerIndex["player" + i].GetComponent<TextMeshProUGUI>().text = j - 7 + "번 플레이어";
         }
     }
 
@@ -238,7 +247,10 @@ public class CBattleRoom : MonoBehaviour
 
         byte count = msg.pop_byte();
 
-        Debug.Log($"카운트: {count}");
+        //Debug.Log($"카운트: {count}");
+
+        // 디버그
+        PlayerHandCard_FirstSet();
 
         // 왜 여기로 안 들감?
         for (byte i = 0; i < count; ++i)
@@ -425,13 +437,34 @@ public class CBattleRoom : MonoBehaviour
         List<string> charName = new List<string>();
     }
 
+    // 디버그용. 카드 이벤트 확인용
+    public void PlayerHandCard_FirstSet()
+    {
+        //Debug.Log($"숫자: {playerObj["player0"].GetChild(4).childCount}");
+
+        for (int i = 0; i < playerObj["player0"].GetChild(4).childCount; i++)
+        {
+            // 카드 기능
+            Cards.Add(playerObj["player0"].GetChild(4).GetChild(i).gameObject);                     // 손패 리스트 push
+            card = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<Bang>();
+            playerObj["player0"].GetChild(4).GetChild(i).gameObject.GetComponent<Button>()
+                .onClick.AddListener(card.UseCard);
+
+            // 카드 기능 뷰
+            trigger = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<EventTrigger>();
+            entry_PointerEnter.eventID = EventTriggerType.PointerEnter;
+            entry_PointerEnter.callback.AddListener((data) => { UseViewUi((PointerEventData)data); });
+            trigger.triggers.Add(entry_PointerEnter);
+        }
+    }
+
     // 이게 아닌거 같은디....;;
-    public void PlayerHandCardSet(string cardName)
+    public void PlayerHandCard_Set(string cardName)
     {
         // HandCards obj
-        for(int i=0; i< playerObjs["player0"].GetChild(4).childCount; i++)
+        for(int i=0; i< playerIndex["player0"].GetChild(4).childCount; i++)
         {
-            Cards.Add(playerObjs["player0"].GetChild(4).GetChild(i).gameObject);
+            Cards.Add(playerIndex["player0"].GetChild(4).GetChild(i).gameObject);
         }
     }
 
@@ -440,11 +473,24 @@ public class CBattleRoom : MonoBehaviour
         // 프로토콜 확정 시 작성
     }
 
-    public void UseCardEvent()
+    public void UseCardEvent(string cardName)
     {
+        Debug.Log("실제로 쏨");
+
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
 
         //if()
+    }
+
+    // 왜 11개가 호출되지?
+    public void UseViewUi(PointerEventData data)
+    {
+        Debug.Log("뷰 띄우기");
+    }
+
+    public void UseViewUi(Transform textPro, bool mouseIn, string funcText)
+    {
+
     }
 
     public void TurnEnd()
