@@ -45,10 +45,10 @@ public class CPlayer : MonoBehaviour {
 		this.cell_indexes.Clear();
 	}
 	
-	public void initialize(byte player_index)
+	public void initialize(byte player_index, string charName)
 	{
 		this.player_index = player_index;
-		Debug.Log($"{gameObject.name},{this.player_index}");
+		Debug.Log($"{gameObject.name},{this.player_index}. {charName}");
 	}
 
     #region 추후 삭제 요망

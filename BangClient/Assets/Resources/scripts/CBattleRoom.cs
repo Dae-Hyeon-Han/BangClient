@@ -65,6 +65,7 @@ public class CBattleRoom : MonoBehaviour
     string characterNameLeft;
     string characterNameRight;
     Dictionary<string, Transform> playerIndex = new Dictionary<string, Transform>();        // 숫자 출력용
+    Dictionary<string, Image> playerCharImage = new Dictionary<string, Image>();        // 숫자 출력용
     Dictionary<string, Transform> playerObj = new Dictionary<string, Transform>();          // 실제 제어용
     //List<>
 
@@ -99,7 +100,10 @@ public class CBattleRoom : MonoBehaviour
         foreach (Transform players in playerGroup)
         {
             playerIndex[players.name] = players.GetChild(0);
+            playerCharImage[players.name] = players.GetChild(1).GetComponent<Image>();
             playerObj[players.name] = players;
+
+            //Debug.Log($"플레이어 이름: {playerCharImage[players.name].name}");
         }
     }
 
@@ -247,27 +251,27 @@ public class CBattleRoom : MonoBehaviour
 
         byte count = msg.pop_byte();
 
-        //Debug.Log($"카운트: {count}");
-
         // 디버그
         PlayerHandCard_FirstSet();
 
-        // 왜 여기로 안 들감?
         for (byte i = 0; i < count; ++i)
         {
             byte player_index = msg.pop_byte();
+            string charName = msg.pop_string();
 
             GameObject obj = new GameObject(string.Format("player{0}", i));
             CPlayer player = obj.AddComponent<CPlayer>();
-            player.initialize(player_index);
+            player.initialize(player_index, charName);
             player.clear();
 
-            byte virus_count = msg.pop_byte();
-            for (byte index = 0; index < virus_count; ++index)
-            {
-                short position = msg.pop_int16();
-                player.add(position);
-            }
+            // 플레이어 캐릭터 정리
+            playerCharImage[$"player{i}"].sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
+
+            //Debug.Log($"인덱스: {player_index}");
+
+
+            //Debug.Log($"{i}의 캐릭터 이름: {charName}");
+
 
             this.players.Add(player);
         }
@@ -374,29 +378,29 @@ public class CBattleRoom : MonoBehaviour
 
     }
 
-    IEnumerator reproduce(short cell)
-    {
-        CPlayer current_player = this.players[this.current_player_index];
-        CPlayer other_player = this.players.Find(obj => obj.player_index != this.current_player_index);
+    //IEnumerator reproduce(short cell)
+    //{
+    //    CPlayer current_player = this.players[this.current_player_index];
+    //    CPlayer other_player = this.players.Find(obj => obj.player_index != this.current_player_index);
 
-        clear_available_attacking_cells();
-        //yield return new WaitForSeconds(0.5f);
+    //    clear_available_attacking_cells();
+    //    //yield return new WaitForSeconds(0.5f);
 
-        current_player.add(cell);
+    //    current_player.add(cell);
 
-        yield return new WaitForSeconds(0.5f);
+    //    yield return new WaitForSeconds(0.5f);
 
-        // eat.
-        List<short> neighbors = CHelper.find_neighbor_cells(cell, other_player.cell_indexes, 1);
-        foreach (short obj in neighbors)
-        {
-            current_player.add(obj);
+    //    // eat.
+    //    List<short> neighbors = CHelper.find_neighbor_cells(cell, other_player.cell_indexes, 1);
+    //    foreach (short obj in neighbors)
+    //    {
+    //        current_player.add(obj);
 
-            other_player.remove(obj);
+    //        other_player.remove(obj);
 
-            yield return new WaitForSeconds(0.2f);
-        }
-    }
+    //        yield return new WaitForSeconds(0.2f);
+    //    }
+    //}
 
     // 이게 뭔지?
     bool validate_begin_cell(short cell)
