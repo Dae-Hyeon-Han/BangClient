@@ -29,17 +29,14 @@ public class CMainTitle : MonoBehaviour
     void Start()
     {
         this.user_state = USER_STATE.NOT_CONNECTED;
-        //this.bg = Resources.Load("images/title_blue") as Texture;
         this.battle_room = GameObject.Find("BattleRoom").GetComponent<CBattleRoom>();
         this.battle_room.gameObject.SetActive(false);
 
         this.network_manager = GameObject.Find("NetworkManager").GetComponent<CNetworkManager>();
 
-        // 파일 변경할 것
-        //this.waiting_img = Resources.Load("images/waiting") as Texture;
-
-        LogInCanvas.gameObject.SetActive(true);
-        isInput = false;
+        // 로그인 기능 다시 만들 시 넣을 것
+        //LogInCanvas.gameObject.SetActive(true);
+        //isInput = false;
 
         this.user_state = USER_STATE.NOT_CONNECTED;
         enter();
@@ -80,7 +77,8 @@ public class CMainTitle : MonoBehaviour
 
         while (true)
         {
-            if (this.user_state == USER_STATE.WAITING_MATCHING && isInput)
+            //if (this.user_state == USER_STATE.WAITING_MATCHING && isInput)        // 로그인 기능 개발 시 활성화 시켜야 할 조건문
+            if(this.user_state == USER_STATE.CONNECTED)
             {
                 #region
                 CPacket msg = CPacket.create((short)PROTOCOL.ENTER_GAME_ROOM_REQ);
@@ -163,7 +161,7 @@ public class CMainTitle : MonoBehaviour
         // 대기 중 화면을 그리는 메서드 추가 요망
         //gamePlayManager.gameObject.SetActive(true);
         //CBattleRoom.MyId = id.text;
-        this.user_state = USER_STATE.WAITING_MATCHING;
+        //this.user_state = USER_STATE.WAITING_MATCHING;
         LogInCanvas.gameObject.SetActive(false);
         isInput = true;
     }
