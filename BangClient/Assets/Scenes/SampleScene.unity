@@ -6284,6 +6284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterPick: {fileID: 283508029}
   playerGroup: {fileID: 589964026}
+  controller: {fileID: 1834697931}
   Cards: []
 --- !u!4 &635805777
 Transform:
@@ -16206,6 +16207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1834697930}
+  - component: {fileID: 1834697931}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -16228,6 +16230,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1834697931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834697929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3cbec7f86a27a4784ab70c8afeb855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1838873624
 GameObject:
   m_ObjectHideFlags: 0

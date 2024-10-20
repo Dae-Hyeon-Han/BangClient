@@ -64,10 +64,14 @@ public class CBattleRoom : MonoBehaviour
     public Transform playerGroup;
     string characterNameLeft;
     string characterNameRight;
+    
+    // 플레이어 정보 처리용
     Dictionary<string, Transform> playerIndex = new Dictionary<string, Transform>();        // 숫자 출력용
     Dictionary<string, Image> playerCharImage = new Dictionary<string, Image>();        // 숫자 출력용
     Dictionary<string, Transform> playerObj = new Dictionary<string, Transform>();          // 실제 제어용
-    //List<>
+    
+    // 컨트롤러
+    public PlayerController controller;
 
     // 플레잉 카드 사용시 구분용
     public List<GameObject> Cards = new List<GameObject>();
@@ -500,6 +504,10 @@ public class CBattleRoom : MonoBehaviour
     public void TurnEnd()
     {
         Debug.Log("턴 엔드 버튼 이벤트 등록 필요");
+
+        CPacket msg = CPacket.create((short)PROTOCOL.TURN_FINISHED_REQ);
+        msg.push(player_me_index);
+        this.network_manager.send(msg);
     }
     #endregion
 }
