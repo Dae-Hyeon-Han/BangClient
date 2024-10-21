@@ -8,7 +8,7 @@ public class Sid_Ketchum : Characters
     void Start()
     {
         characterName = "시드 케첨";
-        life = 4;
+        //life = 4;
         coments = "카드 2장을 버려 생명력 1을 회복 할 수 있다.";
     }
 

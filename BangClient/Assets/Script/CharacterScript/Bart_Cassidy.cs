@@ -8,7 +8,7 @@ public class Bart_Cassidy : Characters
     void Start()
     {
         characterName = "바트 캐시디";
-        life = 4;
+        //life = 4;
         coments = "생명력을 잃을 때마다 카드 더미에서 카드 한 장을 가져온다.";
     }
 

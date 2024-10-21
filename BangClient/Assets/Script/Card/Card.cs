@@ -6,6 +6,7 @@ public abstract class Card : MonoBehaviour
 {
     public string cardName;
     public string funcText;
+    public Transform ComentTextBox;
 
     // 카드 사용하기
     public abstract void UseCard();

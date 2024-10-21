@@ -8,7 +8,7 @@ public class Willy_The_Kid : Characters
     void Start()
     {
         characterName = "윌리 더 키드";
-        life = 4;
+        //life = 4;
         coments = "<뱅!>을 원하는 만큼 사용할 수 있다.";
     }
 
