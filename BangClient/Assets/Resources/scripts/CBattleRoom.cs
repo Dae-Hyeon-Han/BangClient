@@ -139,9 +139,10 @@ public class CBattleRoom : MonoBehaviour
         this.network_manager.message_receiver = this;
         this.player_me_index = player_me_index;
 
+        controller.SetMyNumber(player_me_index);
+
         CPacket msg = CPacket.create((short)PROTOCOL.LOADING_COMPLETED);
         this.network_manager.send(msg);
-
 
         // 나와 다른 플레이어의 인덱스 번호 시각화
         int j=0;
@@ -191,6 +192,12 @@ public class CBattleRoom : MonoBehaviour
             case PROTOCOL.USECARD:
                 {
                     Debug.Log("카드 사용!");
+                }
+                break;
+            case PROTOCOL.CHAT:
+                {
+                    //Debug.Log("채팅 받음!");
+                    controller.ChatReceive(msg.pop_string());
                 }
                 break;
             case PROTOCOL.START_PLAYER_TURN:
@@ -272,8 +279,6 @@ public class CBattleRoom : MonoBehaviour
             playerCharImage[$"player{i}"].sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
 
             //Debug.Log($"인덱스: {player_index}");
-
-
             //Debug.Log($"{i}의 캐릭터 이름: {charName}");
 
 

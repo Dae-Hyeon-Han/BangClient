@@ -47,11 +47,18 @@ public class PlayerController : MonoBehaviour
 
     // game room에서 처리?
     // 코멘트는 클라이언트 측에서 처리.
-    public void SetMyChar(byte index, string charName, int life)
+    public void SetMyNumber(byte index)
+    {
+        player_me_index = index;
+
+        //Debug.Log($"마이 넘버: {index}");
+    }
+
+    public void SetMyChar(string charName, int life)
     {
         myChar.name = charName;
         myChar.life = life;
-        player_me_index = index;
+        //Debug.Log("캐릭터 셋팅");
     }
 
     // 패 추가
@@ -64,27 +71,27 @@ public class PlayerController : MonoBehaviour
     public void ChatSend()
     {
         CPacket msg = CPacket.create((short)PROTOCOL.CHAT);
-        msg.push(player_me_index);
-        msg.push(inputField.text);
-        inputField.text = null;
+        msg.push(player_me_index + ": " + inputField.text);
+        inputField.text = "";
 
         //Debug.Log($"{inputField.text}");
+
+        this.network_manager.send(msg);
     }
 
     public void ChatReceive(string msg)
     {
-        //dialogue.text += "\n" + msg;            // 한 줄 바꿈 후 텍스트 입력
-        //dialogueQueue.Enqueue($"\n{msg}");
-        chatList.Add(msg);
+        //chatList.Add(msg);
 
         // 대화 개수는 10개까지만 남기기
         if (chatList.Count > 10)
             chatList.RemoveAt(0);
 
         // 디스플레이
-        for(int i=0; i < chatList.Count; i++)
+        for (int i = 0; i < chatList.Count; i++)
         {
-            chat.text = "\n" + chatList[i];
+            //chat.text = chatList[i] + "\n";
+            chat.text += msg;
         }
     }
 }
