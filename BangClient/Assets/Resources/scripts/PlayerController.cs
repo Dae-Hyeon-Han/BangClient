@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI chat;
     [SerializeField] TextMeshProUGUI inputField;
     List<string> chatList = new List<string>();
+    string chatText;
 
     // 통신용
     CNetworkManager network_manager;
@@ -81,17 +82,34 @@ public class PlayerController : MonoBehaviour
 
     public void ChatReceive(string msg)
     {
-        //chatList.Add(msg);
+        chatList.Add(msg);
 
         // 대화 개수는 10개까지만 남기기
-        if (chatList.Count > 10)
+        if (chatList.Count >= 10)
             chatList.RemoveAt(0);
 
+        chatText = "";
+
         // 디스플레이
-        for (int i = 0; i < chatList.Count; i++)
+        //for (int i = 0; i < chatList.Count; i++)
+        //{
+        //    chatText += chatList[i] + "\n";
+        //}
+
+        //Debug.Log($"{chatList.Count}");
+
+        //for (int i = chatList.Count - 1; i >= 0; i++)
+        //{
+        //    chatText += chatList[i] + "\n";
+        //}
+
+        foreach(string text in chatList)
         {
-            //chat.text = chatList[i] + "\n";
-            chat.text += msg;
+            chatText += text + "\n";
         }
+
+        Debug.Log($"대화 : {msg}");
+        Debug.Log($"대화 목록: {chatText}");
+        chat.text = chatText;
     }
 }
