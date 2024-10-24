@@ -75,8 +75,6 @@ public class PlayerController : MonoBehaviour
         msg.push(player_me_index + ": " + inputField.text);
         inputField.text = "";
 
-        //Debug.Log($"{inputField.text}");
-
         this.network_manager.send(msg);
     }
 
@@ -89,19 +87,6 @@ public class PlayerController : MonoBehaviour
             chatList.RemoveAt(0);
 
         chatText = "";
-
-        // 디스플레이
-        //for (int i = 0; i < chatList.Count; i++)
-        //{
-        //    chatText += chatList[i] + "\n";
-        //}
-
-        //Debug.Log($"{chatList.Count}");
-
-        //for (int i = chatList.Count - 1; i >= 0; i++)
-        //{
-        //    chatText += chatList[i] + "\n";
-        //}
 
         foreach(string text in chatList)
         {

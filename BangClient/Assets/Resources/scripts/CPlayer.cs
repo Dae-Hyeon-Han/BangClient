@@ -19,12 +19,18 @@ public class CPlayer : MonoBehaviour {
 	CPlayerAgent agent;
 
 	#region 뱅 용
-	public string charName;				// 캐릭터 이름
+	public string charName;             // 캐릭터 이름
+	public string job;					// 직업
 	public int cardInHand;				// 손패
 	public string weapon;				// 장착중인 무기
 	public List<string> Equipment;      // 술통, 야생마, 조준경
 	public int positionFlag;            // 게임 중 거리 계산용으로 사용할 것.
-	public int myRange;					// 내 사거리
+	public int myRange;                 // 내 사거리
+	public int outRange;                // 내가 멀어질 경우(캐릭터 특성 or 조랑말 효과)
+	public int maxLife;					// 최대 체력
+	public int extraLife;				// 현재 체력
+
+	public Transform player;			//
 
 	public int MyRange
     {
@@ -45,9 +51,13 @@ public class CPlayer : MonoBehaviour {
 		this.cell_indexes.Clear();
 	}
 	
-	public void initialize(byte player_index, string charName)
+	public void initialize(byte player_index, string charName, int life, string job)
 	{
 		this.player_index = player_index;
+		this.charName = charName;
+		this.maxLife = life;
+		this.job = job;
+
 		Debug.Log($"{gameObject.name},{this.player_index}. {charName}");
 	}
 

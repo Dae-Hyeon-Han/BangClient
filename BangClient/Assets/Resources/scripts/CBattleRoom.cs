@@ -67,7 +67,7 @@ public class CBattleRoom : MonoBehaviour
     
     // 플레이어 정보 처리용
     Dictionary<string, Transform> playerIndex = new Dictionary<string, Transform>();        // 숫자 출력용
-    Dictionary<string, Image> playerCharImage = new Dictionary<string, Image>();        // 숫자 출력용
+    Dictionary<string, Image> playerCharImage = new Dictionary<string, Image>();            // 숫자 출력용
     Dictionary<string, Transform> playerObj = new Dictionary<string, Transform>();          // 실제 제어용
     
     // 컨트롤러
@@ -196,7 +196,6 @@ public class CBattleRoom : MonoBehaviour
                 break;
             case PROTOCOL.CHAT:
                 {
-                    //Debug.Log("채팅 받음!");
                     controller.ChatReceive(msg.pop_string());
                 }
                 break;
@@ -263,16 +262,18 @@ public class CBattleRoom : MonoBehaviour
         byte count = msg.pop_byte();
 
         // 디버그
-        PlayerHandCard_FirstSet();
+        //PlayerHandCard_FirstSet();
 
         for (byte i = 0; i < count; ++i)
         {
             byte player_index = msg.pop_byte();
             string charName = msg.pop_string();
+            int life = msg.pop_int32();
+            string job = msg.pop_string();
 
             GameObject obj = new GameObject(string.Format("player{0}", i));
             CPlayer player = obj.AddComponent<CPlayer>();
-            player.initialize(player_index, charName);
+            player.initialize(player_index, charName, life, job);
             player.clear();
 
             // 플레이어 캐릭터 정리
@@ -284,6 +285,12 @@ public class CBattleRoom : MonoBehaviour
 
             this.players.Add(player);
         }
+
+        for (int i = 0; i < 7; i++)
+        {
+            //playerCharImage[$"player{i}"].sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
+        }
+
 
 
 
