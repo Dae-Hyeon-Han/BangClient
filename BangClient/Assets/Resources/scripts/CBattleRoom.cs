@@ -104,7 +104,7 @@ public class CBattleRoom : MonoBehaviour
         foreach (Transform players in playerGroup)
         {
             playerIndex[players.name] = players.GetChild(0);
-            playerCharImage[players.name] = players.GetChild(1).GetComponent<Image>();
+            //playerCharImage[players.name] = players.GetChild(1).GetComponent<Image>();
             playerObj[players.name] = players;
 
             //Debug.Log($"플레이어 이름: {playerCharImage[players.name].name}");
@@ -115,11 +115,6 @@ public class CBattleRoom : MonoBehaviour
     private void OnEnable()
     {
         //CharacterPick.gameObject.SetActive(true);
-    }
-
-    void reset()
-    {
-        // 보드판 데이터를 모두 초기화 한다.
     }
 
 
@@ -268,16 +263,16 @@ public class CBattleRoom : MonoBehaviour
         {
             byte player_index = msg.pop_byte();
             string charName = msg.pop_string();
-            int life = msg.pop_int32();
             string job = msg.pop_string();
+            int life = msg.pop_int32();
 
             GameObject obj = new GameObject(string.Format("player{0}", i));
             CPlayer player = obj.AddComponent<CPlayer>();
-            player.initialize(player_index, charName, life, job);
+            player.initialize(player_index, charName, job, life);
             player.clear();
 
             // 플레이어 캐릭터 정리
-            playerCharImage[$"player{i}"].sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
+            //playerCharImage[$"player{i}"].sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
 
             //Debug.Log($"인덱스: {player_index}");
             //Debug.Log($"{i}의 캐릭터 이름: {charName}");
@@ -295,7 +290,7 @@ public class CBattleRoom : MonoBehaviour
 
 
         this.current_player_index = msg.pop_byte();
-        reset();
+        //reset();
 
         this.game_state = GAME_STATE.STARTED;
     }
@@ -478,15 +473,15 @@ public class CBattleRoom : MonoBehaviour
         }
     }
 
-    // 이게 아닌거 같은디....;;
-    public void PlayerHandCard_Set(string cardName)
-    {
-        // HandCards obj
-        for(int i=0; i< playerIndex["player0"].GetChild(4).childCount; i++)
-        {
-            Cards.Add(playerIndex["player0"].GetChild(4).GetChild(i).gameObject);
-        }
-    }
+    //// 이게 아닌거 같은디....;;
+    //public void PlayerHandCard_Set(string cardName)
+    //{
+    //    // HandCards obj
+    //    for(int i=0; i< playerIndex["player0"].GetChild(4).childCount; i++)
+    //    {
+    //        Cards.Add(playerIndex["player0"].GetChild(4).GetChild(i).gameObject);
+    //    }
+    //}
 
     public void OtherPlayerCardSet(CPacket msg)
     {
