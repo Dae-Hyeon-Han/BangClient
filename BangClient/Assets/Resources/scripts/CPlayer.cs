@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using TMPro;
 
 //using BangGameServer;
 //using FreeNet;
@@ -14,8 +15,6 @@ public enum PLAYER_STATE
 
 public class CPlayer : MonoBehaviour
 {
-
-    public List<short> cell_indexes { get; private set; }
     public byte player_index { get; private set; }
     public PLAYER_STATE state { get; private set; }
     CPlayerAgent agent;
@@ -34,7 +33,14 @@ public class CPlayer : MonoBehaviour
 
     public Transform playerGroup;            //
 
-    Dictionary<string, Image> playerCharImage = new Dictionary<string, Image>();
+    Dictionary<string, Transform> playerIndex = new Dictionary<string, Transform>();        // 숫자 출력용
+    //Dictionary<string, Image> playerCharImage = new Dictionary<string, Image>();            // 그림 출력용
+    TextMeshProUGUI myId;
+    Image playerCharImage;
+    Image jobImage;
+    TextMeshProUGUI life;
+    Transform handsCard;
+    Transform equips;
 
     public int MyRange
     {
@@ -45,55 +51,45 @@ public class CPlayer : MonoBehaviour
 
     void Awake()
     {
-        this.cell_indexes = new List<short>();
         this.agent = new CPlayerAgent();
     }
 
     private void Start()
     {
-        playerGroup = GameObject.Find("players").transform;
+        playerGroup = GameObject.Find("Players").transform;
 
-        foreach (Transform players in playerGroup)
-        {
-            playerCharImage[players.name] = players.GetChild(1).GetComponent<Image>();
-        }
-    }
+        //foreach (Transform players in playerGroup)
+        //{
+        //    //playerCharImage[players.name] = players.GetChild(1).GetComponent<Image>();
+        //    playerIndex[players.name] = players.GetChild(0);
+        //}
 
-    public void clear()
-    {
-        this.cell_indexes.Clear();
+        myId = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        playerCharImage = transform.GetChild(1).GetComponent<Image>();
+        jobImage = transform.GetChild(2).GetComponent<Image>();
+        life = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+        //handsCard = transform.GetChild(4).GetComponent<Transform>();
+        //equips = transform.GetChild(5).GetComponent<Transform>();
     }
 
     // 이곳을 기준으로 플레이어 별 직업 및 캐릭터 별 옵션 셋팅은 완료하고, 플레이어에 대한 정보를 정리할 것.
-    public void initialize(byte player_index, string charName, string job, int life)
+    public void initialize(byte player_me_index,byte player_index, string charName, string job, int life)
     {
         this.player_index = player_index;
         this.charName = charName;
         this.job = job;
         this.maxLife = life;
 
-        //playerCharImage[$"player{i}"].sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
+        myId.text = this.player_index + "번 플레이어";
+        playerCharImage.sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
+        jobImage.sprite = Resources.Load<Sprite>("Images/Job/" + job);
+        this.life.text = "hp: " + this.maxLife;
+        //handsCard
 
-        Debug.Log($"{gameObject.name},{this.player_index}. {charName}");
+        Debug.Log($"목록: {player_me_index}, {player_index}, {charName}, {job}, {life}");
     }
 
     #region 추후 삭제 요망
-    public void add(short cell)
-    {
-        if (this.cell_indexes.Contains(cell))
-        {
-            Debug.LogError(string.Format("Already have a cell. {0}", cell));
-            return;
-        }
-
-        this.cell_indexes.Add(cell);
-    }
-
-    public void remove(short cell)
-    {
-        this.cell_indexes.Remove(cell);
-    }
-
     public void change_to_agent()
     {
         this.state = PLAYER_STATE.AI;
@@ -104,15 +100,6 @@ public class CPlayer : MonoBehaviour
         this.state = PLAYER_STATE.HUMAN;
     }
 
-    public CellInfo run_agent(List<short> board, List<CPlayer> players, List<short> victim_cells)
-    {
-        return this.agent.run(board, players, this.cell_indexes, victim_cells);
-    }
-
-    public int get_virus_count()
-    {
-        return this.cell_indexes.Count;
-    }
     #endregion
 
     #region 여기서부터 뱅용. 이 플랜이 맞나...

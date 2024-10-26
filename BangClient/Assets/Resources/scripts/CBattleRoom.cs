@@ -19,7 +19,7 @@ public class CBattleRoom : MonoBehaviour
     // 가로, 세로 칸 수를 의미한다.
     public static readonly int COL_COUNT = 7;
 
-    List<CPlayer> players;
+    //public List<CPlayer> players;
 
     // 현재 턴을 진행중인 플레이어 인덱스.
     byte current_player_index;
@@ -64,14 +64,17 @@ public class CBattleRoom : MonoBehaviour
     public Transform playerGroup;
     string characterNameLeft;
     string characterNameRight;
-    
+
     // 플레이어 정보 처리용
-    Dictionary<string, Transform> playerIndex = new Dictionary<string, Transform>();        // 숫자 출력용
-    Dictionary<string, Image> playerCharImage = new Dictionary<string, Image>();            // 숫자 출력용
+    //Dictionary<string, Transform> playerIndex = new Dictionary<string, Transform>();        // 숫자 출력용
+    //Dictionary<string, Image> playerCharImage = new Dictionary<string, Image>();            // 그림 출력용
     Dictionary<string, Transform> playerObj = new Dictionary<string, Transform>();          // 실제 제어용
-    
+
     // 컨트롤러
     public PlayerController controller;
+
+    // 플레이어들
+    List<CPlayer> players = new List<CPlayer>();
 
     // 플레잉 카드 사용시 구분용
     public List<GameObject> Cards = new List<GameObject>();
@@ -81,7 +84,8 @@ public class CBattleRoom : MonoBehaviour
     Card card;
     EventTrigger trigger;
     EventTrigger.Entry entry_PointerEnter = new EventTrigger.Entry();
-    
+    public TextMeshProUGUI debug;
+
     #endregion
     //public enum Characters
     //   {
@@ -100,14 +104,17 @@ public class CBattleRoom : MonoBehaviour
         this.win_player_index = byte.MaxValue;
         //this.battle_info = gameObject.AddComponent<CBattleInfoPanel>();
 
-        // 이거 쓸모 없나?
         foreach (Transform players in playerGroup)
         {
-            playerIndex[players.name] = players.GetChild(0);
-            //playerCharImage[players.name] = players.GetChild(1).GetComponent<Image>();
+            //playerIndex[players.name] = players.GetChild(0);
             playerObj[players.name] = players;
+            //playerCharImage[players.name] = players.GetChild(1).GetComponent<Image>();
+
+            // UI 오브젝트 player0 ~ 6
+            players.gameObject.AddComponent<CPlayer>();
 
             //Debug.Log($"플레이어 이름: {playerCharImage[players.name].name}");
+            this.players.Add(players.GetComponent<CPlayer>());
         }
     }
 
@@ -139,17 +146,22 @@ public class CBattleRoom : MonoBehaviour
         CPacket msg = CPacket.create((short)PROTOCOL.LOADING_COMPLETED);
         this.network_manager.send(msg);
 
-        // 나와 다른 플레이어의 인덱스 번호 시각화
-        int j=0;
-        
-        for(int i=0; i<7; i++)
-        {
-            j = player_me_index + i;
-            if (j < 7)
-                playerIndex["player" + i].GetComponent<TextMeshProUGUI>().text = j + "번 플레이어";
-            else
-                playerIndex["player" + i].GetComponent<TextMeshProUGUI>().text = j - 7 + "번 플레이어";
-        }
+        #region 인덱스 번호
+        //// 나와 다른 플레이어의 인덱스 번호 시각화
+        //int j = 0;
+
+        //for (int i = 0; i < 7; i++)
+        //{
+        //    j = player_me_index + i;
+        //    if (j < 7)
+        //        playerIndex["player" + i].GetComponent<TextMeshProUGUI>().text = j + "번 플레이어";
+        //    else
+        //        playerIndex["player" + i].GetComponent<TextMeshProUGUI>().text = j - 7 + "번 플레이어";
+        //}
+        #endregion
+
+        // 플레이어 obj에 CPlayer 컴포넌트 추가
+
     }
 
 
@@ -161,17 +173,6 @@ public class CBattleRoom : MonoBehaviour
     void on_recv(CPacket msg)
     {
         PROTOCOL protocol_id = (PROTOCOL)msg.pop_protocol_id();
-
-
-        #region 왜 이 코드를 쓰면 오브젝트가 안 생김?
-        //if (string.IsNullOrEmpty(msg.pop_string()))
-        //{
-        //    Debug.Log("Using Card");
-        //    useCard = msg.pop_string();
-        //}
-        #endregion
-
-        // USECARD 프로토콜의 경우, 어떻게 받아올지?
 
         switch (protocol_id)
         {
@@ -251,13 +252,17 @@ public class CBattleRoom : MonoBehaviour
 
     void on_game_start(CPacket msg)
     {
-        this.players = new List<CPlayer>();
+        //this.players = new List<CPlayer>();
 
 
         byte count = msg.pop_byte();
 
         // 디버그
         //PlayerHandCard_FirstSet();
+
+        #region 이곳에서 무언가를 해야 함. 그래야 버그가 발생하지 않음
+
+        #endregion
 
         for (byte i = 0; i < count; ++i)
         {
@@ -266,10 +271,15 @@ public class CBattleRoom : MonoBehaviour
             string job = msg.pop_string();
             int life = msg.pop_int32();
 
-            GameObject obj = new GameObject(string.Format("player{0}", i));
-            CPlayer player = obj.AddComponent<CPlayer>();
-            player.initialize(player_index, charName, job, life);
-            player.clear();
+            //GameObject obj = new GameObject(string.Format("player{0}", i));
+            //CPlayer player = obj.AddComponent<CPlayer>();
+            players[i].initialize(player_me_index, player_index, charName, job, life);                   // 버그 원인: 서버는 무조건 0번 부터 뿌려주기 때문에, 무조건 0번 접근자가 받을 정보를 내(모든 플레이어)가 받게 됨
+            //player.clear();
+
+            debug.text = $"목록: {player_me_index}, {player_index}, {charName}, {job}, {life}";
+
+            //players[i].player_index = player_index;
+
 
             // 플레이어 캐릭터 정리
             //playerCharImage[$"player{i}"].sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
@@ -278,7 +288,7 @@ public class CBattleRoom : MonoBehaviour
             //Debug.Log($"{i}의 캐릭터 이름: {charName}");
 
 
-            this.players.Add(player);
+            //this.players.Add(player);
         }
 
         for (int i = 0; i < 7; i++)
@@ -412,12 +422,6 @@ public class CBattleRoom : MonoBehaviour
     //        yield return new WaitForSeconds(0.2f);
     //    }
     //}
-
-    // 이게 뭔지?
-    bool validate_begin_cell(short cell)
-    {
-        return this.players[this.current_player_index].cell_indexes.Exists(obj => obj == cell);
-    }
     #endregion
 
     #region 여기서부터 뱅용 메서드

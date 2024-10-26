@@ -9,9 +9,9 @@ public static class CHelper
 	{
 		List<short> targets = find_neighbor_cells(basis_cell, total_cells, 2);
 
-		players.ForEach(obj => {
-			targets.RemoveAll(number => obj.cell_indexes.Exists(cell => cell == number));
-		});
+		//players.ForEach(obj => {
+		//	targets.RemoveAll(number => obj.cell_indexes.Exists(cell => cell == number));
+		//});
 		
 		//string debug = basis_cell.ToString() + " => ";
 		//targets.ForEach(obj => {
@@ -80,13 +80,13 @@ public static class CHelper
 	public static bool can_play_more(List<short> board, List<CPlayer> players, int current_player_index)
 	{
 		CPlayer current = players[current_player_index];
-		foreach(byte cell in current.cell_indexes)
-		{
-			if (CHelper.find_available_cells(cell, board, players).Count > 0)
-			{
-				return true;
-			}
-		}
+		//foreach(byte cell in current.cell_indexes)
+		//{
+		//	if (CHelper.find_available_cells(cell, board, players).Count > 0)
+		//	{
+		//		return true;
+		//	}
+		//}
 		return false;
 	}
 }
