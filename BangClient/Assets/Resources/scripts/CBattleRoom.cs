@@ -74,7 +74,8 @@ public class CBattleRoom : MonoBehaviour
     public PlayerController controller;
 
     // 플레이어들
-    List<CPlayer> players = new List<CPlayer>();
+    public List<CPlayer> players = new List<CPlayer>();
+    [SerializeField] List<CPlayer> tempPlayers = new List<CPlayer>();
 
     // 플레잉 카드 사용시 구분용
     public List<GameObject> Cards = new List<GameObject>();
@@ -110,11 +111,11 @@ public class CBattleRoom : MonoBehaviour
             playerObj[players.name] = players;
             //playerCharImage[players.name] = players.GetChild(1).GetComponent<Image>();
 
-            // UI 오브젝트 player0 ~ 6
-            players.gameObject.AddComponent<CPlayer>();
+            //// UI 오브젝트 player0 ~ 6
+            //players.gameObject.AddComponent<CPlayer>();
 
-            //Debug.Log($"플레이어 이름: {playerCharImage[players.name].name}");
-            this.players.Add(players.GetComponent<CPlayer>());
+            ////Debug.Log($"플레이어 이름: {playerCharImage[players.name].name}");
+            //this.players.Add(players.GetComponent<CPlayer>());
         }
     }
 
@@ -147,21 +148,191 @@ public class CBattleRoom : MonoBehaviour
         this.network_manager.send(msg);
 
         #region 인덱스 번호
-        //// 나와 다른 플레이어의 인덱스 번호 시각화
-        //int j = 0;
+        // 나와 다른 플레이어의 인덱스 번호 시각화
+        int j = 0;
 
         //for (int i = 0; i < 7; i++)
         //{
         //    j = player_me_index + i;
         //    if (j < 7)
-        //        playerIndex["player" + i].GetComponent<TextMeshProUGUI>().text = j + "번 플레이어";
+        //    {
+        //        //playerIndex["player" + i].GetComponent<TextMeshProUGUI>().text = j + "번 플레이어";
+
+        //    }
         //    else
-        //        playerIndex["player" + i].GetComponent<TextMeshProUGUI>().text = j - 7 + "번 플레이어";
+        //    {
+        //        //playerIndex["player" + i].GetComponent<TextMeshProUGUI>().text = j - 7 + "번 플레이어";
+        //    }
+
+        //    //players.Add();
         //}
         #endregion
 
-        // 플레이어 obj에 CPlayer 컴포넌트 추가
+        #region 구버전
+        //if (player_me_index == 0)
+        //{
+        //    //foreach (Transform players in playerGroup)
+        //    //{
+        //    //    this.players.Add(players.GetComponent<CPlayer>());
+        //    //}
+        //    this.players.Add(transform.Find("player0").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player1").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player2").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player3").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player4").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player5").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player6").GetComponent<CPlayer>());
+        //}
+        //else if(player_me_index == 1)
+        //{
+        //    this.players.Add(transform.Find("player6").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player0").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player1").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player2").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player3").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player4").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player5").GetComponent<CPlayer>());
+        //}
+        //else if (player_me_index == 2)
+        //{
+        //    this.players.Add(transform.Find("player5").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player6").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player0").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player1").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player2").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player3").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player4").GetComponent<CPlayer>());
+        //}
+        //else if (player_me_index == 3)
+        //{
+        //    this.players.Add(transform.Find("player4").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player5").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player6").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player0").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player1").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player2").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player3").GetComponent<CPlayer>());
+        //}
+        //else if (player_me_index == 4)
+        //{
+        //    this.players.Add(transform.Find("player3").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player4").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player5").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player6").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player0").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player1").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player2").GetComponent<CPlayer>());
+        //}
+        //else if (player_me_index == 5)
+        //{
+        //    this.players.Add(transform.Find("player2").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player3").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player4").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player5").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player6").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player0").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player1").GetComponent<CPlayer>());
+        //}
+        //else if (player_me_index == 6)
+        //{
+        //    this.players.Add(transform.Find("player1").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player2").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player3").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player4").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player5").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player6").GetComponent<CPlayer>());
+        //    this.players.Add(transform.Find("player0").GetComponent<CPlayer>());
+        //}
+        //else
+        //{
+        //    for (int i = 0; i < 7; i++)
+        //    {
+        //        //j = player_me_index + i;
+        //        j = 7 - player_me_index + i;
+        //        if (j < 7)
+        //        {
+        //            this.players.Add(transform.Find("player" + j).GetComponent<CPlayer>());
+        //        }
+        //        else
+        //        {
+        //            this.players.Add(transform.Find("player" + (j - 7)).GetComponent<CPlayer>());
+        //        }
+        //        //this.players.Add(transform.Find("player" + j).GetComponent<CPlayer>());
 
+        //        Debug.Log($"{j}, {j-7}");
+        //    }
+        //}
+        #endregion
+        if (player_me_index == 0)
+        {
+            this.players.Add(tempPlayers[0]);
+            this.players.Add(tempPlayers[1]);
+            this.players.Add(tempPlayers[2]);
+            this.players.Add(tempPlayers[3]);
+            this.players.Add(tempPlayers[4]);
+            this.players.Add(tempPlayers[5]);
+            this.players.Add(tempPlayers[6]);
+        }
+        else if (player_me_index == 1)
+        {
+            this.players.Add(tempPlayers[6]);
+            this.players.Add(tempPlayers[0]);
+            this.players.Add(tempPlayers[1]);
+            this.players.Add(tempPlayers[2]);
+            this.players.Add(tempPlayers[3]);
+            this.players.Add(tempPlayers[4]);
+            this.players.Add(tempPlayers[5]);
+        }
+        else if (player_me_index == 2)
+        {
+            this.players.Add(tempPlayers[5]);
+            this.players.Add(tempPlayers[6]);
+            this.players.Add(tempPlayers[0]);
+            this.players.Add(tempPlayers[1]);
+            this.players.Add(tempPlayers[2]);
+            this.players.Add(tempPlayers[3]);
+            this.players.Add(tempPlayers[4]);
+        }
+        else if (player_me_index == 3)
+        {
+            this.players.Add(tempPlayers[4]);
+            this.players.Add(tempPlayers[5]);
+            this.players.Add(tempPlayers[6]);
+            this.players.Add(tempPlayers[0]);
+            this.players.Add(tempPlayers[1]);
+            this.players.Add(tempPlayers[2]);
+            this.players.Add(tempPlayers[3]);
+        }
+        else if (player_me_index == 4)
+        {
+            this.players.Add(tempPlayers[3]);
+            this.players.Add(tempPlayers[4]);
+            this.players.Add(tempPlayers[5]);
+            this.players.Add(tempPlayers[6]);
+            this.players.Add(tempPlayers[0]);
+            this.players.Add(tempPlayers[1]);
+            this.players.Add(tempPlayers[2]);
+        }
+        else if (player_me_index == 5)
+        {
+            this.players.Add(tempPlayers[2]);
+            this.players.Add(tempPlayers[3]);
+            this.players.Add(tempPlayers[4]);
+            this.players.Add(tempPlayers[5]);
+            this.players.Add(tempPlayers[6]);
+            this.players.Add(tempPlayers[0]);
+            this.players.Add(tempPlayers[1]);
+        }
+        else if (player_me_index == 6)
+        {
+            this.players.Add(tempPlayers[1]);
+            this.players.Add(tempPlayers[2]);
+            this.players.Add(tempPlayers[3]);
+            this.players.Add(tempPlayers[4]);
+            this.players.Add(tempPlayers[5]);
+            this.players.Add(tempPlayers[6]);
+            this.players.Add(tempPlayers[0]);
+        }
     }
 
 

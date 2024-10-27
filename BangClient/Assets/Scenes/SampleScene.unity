@@ -2674,6 +2674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 276876863}
   - component: {fileID: 276876864}
+  - component: {fileID: 276876865}
   m_Layer: 5
   m_Name: player4
   m_TagString: Untagged
@@ -2751,6 +2752,29 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &276876865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276876862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eada3105a8627f4cbbbb2d5b2cd8027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charName: 
+  job: 
+  cardInHand: 0
+  weapon: 
+  Equipment: []
+  positionFlag: 0
+  myRange: 0
+  outRange: 0
+  maxLife: 0
+  extraLife: 0
+  playerGroup: {fileID: 0}
 --- !u!1 &283143075
 GameObject:
   m_ObjectHideFlags: 0
@@ -3624,6 +3648,7 @@ GameObject:
   m_Component:
   - component: {fileID: 360689522}
   - component: {fileID: 360689523}
+  - component: {fileID: 360689524}
   m_Layer: 5
   m_Name: player2
   m_TagString: Untagged
@@ -3701,6 +3726,29 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &360689524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360689521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eada3105a8627f4cbbbb2d5b2cd8027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charName: 
+  job: 
+  cardInHand: 0
+  weapon: 
+  Equipment: []
+  positionFlag: 0
+  myRange: 0
+  outRange: 0
+  maxLife: 0
+  extraLife: 0
+  playerGroup: {fileID: 0}
 --- !u!1 &362905559
 GameObject:
   m_ObjectHideFlags: 0
@@ -6285,6 +6333,15 @@ MonoBehaviour:
   CharacterPick: {fileID: 283508029}
   playerGroup: {fileID: 589964026}
   controller: {fileID: 1834697931}
+  players: []
+  tempPlayers:
+  - {fileID: 920525908}
+  - {fileID: 783092732}
+  - {fileID: 360689524}
+  - {fileID: 1731551473}
+  - {fileID: 276876865}
+  - {fileID: 1403116339}
+  - {fileID: 2115052262}
   Cards: []
   debug: {fileID: 782628377}
 --- !u!4 &635805777
@@ -8585,6 +8642,7 @@ GameObject:
   m_Component:
   - component: {fileID: 783092730}
   - component: {fileID: 783092731}
+  - component: {fileID: 783092732}
   m_Layer: 5
   m_Name: player1
   m_TagString: Untagged
@@ -8662,6 +8720,29 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &783092732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783092729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eada3105a8627f4cbbbb2d5b2cd8027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charName: 
+  job: 
+  cardInHand: 0
+  weapon: 
+  Equipment: []
+  positionFlag: 0
+  myRange: 0
+  outRange: 0
+  maxLife: 0
+  extraLife: 0
+  playerGroup: {fileID: 0}
 --- !u!1 &789238772
 GameObject:
   m_ObjectHideFlags: 0
@@ -9396,6 +9477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 920525907}
+  - component: {fileID: 920525908}
   m_Layer: 5
   m_Name: player0
   m_TagString: Untagged
@@ -9429,6 +9511,29 @@ RectTransform:
   m_AnchoredPosition: {x: -200, y: 330}
   m_SizeDelta: {x: 400, y: 300}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &920525908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920525906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eada3105a8627f4cbbbb2d5b2cd8027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charName: 
+  job: 
+  cardInHand: 0
+  weapon: 
+  Equipment: []
+  positionFlag: 0
+  myRange: 0
+  outRange: 0
+  maxLife: 0
+  extraLife: 0
+  playerGroup: {fileID: 0}
 --- !u!1 &932966890
 GameObject:
   m_ObjectHideFlags: 0
@@ -13685,6 +13790,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1403116337}
   - component: {fileID: 1403116338}
+  - component: {fileID: 1403116339}
   m_Layer: 5
   m_Name: player5
   m_TagString: Untagged
@@ -13762,6 +13868,29 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1403116339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403116336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eada3105a8627f4cbbbb2d5b2cd8027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charName: 
+  job: 
+  cardInHand: 0
+  weapon: 
+  Equipment: []
+  positionFlag: 0
+  myRange: 0
+  outRange: 0
+  maxLife: 0
+  extraLife: 0
+  playerGroup: {fileID: 0}
 --- !u!1 &1420249080
 GameObject:
   m_ObjectHideFlags: 0
@@ -15931,6 +16060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1731551471}
   - component: {fileID: 1731551472}
+  - component: {fileID: 1731551473}
   m_Layer: 5
   m_Name: player3
   m_TagString: Untagged
@@ -16008,6 +16138,29 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1731551473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731551470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eada3105a8627f4cbbbb2d5b2cd8027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charName: 
+  job: 
+  cardInHand: 0
+  weapon: 
+  Equipment: []
+  positionFlag: 0
+  myRange: 0
+  outRange: 0
+  maxLife: 0
+  extraLife: 0
+  playerGroup: {fileID: 0}
 --- !u!1 &1734569705
 GameObject:
   m_ObjectHideFlags: 0
@@ -18691,6 +18844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2115052260}
   - component: {fileID: 2115052261}
+  - component: {fileID: 2115052262}
   m_Layer: 5
   m_Name: player6
   m_TagString: Untagged
@@ -18768,6 +18922,29 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2115052262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115052259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eada3105a8627f4cbbbb2d5b2cd8027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charName: 
+  job: 
+  cardInHand: 0
+  weapon: 
+  Equipment: []
+  positionFlag: 0
+  myRange: 0
+  outRange: 0
+  maxLife: 0
+  extraLife: 0
+  playerGroup: {fileID: 0}
 --- !u!1 &2122355683
 GameObject:
   m_ObjectHideFlags: 0
