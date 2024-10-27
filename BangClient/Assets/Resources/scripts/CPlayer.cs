@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 //using BangGameServer;
 //using FreeNet;
@@ -41,6 +42,7 @@ public class CPlayer : MonoBehaviour
     TextMeshProUGUI life;
     Transform handsCard;
     Transform equips;
+    Characters myCharacter;
 
     public int MyRange
     {
@@ -86,7 +88,18 @@ public class CPlayer : MonoBehaviour
         this.life.text = "hp: " + this.maxLife;
         //handsCard
 
-        Debug.Log($"목록: {player_me_index}, {player_index}, {charName}, {job}, {life}");
+        //Debug.Log($"목록: {player_me_index}, {player_index}, {charName}, {job}, {life}");
+        //AddCharacterComponent();
+    }
+
+    public void AddCharacterComponent()
+    {
+        //Type type = Type.GetType(charName);
+        //Characters instance = Activator.CreateInstance(type) as Characters;
+        ////Debug.Log($"캐릭터: {charName},{instance.characterName}");
+        //instance.CharacterAbility();
+
+        //gameObject.AddComponent<Characters>();
     }
 
     #region 추후 삭제 요망
@@ -107,6 +120,11 @@ public class CPlayer : MonoBehaviour
     public void DrawCard()
     {
         //CPacket msg = CPacket.create((short)PROTOCOL.DRAWCARD);
+    }
+
+    public void CharacterExplaine()
+    {
+
     }
 
     // 뱅 사용

@@ -9,11 +9,11 @@ public class Bart_Cassidy : Characters
     {
         characterName = "바트 캐시디";
         //life = 4;
-        coments = "생명력을 잃을 때마다 카드 더미에서 카드 한 장을 가져온다.";
+        comments = "생명력을 잃을 때마다 카드 더미에서 카드 한 장을 가져온다.";
     }
 
     public override void CharacterAbility()
     {
-
+        Debug.Log($"설명 {comments}");
     }
 }

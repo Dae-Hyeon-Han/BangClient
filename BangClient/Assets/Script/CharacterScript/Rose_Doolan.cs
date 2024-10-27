@@ -8,11 +8,11 @@ public class Rose_Doolan : Characters
     {
         characterName = "로즈 둘란";
         //life = 4;
-        coments = "다른 사람을 볼 때 거리 1이 가까워진다.";
+        comments = "다른 사람을 볼 때 거리 1이 가까워진다.";
     }
 
     public override void CharacterAbility()
     {
-
+        Debug.Log($"설명 {comments}");
     }
 }

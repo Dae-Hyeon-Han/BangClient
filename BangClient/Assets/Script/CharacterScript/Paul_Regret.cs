@@ -8,11 +8,11 @@ public class Paul_Regret : Characters
     {
         characterName = "폴 리그레트";
         //life = 3;
-        coments = "다른 사람이 볼 때 거리 1이 멀어진다.";
+        comments = "다른 사람이 볼 때 거리 1이 멀어진다.";
     }
 
     public override void CharacterAbility()
     {
-
+        Debug.Log($"설명 {comments}");
     }
 }
