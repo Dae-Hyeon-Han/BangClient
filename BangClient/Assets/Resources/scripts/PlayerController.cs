@@ -9,19 +9,24 @@ using BangGameServer;
 public class PlayerController : MonoBehaviour
 {
     // 손 카드 및 장착 카드 목록
-    List<Card> handCardList = new List<Card>();
     List<Card> equipCardList = new List<Card>();
 
     // 캐릭터
     Characters myChar;
     TextMeshProUGUI charExplaneBox;
     byte player_me_index;
-
+    
     // 유저
     public Transform player;
 
     // 손에 든 카드
-    Dictionary<string, Transform> handCard = new Dictionary<string, Transform>();
+    #region 이 셋은 세트
+    List<Transform> myCardPool = new List<Transform>();
+    List<Image> myCardShape = new List<Image>();
+    List<TextMeshProUGUI> myCardNumber = new List<TextMeshProUGUI>();
+    #endregion
+    List<Card> myCard = new List<Card>();
+    Image card;
 
     // 다른 플레이어들이 장착중인 장비. 설명을 보기 위해 필요
     public List<Transform> equips;
@@ -37,11 +42,14 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        foreach (Transform cards in player)
+        // pool setting
+        foreach(Transform myCard in player.GetChild(4))
         {
-            handCard[cards.name] = cards;
-            cards.gameObject.SetActive(false);              // 플레이 중 손패가 생기면 활성화 시킬 것
+            myCardPool.Add(myCard);
+            myCardShape.Add(myCard.GetChild(0).GetComponent<Image>());
+            myCardNumber.Add(myCard.GetChild(1).GetComponent<TextMeshProUGUI>());
         }
+
 
         this.network_manager = GameObject.Find("NetworkManager").GetComponent<CNetworkManager>();
     }
@@ -63,9 +71,24 @@ public class PlayerController : MonoBehaviour
     }
 
     // 패 추가
-    public void AddCard(string cardName, string shape, string number)
+    public void PlusCard(string cardName, string shape, string number)
     {
+        for(int i=0; i<myCardPool.Count; i++)
+        {
+            if(myCardPool[i].gameObject.activeSelf == false)
+            {
+                myCardPool[i].gameObject.SetActive(true);
+                myCardPool[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/CardImage/" + cardName);
+                myCardShape[i].sprite = Resources.Load<Sprite>("Images/CardImage/" + shape);
+                myCardNumber[i].text = number;
 
+                // 글자색 셋팅
+                if (shape == "DIAMOND" || shape == "HEART")
+                    myCardNumber[i].color = Color.red;
+                else
+                    myCardNumber[i].color = Color.black;
+            }
+        }
     }
 
     // 채팅 보내기
@@ -88,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         chatText = "";
 
-        foreach(string text in chatList)
+        foreach (string text in chatList)
         {
             chatText += text + "\n";
         }

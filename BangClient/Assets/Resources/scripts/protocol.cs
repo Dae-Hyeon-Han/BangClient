@@ -45,7 +45,8 @@ namespace BangGameServer
         // 채팅
         CHAT = 13,
 
-        //DRAWCARD = 13,
+        // 카드 뽑기
+        DRAWCARD = 15,
 
         //// 인디언 사용
         //INDIANS_REQ = 15,

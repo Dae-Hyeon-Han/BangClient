@@ -199,6 +199,12 @@ public class CBattleRoom : MonoBehaviour
                     controller.ChatReceive(msg.pop_string());
                 }
                 break;
+            case PROTOCOL.DRAWCARD:
+                {
+                    Debug.Log("카드 드로우!");
+                    controller.PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
+                }
+                break;
             case PROTOCOL.START_PLAYER_TURN:
                 on_start_player_turn(msg);
                 Debug.Log("플레이어 턴 시작!");

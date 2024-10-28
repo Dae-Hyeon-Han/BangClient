@@ -40,9 +40,13 @@ public class CPlayer : MonoBehaviour
     Image playerCharImage;
     Image jobImage;
     TextMeshProUGUI life;
-    Transform handsCard;
+    //Transform handsCard;
     Transform equips;
     Characters myCharacter;
+
+    // 손에 든 카드
+    Queue<GameObject> handCardPool = new Queue<GameObject>();
+    Image card;
 
     public int MyRange
     {
@@ -72,10 +76,20 @@ public class CPlayer : MonoBehaviour
         life = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
         //handsCard = transform.GetChild(4).GetComponent<Transform>();
         //equips = transform.GetChild(5).GetComponent<Transform>();
+
+
+        //card = transform.GetChild(4).GetChild(0).GetComponent<Image>();
+        //Debug.Log($"{card.transform.parent.name}, {gameObject.transform.name}");
+        
+        foreach(GameObject card in transform.GetChild(4))
+        {
+            card.SetActive(false);
+            handCardPool.Enqueue(card);
+        }
     }
 
     // 이곳을 기준으로 플레이어 별 직업 및 캐릭터 별 옵션 셋팅은 완료하고, 플레이어에 대한 정보를 정리할 것.
-    public void initialize(byte player_me_index,byte player_index, string charName, string job, int life)
+    public void initialize(byte player_me_index, byte player_index, string charName, string job, int life)
     {
         this.player_index = player_index;
         this.charName = charName;
@@ -90,6 +104,9 @@ public class CPlayer : MonoBehaviour
 
         //Debug.Log($"목록: {player_me_index}, {player_index}, {charName}, {job}, {life}");
         //AddCharacterComponent();
+
+        for(int i=0; i<4; i++)
+            PlusCard();
     }
 
     public void AddCharacterComponent()
@@ -117,9 +134,18 @@ public class CPlayer : MonoBehaviour
 
     #region 여기서부터 뱅용. 이 플랜이 맞나...
     // 새로운 턴이 되어 카드 드로우 시
-    public void DrawCard()
+    public void PlusCard()
     {
-        //CPacket msg = CPacket.create((short)PROTOCOL.DRAWCARD);
+        // 플레이어는 컨트롤러에서 따로 관리할 것
+        if (gameObject.name == "player0")
+            return;
+
+        handCardPool.Dequeue().SetActive(true);
+    }
+
+    public void MinusCard()
+    {
+        //handCardPool.Enqueue().SetActive(false);
     }
 
     public void CharacterExplaine()
