@@ -45,6 +45,9 @@ namespace BangGameServer
         // 채팅
         CHAT = 13,
 
+        // 첫 셋팅
+        CARDFIRSTSET = 14,
+
         // 카드 뽑기
         DRAWCARD = 15,
 

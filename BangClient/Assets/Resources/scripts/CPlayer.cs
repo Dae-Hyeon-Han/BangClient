@@ -45,7 +45,7 @@ public class CPlayer : MonoBehaviour
     Characters myCharacter;
 
     // 손에 든 카드
-    Queue<GameObject> handCardPool = new Queue<GameObject>();
+    List<Transform> handCardPool = new List<Transform>();
     Image card;
 
     public int MyRange
@@ -80,11 +80,13 @@ public class CPlayer : MonoBehaviour
 
         //card = transform.GetChild(4).GetChild(0).GetComponent<Image>();
         //Debug.Log($"{card.transform.parent.name}, {gameObject.transform.name}");
-        
-        foreach(GameObject card in transform.GetChild(4))
+
+        //Debug.Log($"{transform.GetChild(4).name}");
+
+        foreach (Transform card in transform.GetChild(4))
         {
-            card.SetActive(false);
-            handCardPool.Enqueue(card);
+            card.gameObject.SetActive(false);
+            handCardPool.Add(card);
         }
     }
 
@@ -140,7 +142,7 @@ public class CPlayer : MonoBehaviour
         if (gameObject.name == "player0")
             return;
 
-        handCardPool.Dequeue().SetActive(true);
+        //handCardPool.Dequeue().SetActive(true);
     }
 
     public void MinusCard()

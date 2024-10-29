@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
     // ÆÐ Ãß°¡
     public void PlusCard(string cardName, string shape, string number)
     {
+        Debug.Log($"{cardName},{shape},{number}");
+
         for(int i=0; i<myCardPool.Count; i++)
         {
             if(myCardPool[i].gameObject.activeSelf == false)
