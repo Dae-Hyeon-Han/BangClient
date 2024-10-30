@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     Characters myChar;
     TextMeshProUGUI charExplaneBox;
     byte player_me_index;
-    
+
     // 유저
     public Transform player;
 
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // pool setting
-        foreach(Transform myCard in player.GetChild(4))
+        foreach (Transform myCard in player.GetChild(4))
         {
             myCardPool.Add(myCard);
             myCardShape.Add(myCard.GetChild(0).GetComponent<Image>());
@@ -70,14 +70,77 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("캐릭터 셋팅");
     }
 
+    public void SetMyCard(CPacket msg)
+    {
+        //Debug.Log($"패킷: {msg.buffer.Length}");
+
+        //for(int i=0; i<4; i++)
+        //{
+        //    PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
+        //}
+
+        while (true)
+        {
+            string name, shape, number;
+            name = msg.pop_string();
+            shape = msg.pop_string();
+            number = msg.pop_string();
+
+            int pivot = 0;
+
+            try
+            {
+
+
+                pivot++;
+
+
+            }
+            catch
+            {
+                Debug.Log("예외 발생");
+                return;
+            }
+
+
+            //if(string.IsNullOrEmpty(msg.pop_string()) == false)
+            //{
+
+            //}
+            //else
+            //{
+            //    break;
+            //}
+        }
+
+        Debug.Log("while 탈출");
+    }
+
     // 패 추가
     public void PlusCard(string cardName, string shape, string number)
     {
         Debug.Log($"{cardName},{shape},{number}");
 
-        for(int i=0; i<myCardPool.Count; i++)
+        //for(int i=0; i<myCardPool.Count; i++)
+        //{
+        //    if(myCardPool[i].gameObject.activeSelf == false)
+        //    {
+        //        myCardPool[i].gameObject.SetActive(true);
+        //        myCardPool[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/CardImage/" + cardName);
+        //        myCardShape[i].sprite = Resources.Load<Sprite>("Images/CardImage/" + shape);
+        //        myCardNumber[i].text = number;
+
+        //        // 글자색 셋팅
+        //        if (shape == "DIAMOND" || shape == "HEART")
+        //            myCardNumber[i].color = Color.red;
+        //        else
+        //            myCardNumber[i].color = Color.black;
+        //    }
+        //}
+
+        for (int i = 0; i < myCardPool.Count; i++)
         {
-            if(myCardPool[i].gameObject.activeSelf == false)
+            if (myCardPool[i].gameObject.activeSelf == false)
             {
                 myCardPool[i].gameObject.SetActive(true);
                 myCardPool[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/CardImage/" + cardName);
