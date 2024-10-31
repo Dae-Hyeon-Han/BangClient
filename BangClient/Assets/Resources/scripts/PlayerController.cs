@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     List<TextMeshProUGUI> myCardNumber = new List<TextMeshProUGUI>();
     #endregion
     List<Card> myCard = new List<Card>();
+    List<bool> fullCard = new List<bool>();                     // 카드 추가 시 false 인 곳의 인덱스만 사용할 것
     Image card;
 
     // 다른 플레이어들이 장착중인 장비. 설명을 보기 위해 필요
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
             myCardPool.Add(myCard);
             myCardShape.Add(myCard.GetChild(0).GetComponent<Image>());
             myCardNumber.Add(myCard.GetChild(1).GetComponent<TextMeshProUGUI>());
+            fullCard.Add(false);
         }
 
 
@@ -72,6 +74,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetMyCard(CPacket msg)
     {
+        #region
         //Debug.Log($"패킷: {msg.buffer.Length}");
 
         //for(int i=0; i<4; i++)
@@ -79,41 +82,50 @@ public class PlayerController : MonoBehaviour
         //    PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
         //}
 
-        while (true)
+        //while (true)
+        //{
+        //    string name, shape, number;
+        //    name = msg.pop_string();
+        //    shape = msg.pop_string();
+        //    number = msg.pop_string();
+
+        //    int pivot = 0;
+
+        //    try
+        //    {
+
+
+        //        pivot++;
+
+
+        //    }
+        //    catch
+        //    {
+        //        Debug.Log("예외 발생");
+        //        return;
+        //    }
+
+
+        //    //if(string.IsNullOrEmpty(msg.pop_string()) == false)
+        //    //{
+
+        //    //}
+        //    //else
+        //    //{
+        //    //    break;
+        //    //}
+        //}
+
+        //Debug.Log("while 탈출");
+        #endregion
+
+        int count = msg.pop_int32();
+
+        for (int i = 0; i < count; i++)
         {
-            string name, shape, number;
-            name = msg.pop_string();
-            shape = msg.pop_string();
-            number = msg.pop_string();
-
-            int pivot = 0;
-
-            try
-            {
-
-
-                pivot++;
-
-
-            }
-            catch
-            {
-                Debug.Log("예외 발생");
-                return;
-            }
-
-
-            //if(string.IsNullOrEmpty(msg.pop_string()) == false)
-            //{
-
-            //}
-            //else
-            //{
-            //    break;
-            //}
+            Debug.Log($"내 인덱스2: {player_me_index}, {msg.pop_string()}, {msg.pop_string()}, {msg.pop_string()}");
+            PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
         }
-
-        Debug.Log("while 탈출");
     }
 
     // 패 추가
@@ -121,6 +133,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log($"{cardName},{shape},{number}");
 
+        #region
         //for(int i=0; i<myCardPool.Count; i++)
         //{
         //    if(myCardPool[i].gameObject.activeSelf == false)
@@ -137,21 +150,21 @@ public class PlayerController : MonoBehaviour
         //            myCardNumber[i].color = Color.black;
         //    }
         //}
+        #endregion
 
-        for (int i = 0; i < myCardPool.Count; i++)
+        // fullCard는 리스트의 사용 중이지 않은 인덱스 번호를 찾기 위한 수단
+        for (int i = 0; i < fullCard.Count; i++)
         {
-            if (myCardPool[i].gameObject.activeSelf == false)
+            if (fullCard[i])
+                continue;
+            else
             {
                 myCardPool[i].gameObject.SetActive(true);
                 myCardPool[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/CardImage/" + cardName);
                 myCardShape[i].sprite = Resources.Load<Sprite>("Images/CardImage/" + shape);
                 myCardNumber[i].text = number;
-
-                // 글자색 셋팅
-                if (shape == "DIAMOND" || shape == "HEART")
-                    myCardNumber[i].color = Color.red;
-                else
-                    myCardNumber[i].color = Color.black;
+                fullCard[i] = true;
+                return;
             }
         }
     }

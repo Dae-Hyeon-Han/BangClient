@@ -141,6 +141,13 @@ public class CPlayer : MonoBehaviour
         // 플레이어는 컨트롤러에서 따로 관리할 것
         if (gameObject.name == "player0")
             return;
+        else
+        {
+            for(int i=0;i<4;i++)
+            {
+                handCardPool[i].gameObject.SetActive(true);
+            }
+        }
 
         //handCardPool.Dequeue().SetActive(true);
     }

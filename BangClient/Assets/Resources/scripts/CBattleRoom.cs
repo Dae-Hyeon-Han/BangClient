@@ -202,8 +202,19 @@ public class CBattleRoom : MonoBehaviour
             case PROTOCOL.CARDFIRSTSET:
                 {
                     Debug.Log("카드 드로우!");
+                    //byte index = msg.pop_byte();
                     //controller.PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
                     controller.SetMyCard(msg);
+                    //if (msg.pop_byte() == this.player_me_index)
+                    //{
+                    //    Debug.Log($"내 인덱스1: {player_me_index}");
+                    //    controller.SetMyCard(msg);
+                    //}
+                    //else
+                    //{
+                    //    Debug.Log($"내 인덱스1: {player_me_index}");
+                    //    controller.SetMyCard(msg);
+                    //}
                 }
                 break;
             case PROTOCOL.START_PLAYER_TURN:
@@ -472,20 +483,20 @@ public class CBattleRoom : MonoBehaviour
     {
         //Debug.Log($"숫자: {playerObj["player0"].GetChild(4).childCount}");
 
-        for (int i = 0; i < playerObj["player0"].GetChild(4).childCount; i++)
-        {
-            // 카드 기능
-            Cards.Add(playerObj["player0"].GetChild(4).GetChild(i).gameObject);                     // 손패 리스트 push
-            card = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<Bang>();
-            playerObj["player0"].GetChild(4).GetChild(i).gameObject.GetComponent<Button>()
-                .onClick.AddListener(card.UseCard);
+        //for (int i = 0; i < playerObj["player0"].GetChild(4).childCount; i++)
+        //{
+        //    // 카드 기능
+        //    Cards.Add(playerObj["player0"].GetChild(4).GetChild(i).gameObject);                     // 손패 리스트 push
+        //    card = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<Bang>();
+        //    playerObj["player0"].GetChild(4).GetChild(i).gameObject.GetComponent<Button>()
+        //        .onClick.AddListener(card.UseCard);
 
-            // 카드 기능 뷰
-            trigger = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<EventTrigger>();
-            entry_PointerEnter.eventID = EventTriggerType.PointerEnter;
-            entry_PointerEnter.callback.AddListener((data) => { UseViewUi((PointerEventData)data); });
-            trigger.triggers.Add(entry_PointerEnter);
-        }
+        //    // 카드 기능 뷰
+        //    trigger = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<EventTrigger>();
+        //    entry_PointerEnter.eventID = EventTriggerType.PointerEnter;
+        //    entry_PointerEnter.callback.AddListener((data) => { UseViewUi((PointerEventData)data); });
+        //    trigger.triggers.Add(entry_PointerEnter);
+        //}
     }
 
     //// 이게 아닌거 같은디....;;
