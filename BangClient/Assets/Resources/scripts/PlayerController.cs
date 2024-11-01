@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     // Åë½Å¿ë
     CNetworkManager network_manager;
 
+    // µð¹ö±×
+    [SerializeField] TextMeshProUGUI debug;
+
     void Start()
     {
         // pool setting
@@ -119,13 +122,44 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("while Å»Ãâ");
         #endregion
 
-        int count = msg.pop_int32();
+        byte count = msg.pop_byte();
+        byte index = msg.pop_byte();
 
-        for (int i = 0; i < count; i++)
+        Debug.Log($"ÀÎµ¦½º: {index}, {player_me_index}");
+
+        for (byte i = 0; i < count; i++)
         {
-            Debug.Log($"³» ÀÎµ¦½º2: {player_me_index}, {msg.pop_string()}, {msg.pop_string()}, {msg.pop_string()}");
-            PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
+            Debug.Log("¿Ü ¾ÊµÅ");
+            if (index == player_me_index)
+            {
+                int cardCount = msg.pop_int32();
+
+                for (int j = 0; j < cardCount; j++)
+                {
+                    //Debug.Log($"³» ÀÎµ¦½º2: {player_me_index}, {msg.pop_string()}, {msg.pop_string()}, {msg.pop_string()}");
+                    PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
+                }
+            }
+            else
+            {
+                debug.text = $"ÀÎµ¦½º: {index}, {player_me_index}";
+            }
+
         }
+
+        //if (index != player_me_index)
+        //{
+        //    debug.text = $"ÀÎµ¦½º: {index}, {player_me_index}";
+        //    continue;
+        //}
+
+        //int cardCount = msg.pop_int32();
+
+        //for (int j = 0; j < cardCount; j++)
+        //{
+        //    //Debug.Log($"³» ÀÎµ¦½º2: {player_me_index}, {msg.pop_string()}, {msg.pop_string()}, {msg.pop_string()}");
+        //    PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
+        //}
     }
 
     // ÆÐ Ãß°¡

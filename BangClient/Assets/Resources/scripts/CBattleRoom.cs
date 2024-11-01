@@ -201,20 +201,8 @@ public class CBattleRoom : MonoBehaviour
                 break;
             case PROTOCOL.CARDFIRSTSET:
                 {
-                    Debug.Log("카드 드로우!");
-                    //byte index = msg.pop_byte();
-                    //controller.PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
+                    Debug.Log("셋팅!!");
                     controller.SetMyCard(msg);
-                    //if (msg.pop_byte() == this.player_me_index)
-                    //{
-                    //    Debug.Log($"내 인덱스1: {player_me_index}");
-                    //    controller.SetMyCard(msg);
-                    //}
-                    //else
-                    //{
-                    //    Debug.Log($"내 인덱스1: {player_me_index}");
-                    //    controller.SetMyCard(msg);
-                    //}
                 }
                 break;
             case PROTOCOL.START_PLAYER_TURN:
@@ -274,17 +262,8 @@ public class CBattleRoom : MonoBehaviour
 
     void on_game_start(CPacket msg)
     {
-        //this.players = new List<CPlayer>();
-
-
         byte count = msg.pop_byte();
 
-        // 디버그
-        //PlayerHandCard_FirstSet();
-
-        #region 이곳에서 무언가를 해야 함. 그래야 버그가 발생하지 않음
-
-        #endregion
 
         for (byte i = 0; i < count; ++i)
         {
@@ -298,28 +277,12 @@ public class CBattleRoom : MonoBehaviour
             players[i].initialize(player_me_index, player_index, charName, job, life);                   // 버그 원인: 서버는 무조건 0번 부터 뿌려주기 때문에, 무조건 0번 접근자가 받을 정보를 내(모든 플레이어)가 받게 됨
             //player.clear();
 
-            debug.text = $"목록: {player_me_index}, {player_index}, {charName}, {job}, {life}";
-
             //players[i].player_index = player_index;
 
-
-            // 플레이어 캐릭터 정리
-            //playerCharImage[$"player{i}"].sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
-
-            //Debug.Log($"인덱스: {player_index}");
-            //Debug.Log($"{i}의 캐릭터 이름: {charName}");
 
 
             //this.players.Add(player);
         }
-
-        for (int i = 0; i < 7; i++)
-        {
-            //playerCharImage[$"player{i}"].sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
-        }
-
-
-
 
         this.current_player_index = msg.pop_byte();
         //reset();
