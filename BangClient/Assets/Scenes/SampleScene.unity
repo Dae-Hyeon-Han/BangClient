@@ -10264,8 +10264,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 635805776}
-        m_TargetAssemblyTypeName: CBattleRoom, Assembly-CSharp
+      - m_Target: {fileID: 1834697931}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: TurnEnd
         m_Mode: 1
         m_Arguments:

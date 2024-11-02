@@ -125,11 +125,10 @@ public class PlayerController : MonoBehaviour
         byte count = msg.pop_byte();
         byte index = msg.pop_byte();
 
-        Debug.Log($"¿Œµ¶Ω∫: {index}, {player_me_index}");
+        //Debug.Log($"¿Œµ¶Ω∫: {index}, {player_me_index}");
 
         for (byte i = 0; i < count; i++)
         {
-            Debug.Log("ø‹ æ µ≈");
             if (index == player_me_index)
             {
                 int cardCount = msg.pop_int32();
@@ -146,20 +145,6 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-
-        //if (index != player_me_index)
-        //{
-        //    debug.text = $"¿Œµ¶Ω∫: {index}, {player_me_index}";
-        //    continue;
-        //}
-
-        //int cardCount = msg.pop_int32();
-
-        //for (int j = 0; j < cardCount; j++)
-        //{
-        //    //Debug.Log($"≥ª ¿Œµ¶Ω∫2: {player_me_index}, {msg.pop_string()}, {msg.pop_string()}, {msg.pop_string()}");
-        //    PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
-        //}
     }
 
     // ∆– √ﬂ∞°
@@ -201,6 +186,13 @@ public class PlayerController : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void TurnEnd()
+    {
+        CPacket msg = CPacket.create((short)PROTOCOL.TURN_FINISHED_REQ);
+        msg.push(player_me_index);
+        this.network_manager.send(msg);
     }
 
     // √§∆√ ∫∏≥ª±‚
