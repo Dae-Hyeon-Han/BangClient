@@ -205,6 +205,12 @@ public class CBattleRoom : MonoBehaviour
                     controller.SetMyCard(msg);
                 }
                 break;
+            case PROTOCOL.DRAWCARD:
+                {
+                    Debug.Log("드로우!!");
+                    //controller.SetMyCard(msg);
+                }
+                break;
             case PROTOCOL.START_PLAYER_TURN:
                 on_start_player_turn(msg);
                 Debug.Log("플레이어 턴 시작!");

@@ -41,6 +41,13 @@ public class PlayerController : MonoBehaviour
     // 통신용
     CNetworkManager network_manager;
 
+    // 턴
+    public byte current_player_index;
+
+    // 게임 진행용
+    public bool CanDraw;            // 드로우 할 수 있는지
+    public bool CanBang;            // 뱅 쏠 수 있는지
+
     // 디버그
     [SerializeField] TextMeshProUGUI debug;
 
@@ -223,5 +230,21 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"대화 : {msg}");
         Debug.Log($"대화 목록: {chatText}");
         chat.text = chatText;
+    }
+
+    public void DrawCardEvent()
+    {
+        // 내 턴에만 드로우 가능
+        if (CanDraw)
+        {
+            Debug.Log("드로우!");
+            CPacket msg = CPacket.create((short)PROTOCOL.DRAWCARD);
+            msg.push(player_me_index);
+            this.network_manager.send(msg);
+        }
+        else
+        {
+            Debug.Log($"{current_player_index}의 턴임");
+        }
     }
 }
