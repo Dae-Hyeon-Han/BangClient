@@ -247,4 +247,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log($"{current_player_index}의 턴임");
         }
     }
+
+    public void UsedDeckClickEvent()
+    {
+        // 사용한 카드 덱
+        Debug.Log("");
+    }
 }
