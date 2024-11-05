@@ -312,6 +312,7 @@ public class CBattleRoom : MonoBehaviour
         phase_end();
 
         this.current_player_index = msg.pop_byte();
+        controller.current_player_index = this.current_player_index;
     }
 
 

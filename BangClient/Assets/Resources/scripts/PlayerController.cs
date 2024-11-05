@@ -197,6 +197,12 @@ public class PlayerController : MonoBehaviour
 
     public void TurnEnd()
     {
+        if (current_player_index != player_me_index)
+        {
+            Debug.Log($"현재 플레이어: {current_player_index}");
+            return;
+        }
+
         CPacket msg = CPacket.create((short)PROTOCOL.TURN_FINISHED_REQ);
         msg.push(player_me_index);
         this.network_manager.send(msg);
