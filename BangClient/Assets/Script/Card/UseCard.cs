@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UseCard : MonoBehaviour
 {
-    public  string cardName;
+    public string cardName;
     public string shape;
     public string number;
 

@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
     List<Image> myCardShape = new List<Image>();
     List<TextMeshProUGUI> myCardNumber = new List<TextMeshProUGUI>();
     #endregion
-    List<Card> myCard = new List<Card>();
-    List<bool> fullCard = new List<bool>();                     // 카드 추가 시 false 인 곳의 인덱스만 사용할 것
+    //List<Card> myCard = new List<Card>();
+    List<bool> useCard = new List<bool>();                     // 카드 추가 시 false 인 곳의 인덱스만 사용할 것
     Image card;
 
     // 다른 플레이어들이 장착중인 장비. 설명을 보기 위해 필요
@@ -47,6 +47,10 @@ public class PlayerController : MonoBehaviour
     // 게임 진행용
     public bool CanDraw;            // 드로우 할 수 있는지
     public bool CanBang;            // 뱅 쏠 수 있는지
+    [SerializeField] Image explaneBox;
+    [SerializeField] TextMeshProUGUI explaneText;
+    Card explaneSample;
+    Dictionary<string, string> explaneWord = new Dictionary<string, string>();
 
     // 디버그
     [SerializeField] TextMeshProUGUI debug;
@@ -59,11 +63,11 @@ public class PlayerController : MonoBehaviour
             myCardPool.Add(myCard);
             myCardShape.Add(myCard.GetChild(0).GetComponent<Image>());
             myCardNumber.Add(myCard.GetChild(1).GetComponent<TextMeshProUGUI>());
-            fullCard.Add(false);
+            useCard.Add(false);
         }
 
-
         this.network_manager = GameObject.Find("NetworkManager").GetComponent<CNetworkManager>();
+        explaneWord = explaneSample.playingCardDictionary;
     }
 
     // game room에서 처리?
@@ -84,51 +88,6 @@ public class PlayerController : MonoBehaviour
 
     public void SetMyCard(CPacket msg)
     {
-        #region
-        //Debug.Log($"패킷: {msg.buffer.Length}");
-
-        //for(int i=0; i<4; i++)
-        //{
-        //    PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
-        //}
-
-        //while (true)
-        //{
-        //    string name, shape, number;
-        //    name = msg.pop_string();
-        //    shape = msg.pop_string();
-        //    number = msg.pop_string();
-
-        //    int pivot = 0;
-
-        //    try
-        //    {
-
-
-        //        pivot++;
-
-
-        //    }
-        //    catch
-        //    {
-        //        Debug.Log("예외 발생");
-        //        return;
-        //    }
-
-
-        //    //if(string.IsNullOrEmpty(msg.pop_string()) == false)
-        //    //{
-
-        //    //}
-        //    //else
-        //    //{
-        //    //    break;
-        //    //}
-        //}
-
-        //Debug.Log("while 탈출");
-        #endregion
-
         byte count = msg.pop_byte();
         byte index = msg.pop_byte();
 
@@ -143,7 +102,14 @@ public class PlayerController : MonoBehaviour
                 for (int j = 0; j < cardCount; j++)
                 {
                     //Debug.Log($"내 인덱스2: {player_me_index}, {msg.pop_string()}, {msg.pop_string()}, {msg.pop_string()}");
-                    PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
+                    string cardName = msg.pop_string();
+                    string shape = msg.pop_string();
+                    string number = msg.pop_string();
+                    PlusCard(cardName, shape, number);
+
+                    //PlusCard(msg.pop_string(), msg.pop_string(), msg.pop_string());
+
+                    useCard[i] = true;
                 }
             }
             else
@@ -179,9 +145,9 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         // fullCard는 리스트의 사용 중이지 않은 인덱스 번호를 찾기 위한 수단
-        for (int i = 0; i < fullCard.Count; i++)
+        for (int i = 0; i < useCard.Count; i++)
         {
-            if (fullCard[i])
+            if (useCard[i])
                 continue;
             else
             {
@@ -189,7 +155,7 @@ public class PlayerController : MonoBehaviour
                 myCardPool[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/CardImage/" + cardName);
                 myCardShape[i].sprite = Resources.Load<Sprite>("Images/CardImage/" + shape);
                 myCardNumber[i].text = number;
-                fullCard[i] = true;
+                useCard[i] = true;
                 return;
             }
         }
@@ -258,5 +224,21 @@ public class PlayerController : MonoBehaviour
     {
         // 사용한 카드 덱
         Debug.Log("");
+    }
+
+    public void CardInfoDisplay()
+    {
+        Debug.Log("카드 설명 보이기");
+        explaneBox.gameObject.SetActive(true);
+        //explaneText.text = explaneWord[useCard[]].;
+
+        
+    }
+
+    public void CardInfoCover()
+    {
+        Debug.Log("카드 설명 감추기");
+        explaneBox.gameObject.SetActive(false);
+        //explaneText.text = "";
     }
 }

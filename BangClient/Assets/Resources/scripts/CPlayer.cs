@@ -48,6 +48,9 @@ public class CPlayer : MonoBehaviour
     List<Transform> handCardPool = new List<Transform>();
     Image card;
 
+    // ui interaction
+    TextMeshProUGUI explaneBox;
+
     public int MyRange
     {
         get { return myRange; }
@@ -88,6 +91,9 @@ public class CPlayer : MonoBehaviour
             card.gameObject.SetActive(false);
             handCardPool.Add(card);
         }
+
+        // 카드 설명용
+        explaneBox = GameObject.Find("ExplaneText").GetComponent<TextMeshProUGUI>();
     }
 
     // 이곳을 기준으로 플레이어 별 직업 및 캐릭터 별 옵션 셋팅은 완료하고, 플레이어에 대한 정보를 정리할 것.
