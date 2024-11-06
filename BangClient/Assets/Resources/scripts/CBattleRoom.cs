@@ -82,7 +82,7 @@ public class CBattleRoom : MonoBehaviour
     List<Card> HandCard = new List<Card>();
 
     // 디버그 용
-    Card card;
+    Cards card;
     EventTrigger trigger;
     EventTrigger.Entry entry_PointerEnter = new EventTrigger.Entry();
     public TextMeshProUGUI debug;
@@ -453,20 +453,20 @@ public class CBattleRoom : MonoBehaviour
     {
         //Debug.Log($"숫자: {playerObj["player0"].GetChild(4).childCount}");
 
-        //for (int i = 0; i < playerObj["player0"].GetChild(4).childCount; i++)
-        //{
-        //    // 카드 기능
-        //    Cards.Add(playerObj["player0"].GetChild(4).GetChild(i).gameObject);                     // 손패 리스트 push
-        //    card = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<Bang>();
-        //    playerObj["player0"].GetChild(4).GetChild(i).gameObject.GetComponent<Button>()
-        //        .onClick.AddListener(card.UseCard);
+        for (int i = 0; i < playerObj["player0"].GetChild(4).childCount; i++)
+        {
+            // 카드 기능
+            Cards.Add(playerObj["player0"].GetChild(4).GetChild(i).gameObject);                     // 손패 리스트 push
+            card = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<Bang>();
+            playerObj["player0"].GetChild(4).GetChild(i).gameObject.GetComponent<Button>()
+                .onClick.AddListener(card.UseCard);
 
-        //    // 카드 기능 뷰
-        //    trigger = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<EventTrigger>();
-        //    entry_PointerEnter.eventID = EventTriggerType.PointerEnter;
-        //    entry_PointerEnter.callback.AddListener((data) => { UseViewUi((PointerEventData)data); });
-        //    trigger.triggers.Add(entry_PointerEnter);
-        //}
+            // 카드 기능 뷰
+            trigger = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<EventTrigger>();
+            entry_PointerEnter.eventID = EventTriggerType.PointerEnter;
+            entry_PointerEnter.callback.AddListener((data) => { UseViewUi((PointerEventData)data); });
+            trigger.triggers.Add(entry_PointerEnter);
+        }
     }
 
     //// 이게 아닌거 같은디....;;

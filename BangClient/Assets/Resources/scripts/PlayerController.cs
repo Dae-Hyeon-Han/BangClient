@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     // 게임 진행용
     public bool CanDraw;            // 드로우 할 수 있는지
     public bool CanBang;            // 뱅 쏠 수 있는지
+    Cards cards;
     [SerializeField] Image explaneBox;
     [SerializeField] TextMeshProUGUI explaneText;
     Card explaneSample;
@@ -156,9 +157,23 @@ public class PlayerController : MonoBehaviour
                 myCardShape[i].sprite = Resources.Load<Sprite>("Images/CardImage/" + shape);
                 myCardNumber[i].text = number;
                 useCard[i] = true;
+
+                // 여기에 카드 이벤트 추가
+                AddEventOnCard(cardName, i);
+
                 return;
             }
         }
+    }
+
+    public void AddEventOnCard(string cardName, int i)
+    {
+        if(cardName == "BANG")
+            myCardPool[i].gameObject.AddComponent<Bang>();
+        else
+            myCardPool[i].gameObject.AddComponent<Bang>();
+        
+        myCardPool[i].GetComponent<Button>().onClick.AddListener(cards.UseCard);
     }
 
     public void TurnEnd()
@@ -224,6 +239,24 @@ public class PlayerController : MonoBehaviour
     {
         // 사용한 카드 덱
         Debug.Log("");
+    }
+
+    public void UseCardEvent()
+    {
+        //for (int i = 0; i < playerObj["player0"].GetChild(4).childCount; i++)
+        //{
+        //    // 카드 기능
+        //    Cards.Add(playerObj["player0"].GetChild(4).GetChild(i).gameObject);                     // 손패 리스트 push
+        //    card = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<Bang>();
+        //    playerObj["player0"].GetChild(4).GetChild(i).gameObject.GetComponent<Button>()
+        //        .onClick.AddListener(card.UseCard);
+
+        //    // 카드 기능 뷰
+        //    trigger = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<EventTrigger>();
+        //    entry_PointerEnter.eventID = EventTriggerType.PointerEnter;
+        //    entry_PointerEnter.callback.AddListener((data) => { UseViewUi((PointerEventData)data); });
+        //    trigger.triggers.Add(entry_PointerEnter);
+        //}
     }
 
     public void CardInfoDisplay()
