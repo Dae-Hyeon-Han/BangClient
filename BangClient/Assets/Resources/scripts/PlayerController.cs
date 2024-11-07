@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         }
 
         this.network_manager = GameObject.Find("NetworkManager").GetComponent<CNetworkManager>();
-        explaneWord = explaneSample.playingCardDictionary;
+        //explaneWord = explaneSample.playingCardDictionary;
     }
 
     // game room에서 처리?
@@ -168,12 +168,14 @@ public class PlayerController : MonoBehaviour
 
     public void AddEventOnCard(string cardName, int i)
     {
-        if(cardName == "BANG")
+        //Debug.Log($"리스너 {cardName},{i}");
+        if (cardName == "BANG")
             myCardPool[i].gameObject.AddComponent<Bang>();
         else
             myCardPool[i].gameObject.AddComponent<Bang>();
-        
-        myCardPool[i].GetComponent<Button>().onClick.AddListener(cards.UseCard);
+
+        //Debug.Log($"{myCardPool[i].GetComponent<Button>()}");
+        myCardPool[i].gameObject.GetComponent<Button>().onClick.AddListener(cards.UseCard);
     }
 
     public void TurnEnd()
@@ -265,7 +267,7 @@ public class PlayerController : MonoBehaviour
         explaneBox.gameObject.SetActive(true);
         //explaneText.text = explaneWord[useCard[]].;
 
-        
+
     }
 
     public void CardInfoCover()
