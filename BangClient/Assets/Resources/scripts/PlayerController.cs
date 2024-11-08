@@ -169,12 +169,119 @@ public class PlayerController : MonoBehaviour
     public void AddEventOnCard(string cardName, int i)
     {
         //Debug.Log($"리스너 {cardName},{i}");
+        // 뱅
         if (cardName == "BANG")
-            myCardPool[i].gameObject.AddComponent<Bang>();
-        else
-            myCardPool[i].gameObject.AddComponent<Bang>();
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Bang>();
+        }
+        // 빗나감
+        else if(cardName == "MANCATO")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Mancato>();
+        }
+        // 맥주
+        else if (cardName == "BIRRA")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Birra>();
+        }
+        // 기관총
+        else if (cardName == "GATLING")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Gatling>();
+        }
+        // 결투
+        else if (cardName == "DUELLO")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Duello>();
+        }
+        // 인디언
+        else if (cardName == "INDIANI")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Indiani>();
+        }
+        // 주점
+        else if (cardName == "SALOON")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Saloon>();
+        }
+        // 강탈
+        else if (cardName == "PANICO")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Panico>();
+        }
+        // 캣 벌로우
+        else if (cardName == "CAT BALOU")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<CatBalou>();
+        }
+        // 잡화점
+        else if (cardName == "EMPORIO")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Emporio>();
+        }
+        // 역마차
+        else if (cardName == "DILIGENZA")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Diligenza>();
+        }
+        // 웰스파고 은행
+        else if (cardName == "WELLS FARGO")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<WellsFargo>();
+        }
+        // 스코필드
+        else if (cardName == "SCHOFIELD")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Schofield>();
+        }
+        // 레밍턴
+        else if (cardName == "REMINGTON")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Remington>();
+        }
+        // 카빈
+        else if (cardName == "CARABINE")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Carabine>();
+        }
+        // 윈체스터
+        else if (cardName == "WINCHESTER")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Winchester>();
+        }
+        // 볼캐닉
+        else if (cardName == "VOLCANIC")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Volcanic>();
+        }
+        // 조준경
+        else if (cardName == "MIRONO")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Mirono>();
+        }
+        // 야생마
+        else if (cardName == "MUSTANG")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Mustang>();
+        }
+        // 술통
+        else if (cardName == "BARILE")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Barile>();
+        }
+        // 감옥
+        else if (cardName == "PRIGIONE")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Prigione>();
+        }
+        // 다이너마이트
+        else if (cardName == "DINAMITE")
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Dinamite>();
+        }
 
-        //Debug.Log($"{myCardPool[i].GetComponent<Button>()}");
+        //Debug.Log($"오브젝트 이름2: {myCardPool[i].name}");
+        //myCardPool[i].gameObject.AddComponent<Button>();
         myCardPool[i].gameObject.GetComponent<Button>().onClick.AddListener(cards.UseCard);
     }
 

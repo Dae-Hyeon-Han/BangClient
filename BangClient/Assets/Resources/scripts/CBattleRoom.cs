@@ -270,6 +270,8 @@ public class CBattleRoom : MonoBehaviour
     {
         byte count = msg.pop_byte();
 
+        //PlayerHandCard_FirstSet();
+
 
         for (byte i = 0; i < count; ++i)
         {
@@ -458,6 +460,7 @@ public class CBattleRoom : MonoBehaviour
             // 카드 기능
             Cards.Add(playerObj["player0"].GetChild(4).GetChild(i).gameObject);                     // 손패 리스트 push
             card = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<Bang>();
+            Debug.Log($"오브젝트 이름1: {playerObj["player0"].GetChild(4).GetChild(i).name}");
             playerObj["player0"].GetChild(4).GetChild(i).gameObject.GetComponent<Button>()
                 .onClick.AddListener(card.UseCard);
 
