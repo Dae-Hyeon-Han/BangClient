@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     // 유저
     public Transform player;
+    public byte Target;
 
     // 손에 든 카드
     #region 이 셋은 세트
@@ -52,6 +53,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI explaneText;
     Card explaneSample;
     Dictionary<string, string> explaneWord = new Dictionary<string, string>();
+
+    // 게임 상태 확인용
+    public enum EventState
+    {
+        // 뱅
+        DUELLO = 0,         // 결투
+        INDIANI = 1,        // 인디언
+
+        // 빗나감
+        GATLING = 3,        // 기관총
+        BANG = 4,           // 내가 피격 당한 경우
+        //BARILE = 5,         // 술통. 빗나감이 있어도, 술통이 있거나 주르도네라면 먼제 적용해야 함
+
+        // 잡화점
+        EMPORIO = 6,
+
+        // 내 턴 시작 전 선행 작업
+        PRIGIONE = 8,       // 감옥
+        DINAMITE = 9,       // 다이너마이트
+    }
+
+    public EventState myEventState;
 
     // 디버그
     [SerializeField] TextMeshProUGUI debug;
@@ -352,20 +375,7 @@ public class PlayerController : MonoBehaviour
 
     public void UseCardEvent()
     {
-        //for (int i = 0; i < playerObj["player0"].GetChild(4).childCount; i++)
-        //{
-        //    // 카드 기능
-        //    Cards.Add(playerObj["player0"].GetChild(4).GetChild(i).gameObject);                     // 손패 리스트 push
-        //    card = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<Bang>();
-        //    playerObj["player0"].GetChild(4).GetChild(i).gameObject.GetComponent<Button>()
-        //        .onClick.AddListener(card.UseCard);
-
-        //    // 카드 기능 뷰
-        //    trigger = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<EventTrigger>();
-        //    entry_PointerEnter.eventID = EventTriggerType.PointerEnter;
-        //    entry_PointerEnter.callback.AddListener((data) => { UseViewUi((PointerEventData)data); });
-        //    trigger.triggers.Add(entry_PointerEnter);
-        //}
+        // 뱅 등 타깃 지정이 필요한 카드는 이 메서드로 연결할 것
     }
 
     public void CardInfoDisplay()

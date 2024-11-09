@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using FreeNet;
+using BangGameServer;
 
 public class Saloon : Cards
 {
     CBattleRoom battleRoom;
     //Transform viewUi;
     EventSystem eventSystem;
+    CNetworkManager networkManager;
 
     void Start()
     {
@@ -22,8 +25,12 @@ public class Saloon : Cards
 
     public override void UseCard()
     {
-        battleRoom.UseCardEvent(cardName);
+        //battleRoom.UseCardEvent(cardName);
         Debug.Log("Ä«µå°¡ ½ô");
+
+        CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+        msg.push("SALOON");
+        networkManager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc()

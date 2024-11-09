@@ -211,6 +211,11 @@ public class CBattleRoom : MonoBehaviour
                     //controller.SetMyCard(msg);
                 }
                 break;
+            case PROTOCOL.ALLPLAYERINFOSET:
+                {
+                    Debug.Log("모든 플레이어의 인포 리셋!");
+                }
+                break;
             case PROTOCOL.START_PLAYER_TURN:
                 on_start_player_turn(msg);
                 Debug.Log("플레이어 턴 시작!");
