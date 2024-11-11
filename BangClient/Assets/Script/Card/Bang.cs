@@ -13,6 +13,7 @@ public class Bang : Cards
     //public byte player_me_index;
     //public byte currnt_player_index;            // 이 두 값이 일치하면 my turn.
     public PlayerController controller;           // 뱅을 쓸 때, 어떤 상태에서 쓰이는지 확인하기 위함
+    public byte targetIndex;
 
     void Start()
     {
@@ -28,13 +29,15 @@ public class Bang : Cards
 
     public override void UseCard()
     {
-        battleRoom.UseCardEvent(cardName);
+        //battleRoom.UseCardEvent(cardName);
         Debug.Log("카드가 쏨");
 
         // 뱅을 쓰는 경우
         // 1. 공격(볼캐닉을 장착 중이거나, 플레이어 캐릭터가 윌리 더 키드인 경우를 고려하여 작성할 것)
         // 2. 인디언 대응
         // 3. 결투
+
+
     }
 
     public override void MouseIn_ViewCardFunc()

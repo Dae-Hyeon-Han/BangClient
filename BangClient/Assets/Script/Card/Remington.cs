@@ -22,7 +22,7 @@ public class Remington : Cards
 
     public override void UseCard()
     {
-        battleRoom.UseCardEvent(cardName);
+        //battleRoom.UseCardEvent(cardName);
         Debug.Log("Ä«µå°¡ ½ô");
     }
 

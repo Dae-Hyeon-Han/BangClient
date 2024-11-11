@@ -25,7 +25,7 @@ public class CBattleRoom : MonoBehaviour
     byte current_player_index;
 
     // 서버에서 지정해준 본인의 플레이어 인덱스.
-    byte player_me_index;
+    public byte player_me_index;
 
     // 상황에 따른 터치 입력을 처리하기 위한 변수.
     byte step;
@@ -76,6 +76,7 @@ public class CBattleRoom : MonoBehaviour
     // 플레이어들
     public List<CPlayer> players = new List<CPlayer>();
     [SerializeField] List<CPlayer> tempPlayers = new List<CPlayer>();
+    public byte targetIndex;
 
     // 플레잉 카드 사용시 구분용
     public List<GameObject> Cards = new List<GameObject>();
@@ -492,11 +493,11 @@ public class CBattleRoom : MonoBehaviour
         // 프로토콜 확정 시 작성
     }
 
-    public void UseCardEvent(string cardName)
+    public void UseCardEvent()
     {
         Debug.Log("실제로 쏨");
 
-        CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+        //CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
 
         //if()
     }
