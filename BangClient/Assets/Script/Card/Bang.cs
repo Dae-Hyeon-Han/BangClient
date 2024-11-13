@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using BangGameServer;
+using FreeNet;
 
 public class Bang : Cards
 {
+    NetworkManager networkManager;
+
     CBattleRoom battleRoom;
     //Transform viewUi;
     EventSystem eventSystem;
@@ -32,12 +36,15 @@ public class Bang : Cards
         //battleRoom.UseCardEvent(cardName);
         Debug.Log("카드가 쏨");
 
-        // 뱅을 쓰는 경우
-        // 1. 공격(볼캐닉을 장착 중이거나, 플레이어 캐릭터가 윌리 더 키드인 경우를 고려하여 작성할 것)
-        // 2. 인디언 대응
-        // 3. 결투
-
-
+        if (controller.CanBang == false)
+            Debug.Log("또 쏠 수 없음");
+        else
+        {
+            CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+            msg.push(cardName);
+            msg.push(targetIndex);
+            networkManager.send(msg);
+        }
     }
 
     public override void MouseIn_ViewCardFunc()

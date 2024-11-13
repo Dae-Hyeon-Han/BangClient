@@ -11,7 +11,7 @@ public class React : MonoBehaviour
 
     private void Start()
     {
-        battleRoom = GameObject.Find("CBattleRoom").GetComponent<CBattleRoom>();
+        battleRoom = GameObject.Find("BattleRoom").GetComponent<CBattleRoom>();
     }
 
 

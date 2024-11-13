@@ -32,6 +32,10 @@ public class CPlayer : MonoBehaviour
     public int maxLife;                 // 최대 체력
     public int extraLife;               // 현재 체력
 
+    public PlayerController controller;
+
+    [SerializeField] int indexNum;      // 인스펙터 확인용. 쓰진 않음
+
     public Transform playerGroup;            //
 
     Dictionary<string, Transform> playerIndex = new Dictionary<string, Transform>();        // 숫자 출력용
@@ -94,6 +98,9 @@ public class CPlayer : MonoBehaviour
 
         // 카드 설명용
         //explaneBox = GameObject.Find("ExplaneText").GetComponent<TextMeshProUGUI>();
+
+        // 이벤트용
+        controller = GameObject.Find("PlayerController").GetComponent<PlayerController>();
     }
 
     // 이곳을 기준으로 플레이어 별 직업 및 캐릭터 별 옵션 셋팅은 완료하고, 플레이어에 대한 정보를 정리할 것.
@@ -103,6 +110,9 @@ public class CPlayer : MonoBehaviour
         this.charName = charName;
         this.job = job;
         this.maxLife = life;
+
+        // 인스펙터 확인용
+        indexNum = this.player_index;
 
         myId.text = this.player_index + "번 플레이어";
         playerCharImage.sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
@@ -115,6 +125,11 @@ public class CPlayer : MonoBehaviour
 
         for(int i=0; i<4; i++)
             PlusCard();
+
+        // 카드 선택 이벤트 등록
+        if(gameObject.name != "player0")
+            gameObject.GetComponent<Button>().onClick.AddListener(SetTarget);
+        //Debug.Log($"{player_index}");
     }
 
     public void AddCharacterComponent()
@@ -183,6 +198,13 @@ public class CPlayer : MonoBehaviour
     public List<string> MyCard()
     {
         return null;
+    }
+
+    public void SetTarget()
+    {
+        controller.Target = this.player_index;
+
+        Debug.Log($"타깃 인덱스: {controller.Target}");
     }
     #endregion
 }

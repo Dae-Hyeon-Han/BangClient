@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     // 유저
     public Transform player;
+    public CPlayer mePlayer;
     public byte Target;
 
     // 손에 든 카드
@@ -47,12 +48,25 @@ public class PlayerController : MonoBehaviour
 
     // 게임 진행용
     public bool CanDraw;            // 드로우 할 수 있는지
-    public bool CanBang;            // 뱅 쏠 수 있는지
+    //public bool CanBang;            // 뱅 쏠 수 있는지
     Cards cards;
     [SerializeField] Image explaneBox;
     [SerializeField] TextMeshProUGUI explaneText;
     Card explaneSample;
     Dictionary<string, string> explaneWord = new Dictionary<string, string>();
+    private bool canBang;            // 뱅을 쏠 수 있는지. 턴 시작시 true가 되고, 뱅 쏜 후에 false
+
+    public bool CanBang 
+    {
+        get { return canBang; }
+        set 
+        {
+            canBang = value; 
+
+            // 플레이어 캐릭터가 윌리 더 키드인 경우, 볼캐닉을 장착 중인 경우 canBang을 다시 true로 바꿀 것
+        }
+    }
+    
 
     // 게임 상태 확인용
     public enum EventState
@@ -147,7 +161,7 @@ public class PlayerController : MonoBehaviour
     // 패 추가
     public void PlusCard(string cardName, string shape, string number)
     {
-        Debug.Log($"{cardName},{shape},{number}");
+        //Debug.Log($"{cardName},{shape},{number}");
 
         #region
         //for(int i=0; i<myCardPool.Count; i++)
@@ -393,4 +407,9 @@ public class PlayerController : MonoBehaviour
         explaneBox.gameObject.SetActive(false);
         //explaneText.text = "";
     }
+
+    //public void SetTarget()
+    //{
+
+    //}
 }

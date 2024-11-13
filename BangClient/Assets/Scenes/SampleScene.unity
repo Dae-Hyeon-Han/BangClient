@@ -4294,7 +4294,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 184862260}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &276876865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4317,6 +4329,8 @@ MonoBehaviour:
   outRange: 0
   maxLife: 0
   extraLife: 0
+  controller: {fileID: 0}
+  indexNum: 0
   playerGroup: {fileID: 0}
 --- !u!1 &282557414
 GameObject:
@@ -5690,7 +5704,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1661964687}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &360689524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5713,6 +5739,8 @@ MonoBehaviour:
   outRange: 0
   maxLife: 0
   extraLife: 0
+  controller: {fileID: 0}
+  indexNum: 0
   playerGroup: {fileID: 0}
 --- !u!1 &361409083
 GameObject:
@@ -11041,6 +11069,7 @@ MonoBehaviour:
   - {fileID: 276876865}
   - {fileID: 1403116339}
   - {fileID: 2115052262}
+  targetIndex: 0
   Cards: []
   debug: {fileID: 782628377}
 --- !u!4 &635805777
@@ -13353,7 +13382,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2047608186}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &783092732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13376,6 +13417,8 @@ MonoBehaviour:
   outRange: 0
   maxLife: 0
   extraLife: 0
+  controller: {fileID: 0}
+  indexNum: 0
   playerGroup: {fileID: 0}
 --- !u!1 &785619573
 GameObject:
@@ -15199,6 +15242,8 @@ MonoBehaviour:
   outRange: 0
   maxLife: 0
   extraLife: 0
+  controller: {fileID: 0}
+  indexNum: 0
   playerGroup: {fileID: 0}
 --- !u!1 &932966890
 GameObject:
@@ -20430,7 +20475,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 695347173}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1403116339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20453,6 +20510,8 @@ MonoBehaviour:
   outRange: 0
   maxLife: 0
   extraLife: 0
+  controller: {fileID: 0}
+  indexNum: 0
   playerGroup: {fileID: 0}
 --- !u!1 &1430499221
 GameObject:
@@ -23171,7 +23230,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 710933708}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1731551473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23194,6 +23265,8 @@ MonoBehaviour:
   outRange: 0
   maxLife: 0
   extraLife: 0
+  controller: {fileID: 0}
+  indexNum: 0
   playerGroup: {fileID: 0}
 --- !u!1 &1733188591
 GameObject:
@@ -27704,7 +27777,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 999221664}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2115052262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27727,6 +27812,8 @@ MonoBehaviour:
   outRange: 0
   maxLife: 0
   extraLife: 0
+  controller: {fileID: 0}
+  indexNum: 0
   playerGroup: {fileID: 0}
 --- !u!1 &2117393731
 GameObject:
