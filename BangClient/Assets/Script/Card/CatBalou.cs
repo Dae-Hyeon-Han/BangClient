@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using FreeNet;
+using BangGameServer;
 
 public class CatBalou : Cards
 {
+    NetworkManager networkManager;
+
     CBattleRoom battleRoom;
     //Transform viewUi;
     EventSystem eventSystem;
+
+    public PlayerController controller;           // 인덱스 번호를 가져오기 위함
 
     void Start()
     {
@@ -15,15 +21,22 @@ public class CatBalou : Cards
         //viewUi = transform.GetChild(0);
         //viewUi.transform.gameObject.SetActive(false);
         eventSystem = gameObject.GetComponent<EventSystem>();
+        controller = GameObject.Find("PlayerController").GetComponent<PlayerController>();
 
-        cardName = "빗나감!";
+        cardName = "캣 벌로우!";
         funcText = "사정 거리 내의 한 사람에게 공격을 가한다.";
     }
 
     public override void UseCard()
     {
         //battleRoom.UseCardEvent(cardName);
-        Debug.Log("카드가 쏨");
+        Debug.Log("캣 벌로우");
+
+        //[프로토콜][CAT BALOU][타깃 index]
+        CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+        msg.push("CAT BALOU");
+        msg.push(controller.Target);                       // 타깃 인덱스
+        networkManager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc()

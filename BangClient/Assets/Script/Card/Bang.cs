@@ -40,8 +40,9 @@ public class Bang : Cards
             Debug.Log("또 쏠 수 없음");
         else
         {
+            // [프로토콜][BANG][타깃 인덱스]
             CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
-            msg.push(cardName);
+            msg.push("BANG");
             msg.push(targetIndex);
             networkManager.send(msg);
         }

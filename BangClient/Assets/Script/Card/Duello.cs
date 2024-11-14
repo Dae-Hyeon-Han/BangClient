@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using FreeNet;
+using BangGameServer;
 
 public class Duello : Cards
 {
+    NetworkManager networkManager;
+
     CBattleRoom battleRoom;
     //Transform viewUi;
     EventSystem eventSystem;
+
+    PlayerController controller;           // 플레이어 인덱스 번호를 가져오기 위함
 
     void Start()
     {
@@ -15,6 +21,7 @@ public class Duello : Cards
         //viewUi = transform.GetChild(0);
         //viewUi.transform.gameObject.SetActive(false);
         eventSystem = gameObject.GetComponent<EventSystem>();
+        controller = GameObject.Find("PlayerController").GetComponent<PlayerController>();
 
         cardName = "결투";
         funcText = "사정 거리 내의 한 사람에게 공격을 가한다.";
@@ -23,14 +30,16 @@ public class Duello : Cards
     public override void UseCard()
     {
         //battleRoom.UseCardEvent(cardName);
-        Debug.Log("카드가 쏨");
+        //Debug.Log("카드가 쏨");
+
+        //[프로토콜][DUELLO][타깃 index]
+        CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+        msg.push("DUELLO");
+        msg.push(controller.Target);                       // 
+        networkManager.send(msg);
     }
 
-    public override void MouseIn_ViewCardFunc()
-    {
-    }
+    public override void MouseIn_ViewCardFunc() { }
 
-    public override void MouseOut_ViewCardFunc()
-    {
-    }
+    public override void MouseOut_ViewCardFunc() { }
 }

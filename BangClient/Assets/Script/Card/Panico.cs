@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using FreeNet;
+using BangGameServer;
 
 public class Panico : Cards
 {
+    NetworkManager networkManager;
+
     CBattleRoom battleRoom;
     //Transform viewUi;
     EventSystem eventSystem;
+
+    PlayerController controller;
 
     void Start()
     {
@@ -23,14 +29,16 @@ public class Panico : Cards
     public override void UseCard()
     {
         //battleRoom.UseCardEvent(cardName);
-        Debug.Log("Ä«µå°¡ ½ô");
+        //Debug.Log("Ä«µå°¡ ½ô");
+
+        //[ÇÁ·ÎÅäÄÝ][INDIANI][Å¸±ê index]
+        CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+        msg.push("PANICO");
+        msg.push(controller.Target);
+        networkManager.send(msg);
     }
 
-    public override void MouseIn_ViewCardFunc()
-    {
-    }
+    public override void MouseIn_ViewCardFunc() { }
 
-    public override void MouseOut_ViewCardFunc()
-    {
-    }
+    public override void MouseOut_ViewCardFunc() { }
 }

@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     // 캐릭터
     Characters myChar;
     TextMeshProUGUI charExplaneBox;
-    byte player_me_index;
+    public byte player_me_index;
 
     // 유저
     public Transform player;

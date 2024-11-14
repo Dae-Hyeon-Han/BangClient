@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using FreeNet;
+using BangGameServer;
 
 public class WellsFargo : Cards
 {
+    NetworkManager networkManager;
+
     CBattleRoom battleRoom;
     //Transform viewUi;
     EventSystem eventSystem;
+
+    PlayerController controller;
 
     void Start()
     {
@@ -23,20 +29,36 @@ public class WellsFargo : Cards
     public override void UseCard()
     {
         //battleRoom.UseCardEvent(cardName);
-        Debug.Log("Ä«µå°¡ ½ô");
+        //Debug.Log("Ä«µå°¡ ½ô");
+
+        //[ÇÁ·ÎÅäÄÝ][INDIANI][Å¸±ê index]
+        CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+        msg.push("WELLS FARGO");
+        networkManager.send(msg);
     }
 
-    public override void MouseIn_ViewCardFunc()
-    {
-        //viewUi.gameObject.SetActive(true);
-        //viewUi.GetComponent<TextMeshProUGUI>().text = funcText;
+    public override void MouseIn_ViewCardFunc() { }
 
-        //battleRoom.UseViewUi(viewUi, true, funcText);
-    }
+    public override void MouseOut_ViewCardFunc() { }
 
-    public override void MouseOut_ViewCardFunc()
-    {
-        //viewUi.gameObject.SetActive(true);
-        //viewUi.GetComponent<TextMeshProUGUI>().text = funcText;
-    }
+
+    //public override void UseCard()
+    //{
+    //    //battleRoom.UseCardEvent(cardName);
+    //    Debug.Log("Ä«µå°¡ ½ô");
+    //}
+
+    //public override void MouseIn_ViewCardFunc()
+    //{
+    //    //viewUi.gameObject.SetActive(true);
+    //    //viewUi.GetComponent<TextMeshProUGUI>().text = funcText;
+
+    //    //battleRoom.UseViewUi(viewUi, true, funcText);
+    //}
+
+    //public override void MouseOut_ViewCardFunc()
+    //{
+    //    //viewUi.gameObject.SetActive(true);
+    //    //viewUi.GetComponent<TextMeshProUGUI>().text = funcText;
+    //}
 }
