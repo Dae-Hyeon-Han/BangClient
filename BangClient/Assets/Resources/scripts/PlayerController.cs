@@ -11,6 +11,12 @@ public class PlayerController : MonoBehaviour
     // 손 카드 및 장착 카드 목록
     List<Card> equipCardList = new List<Card>();
 
+    // 0번 = 총
+    // 1번 = 술통
+    // 2번 = 조랑말
+    // 3번 = 조준경
+    public List<Image> equipIcon = new List<Image>();
+
     // 캐릭터
     Characters myChar;
     TextMeshProUGUI charExplaneBox;
@@ -20,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public Transform player;
     public CPlayer mePlayer;
     public byte Target;
+
 
     // 손에 든 카드
     #region 이 셋은 세트
@@ -56,6 +63,13 @@ public class PlayerController : MonoBehaviour
     Dictionary<string, string> explaneWord = new Dictionary<string, string>();
     private bool canBang;            // 뱅을 쏠 수 있는지. 턴 시작시 true가 되고, 뱅 쏜 후에 false
 
+    // 타깃 설정을 위해 on/off 되어야 하는 부분(클릭 가능 여부 => 뱅을 쏠 때, 플레이어 타깃 버튼의 콜라이더가 너무 커서 필요함)
+    // 강탈 및 캣 벌로우 사용을 위해 필요
+    public string targetCard;
+    public string targetEquip;
+    
+
+    // 뱅을 쏠 수 있는지 확인 여부용. 턴 시작 시 true로 교체
     public bool CanBang 
     {
         get { return canBang; }
@@ -106,6 +120,12 @@ public class PlayerController : MonoBehaviour
 
         this.network_manager = GameObject.Find("NetworkManager").GetComponent<CNetworkManager>();
         //explaneWord = explaneSample.playingCardDictionary;
+
+        // 장비
+        //foreach(Image equipImage in equips.get)
+        //{
+        //    equipIcon.Add(equipImage.GetComponent<iamge>);
+        //}
     }
 
     // game room에서 처리?

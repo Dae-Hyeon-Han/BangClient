@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using FreeNet;
+using BangGameServer;
 
 public class Barile : Cards
 {
+    NetworkManager networkManager;
+
     CBattleRoom battleRoom;
     //Transform viewUi;
     EventSystem eventSystem;
+
+    PlayerController controller;
 
     void Start()
     {
@@ -15,6 +21,7 @@ public class Barile : Cards
         //viewUi = transform.GetChild(0);
         //viewUi.transform.gameObject.SetActive(false);
         eventSystem = gameObject.GetComponent<EventSystem>();
+        controller = GameObject.Find("PlayerController").GetComponent<PlayerController>();
 
         cardName = "술통";
         funcText = "사정 거리 내의 한 사람에게 공격을 가한다.";
@@ -24,13 +31,14 @@ public class Barile : Cards
     {
         //battleRoom.UseCardEvent(cardName);
         Debug.Log("카드가 쏨");
+
+        // 술통 이미지 보이기
+        controller.equipIcon[1].gameObject.SetActive(true);
+
+        // 술통 효과 활성화
     }
 
-    public override void MouseIn_ViewCardFunc()
-    {
-    }
+    public override void MouseIn_ViewCardFunc(){}
 
-    public override void MouseOut_ViewCardFunc()
-    {
-    }
+    public override void MouseOut_ViewCardFunc(){}
 }
