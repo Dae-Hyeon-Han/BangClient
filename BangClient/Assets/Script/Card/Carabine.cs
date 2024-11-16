@@ -13,7 +13,8 @@ public class Carabine : Cards
     //Transform viewUi;
     EventSystem eventSystem;
 
-    CPlayer myPlayer;
+    //CPlayer myPlayer;
+    PlayerController controller;
 
     void Start()
     {
@@ -21,7 +22,8 @@ public class Carabine : Cards
         //viewUi = transform.GetChild(0);
         //viewUi.transform.gameObject.SetActive(false);
         eventSystem = gameObject.GetComponent<EventSystem>();
-        myPlayer = GameObject.Find("player0").GetComponent<CPlayer>();
+        //myPlayer = GameObject.Find("player0").GetComponent<CPlayer>();
+        controller = GameObject.Find("PlayerController").GetComponent<PlayerController>();
 
         cardName = "카빈";
         funcText = "사정 거리 내의 한 사람에게 공격을 가한다.";
@@ -29,7 +31,11 @@ public class Carabine : Cards
 
     public override void UseCard()
     {
-        
+        // 총 이미지 보이기
+        controller.equipIcon[0].sprite = Resources.Load<Sprite>("Images/CardImage/CARABINE");
+        controller.equipIcon[0].gameObject.SetActive(true);
+
+        // 서버에 총 장착 메시지 보내기
     }
 
     public override void MouseIn_ViewCardFunc(){}
