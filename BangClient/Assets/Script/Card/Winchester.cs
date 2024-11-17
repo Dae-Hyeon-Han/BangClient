@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using FreeNet;
+using BangGameServer;
 
 public class Winchester : Cards
 {
+    NetworkManager networkManager;
+
     CBattleRoom battleRoom;
     //Transform viewUi;
     EventSystem eventSystem;
+
+    PlayerController controller;
 
     void Start()
     {
@@ -15,6 +21,7 @@ public class Winchester : Cards
         //viewUi = transform.GetChild(0);
         //viewUi.transform.gameObject.SetActive(false);
         eventSystem = gameObject.GetComponent<EventSystem>();
+        controller = GameObject.Find("PlayerController").GetComponent<PlayerController>();
 
         cardName = "윈체스터";
         funcText = "사정 거리 내의 한 사람에게 공격을 가한다.";
@@ -24,13 +31,15 @@ public class Winchester : Cards
     {
         //battleRoom.UseCardEvent(cardName);
         Debug.Log("카드가 쏨");
+
+        //[프로토콜][카드 이름][나의 인덱스]
+        CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+        msg.push("REMINGTON");
+        msg.push(controller.player_me_index);
+        networkManager.send(msg);
     }
 
-    public override void MouseIn_ViewCardFunc()
-    {
-    }
+    public override void MouseIn_ViewCardFunc(){}
 
-    public override void MouseOut_ViewCardFunc()
-    {
-    }
+    public override void MouseOut_ViewCardFunc(){}
 }

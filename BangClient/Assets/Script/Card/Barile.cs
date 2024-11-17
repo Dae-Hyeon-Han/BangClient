@@ -33,9 +33,15 @@ public class Barile : Cards
         Debug.Log("카드가 쏨");
 
         // 술통 이미지 보이기
-        controller.equipIcon[1].gameObject.SetActive(true);
+        //controller.equipIcon[1].gameObject.SetActive(true);
 
         // 술통 효과 활성화
+
+        //[프로토콜][카드 이름][나의 인덱스]
+        CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+        msg.push("BARILE");
+        msg.push(controller.player_me_index);
+        networkManager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc(){}

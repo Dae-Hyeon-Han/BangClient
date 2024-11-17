@@ -32,10 +32,14 @@ public class Carabine : Cards
     public override void UseCard()
     {
         // 총 이미지 보이기
-        controller.equipIcon[0].sprite = Resources.Load<Sprite>("Images/CardImage/CARABINE");
-        controller.equipIcon[0].gameObject.SetActive(true);
+        //controller.equipIcon[0].sprite = Resources.Load<Sprite>("Images/CardImage/CARABINE");
+        //controller.equipIcon[0].gameObject.SetActive(true);
 
         // 서버에 총 장착 메시지 보내기
+        CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+        msg.push("CARABINE");
+        msg.push(controller.player_me_index);
+        networkManager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc(){}

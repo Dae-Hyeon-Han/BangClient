@@ -502,6 +502,11 @@ public class CBattleRoom : MonoBehaviour
         //if()
     }
 
+    public void RefreshPlayerInfo(CPacket msg)
+    {
+        Debug.Log("정보 최신화");
+    }
+
     // 왜 11개가 호출되지?
     public void UseViewUi(PointerEventData data)
     {

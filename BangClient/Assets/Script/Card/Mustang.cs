@@ -33,7 +33,13 @@ public class Mustang : Cards
         Debug.Log("카드가 쏨");
 
         // 조랑말 이미지 보이기
-        controller.equipIcon[2].gameObject.SetActive(true);
+        //controller.equipIcon[2].gameObject.SetActive(true);
+
+        //[프로토콜][카드 이름][나의 인덱스]
+        CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+        msg.push("MUSTANG");
+        msg.push(controller.player_me_index);
+        networkManager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc(){}
