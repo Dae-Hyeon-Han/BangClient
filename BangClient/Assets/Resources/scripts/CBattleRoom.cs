@@ -285,10 +285,12 @@ public class CBattleRoom : MonoBehaviour
             string charName = msg.pop_string();
             string job = msg.pop_string();
             int life = msg.pop_int32();
+            int range = msg.pop_int32();
+            int depth = msg.pop_int32();
 
             //GameObject obj = new GameObject(string.Format("player{0}", i));
             //CPlayer player = obj.AddComponent<CPlayer>();
-            players[i].initialize(player_me_index, player_index, charName, job, life);                   // 버그 원인: 서버는 무조건 0번 부터 뿌려주기 때문에, 무조건 0번 접근자가 받을 정보를 내(모든 플레이어)가 받게 됨
+            players[i].initialize(player_me_index, player_index, charName, job, life, range, depth);                   // 버그 원인: 서버는 무조건 0번 부터 뿌려주기 때문에, 무조건 0번 접근자가 받을 정보를 내(모든 플레이어)가 받게 됨
             //player.clear();
 
             //players[i].player_index = player_index;

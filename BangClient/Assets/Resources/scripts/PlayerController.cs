@@ -137,12 +137,12 @@ public class PlayerController : MonoBehaviour
         //Debug.Log($"마이 넘버: {index}");
     }
 
-    public void SetMyChar(string charName, int life)
-    {
-        myChar.name = charName;
-        myChar.life = life;
-        //Debug.Log("캐릭터 셋팅");
-    }
+    //public void SetMyChar(string charName, int life)
+    //{
+    //    myChar.name = charName;
+    //    myChar.life = life;
+    //    //Debug.Log("캐릭터 셋팅");
+    //}
 
     public void SetMyCard(CPacket msg)
     {

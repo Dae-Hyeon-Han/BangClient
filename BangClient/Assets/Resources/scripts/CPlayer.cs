@@ -27,10 +27,10 @@ public class CPlayer : MonoBehaviour
     public string weapon;               // 장착중인 무기
     public List<string> Equipment;      // 술통, 야생마, 조준경
     public int positionFlag;            // 게임 중 거리 계산용으로 사용할 것.
-    public int myRange;                 // 내 사거리
-    public int outRange;                // 내가 멀어질 경우(캐릭터 특성 or 조랑말 효과)
     public int maxLife;                 // 최대 체력
     public int extraLife;               // 현재 체력
+    public int range;                 // 내 사거리
+    public int depth;                // 내가 멀어질 경우(캐릭터 특성 or 조랑말 효과)
 
     public PlayerController controller;
 
@@ -55,11 +55,6 @@ public class CPlayer : MonoBehaviour
     // ui interaction
     TextMeshProUGUI explaneBox;
 
-    public int MyRange
-    {
-        get { return myRange; }
-        set { myRange = value; }
-    }
     #endregion
 
     void Awake()
@@ -104,12 +99,15 @@ public class CPlayer : MonoBehaviour
     }
 
     // 이곳을 기준으로 플레이어 별 직업 및 캐릭터 별 옵션 셋팅은 완료하고, 플레이어에 대한 정보를 정리할 것.
-    public void initialize(byte player_me_index, byte player_index, string charName, string job, int life)
+    public void initialize(byte player_me_index, byte player_index, string charName, string job, int life, int range, int depth)
     {
         this.player_index = player_index;
         this.charName = charName;
         this.job = job;
         this.maxLife = life;
+        this.range = range;
+        this.depth = depth;
+
 
         // 인스펙터 확인용
         indexNum = this.player_index;
