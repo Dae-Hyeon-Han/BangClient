@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     string chatText;
 
     // 통신용
-    CNetworkManager network_manager;
+    public CNetworkManager network_manager;
 
     // 턴
     public byte current_player_index;
@@ -67,7 +67,6 @@ public class PlayerController : MonoBehaviour
     // 강탈 및 캣 벌로우 사용을 위해 필요
     public string targetCard;
     public string targetEquip;
-    
 
     // 뱅을 쏠 수 있는지 확인 여부용. 턴 시작 시 true로 교체
     public bool CanBang 
@@ -80,7 +79,18 @@ public class PlayerController : MonoBehaviour
             // 플레이어 캐릭터가 윌리 더 키드인 경우, 볼캐닉을 장착 중인 경우 canBang을 다시 true로 바꿀 것
         }
     }
-    
+
+    // 타깃 설정을 위한 열거형
+    public enum PlayerState
+    {
+        BANG = 0,             // 뱅
+        DUELLO = 1,           // 결투
+        PANICO = 2,           // 강탈
+        CAT_BALOU = 3,        // 캣 벌로우
+        PRIGIONE = 4,         // 감옥
+        DINAMITE = 5,         // 다이너마이트
+        NONE = 100,           // 그 외
+    }
 
     // 게임 상태 확인용
     public enum EventState
@@ -103,6 +113,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public EventState myEventState;
+    public PlayerState myState;
+    public GameObject setTargetUi;
 
     // 디버그
     [SerializeField] TextMeshProUGUI debug;
@@ -126,6 +138,8 @@ public class PlayerController : MonoBehaviour
         //{
         //    equipIcon.Add(equipImage.GetComponent<iamge>);
         //}
+
+        CanBang = true;
     }
 
     // game room에서 처리?
@@ -414,8 +428,8 @@ public class PlayerController : MonoBehaviour
 
     public void CardInfoDisplay()
     {
-        Debug.Log("카드 설명 보이기");
-        explaneBox.gameObject.SetActive(true);
+        //Debug.Log("카드 설명 보이기");
+        //explaneBox.gameObject.SetActive(true);
         //explaneText.text = explaneWord[useCard[]].;
 
 
@@ -423,13 +437,30 @@ public class PlayerController : MonoBehaviour
 
     public void CardInfoCover()
     {
-        Debug.Log("카드 설명 감추기");
-        explaneBox.gameObject.SetActive(false);
+        //Debug.Log("카드 설명 감추기");
+        //explaneBox.gameObject.SetActive(false);
         //explaneText.text = "";
     }
 
-    //public void SetTarget()
-    //{
+    // 실제로 쏠 수 있는지 확인하기 위한 거리 체크용 메서드
+    // 뱅 사용시 호출
+    public bool CanAttack()
+    {
 
+
+        return true;
+    }
+
+    //public void SetTarget(int target)
+    //{
+    //    // 해당 플레이어가 살아있늕지 확인, 실제 거리 상으로 쏠 수 있는지 확인
+    //    //bool canAttack = CanAttack();
+    //    if(CanAttack())
+    //    {
+
+    //    }
+
+    //    myState = PlayerState.NONE;
+    //    setTargetUi.SetActive(false);
     //}
 }

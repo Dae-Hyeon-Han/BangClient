@@ -7,7 +7,7 @@ using BangGameServer;
 
 public class Duello : Cards
 {
-    NetworkManager networkManager;
+    //NetworkManager networkManager;
 
     CBattleRoom battleRoom;
     //Transform viewUi;
@@ -36,7 +36,7 @@ public class Duello : Cards
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push("DUELLO");
         msg.push(controller.Target);                       // 
-        networkManager.send(msg);
+        controller.network_manager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc() { }

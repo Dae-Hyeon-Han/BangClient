@@ -7,7 +7,7 @@ using BangGameServer;
 
 public class Mustang : Cards
 {
-    NetworkManager networkManager;
+    //NetworkManager networkManager;
 
     CBattleRoom battleRoom;
     //Transform viewUi;
@@ -39,7 +39,7 @@ public class Mustang : Cards
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push("MUSTANG");
         msg.push(controller.player_me_index);
-        networkManager.send(msg);
+        controller.network_manager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc(){}

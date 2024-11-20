@@ -7,7 +7,7 @@ using BangGameServer;
 
 public class Barile : Cards
 {
-    NetworkManager networkManager;
+    //NetworkManager networkManager;
 
     CBattleRoom battleRoom;
     //Transform viewUi;
@@ -41,7 +41,8 @@ public class Barile : Cards
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push("BARILE");
         msg.push(controller.player_me_index);
-        networkManager.send(msg);
+        //networkManager.send(msg);
+        controller.network_manager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc(){}

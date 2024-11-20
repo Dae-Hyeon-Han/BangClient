@@ -7,7 +7,7 @@ using BangGameServer;
 
 public class WellsFargo : Cards
 {
-    NetworkManager networkManager;
+    //NetworkManager networkManager;
 
     CBattleRoom battleRoom;
     //Transform viewUi;
@@ -34,7 +34,7 @@ public class WellsFargo : Cards
         //[프로토콜][INDIANI][타깃 index]
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push("WELLS FARGO");
-        networkManager.send(msg);
+        controller.network_manager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc() { }

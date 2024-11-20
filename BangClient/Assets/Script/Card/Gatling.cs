@@ -7,7 +7,7 @@ using BangGameServer;
 
 public class Gatling : Cards
 {
-    NetworkManager networkManager;
+    //NetworkManager networkManager;
 
     CBattleRoom battleRoom;
     //Transform viewUi;
@@ -35,7 +35,7 @@ public class Gatling : Cards
         //[프로토콜][GATLING]
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push("GATLING");
-        networkManager.send(msg);
+        controller.network_manager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc() { }

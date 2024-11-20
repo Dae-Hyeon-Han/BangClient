@@ -7,7 +7,7 @@ using BangGameServer;
 
 public class Emporio : Cards
 {
-    NetworkManager networkManager;
+    //NetworkManager networkManager;
 
     CBattleRoom battleRoom;
     //Transform viewUi;
@@ -35,7 +35,7 @@ public class Emporio : Cards
         //[프로토콜][EMPORIO]
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push("EMPORIO");
-        networkManager.send(msg);
+        controller.network_manager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc() { }

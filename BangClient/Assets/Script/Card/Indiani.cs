@@ -7,7 +7,7 @@ using BangGameServer;
 
 public class Indiani : Cards
 {
-    NetworkManager networkManager;
+    //NetworkManager networkManager;
 
     CBattleRoom battleRoom;
     //Transform viewUi;
@@ -35,7 +35,7 @@ public class Indiani : Cards
         //[프로토콜][INDIANI]
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push("INDIANI");
-        networkManager.send(msg);
+        controller.network_manager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc() { }

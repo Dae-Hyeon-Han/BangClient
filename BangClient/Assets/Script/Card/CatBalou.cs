@@ -7,7 +7,7 @@ using BangGameServer;
 
 public class CatBalou : Cards
 {
-    NetworkManager networkManager;
+    //NetworkManager networkManager;
 
     CBattleRoom battleRoom;
     //Transform viewUi;
@@ -36,7 +36,7 @@ public class CatBalou : Cards
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push("CAT BALOU");
         msg.push(controller.Target);                       // ≈∏±Í ¿Œµ¶Ω∫
-        networkManager.send(msg);
+        controller.network_manager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc()

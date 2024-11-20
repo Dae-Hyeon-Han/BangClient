@@ -7,7 +7,7 @@ using BangGameServer;
 
 public class Panico : Cards
 {
-    NetworkManager networkManager;
+    //NetworkManager networkManager;
 
     CBattleRoom battleRoom;
     //Transform viewUi;
@@ -35,7 +35,7 @@ public class Panico : Cards
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push("PANICO");
         msg.push(controller.Target);
-        networkManager.send(msg);
+        controller.network_manager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc() { }

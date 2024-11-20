@@ -10,7 +10,8 @@ public class Saloon : Cards
     CBattleRoom battleRoom;
     //Transform viewUi;
     EventSystem eventSystem;
-    CNetworkManager networkManager;
+    //CNetworkManager networkManager;
+    PlayerController controller;
 
     void Start()
     {
@@ -18,6 +19,7 @@ public class Saloon : Cards
         //viewUi = transform.GetChild(0);
         //viewUi.transform.gameObject.SetActive(false);
         eventSystem = gameObject.GetComponent<EventSystem>();
+        controller = GameObject.Find("PlayerController").GetComponent<PlayerController>();
 
         cardName = "빗나감!";
         funcText = "사정 거리 내의 한 사람에게 공격을 가한다.";
@@ -30,7 +32,7 @@ public class Saloon : Cards
 
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push("SALOON");
-        networkManager.send(msg);
+        controller.network_manager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc(){}

@@ -8,7 +8,7 @@ using FreeNet;
 
 public class Bang : Cards
 {
-    NetworkManager networkManager;
+    //NetworkManager networkManager;
 
     CBattleRoom battleRoom;
     //Transform viewUi;
@@ -34,17 +34,24 @@ public class Bang : Cards
     public override void UseCard()
     {
         //battleRoom.UseCardEvent(cardName);
-        Debug.Log("Ä«µå°¡ ½ô");
+        //Debug.Log("Ä«µå°¡ ½ô");
 
         if (controller.CanBang == false)
             Debug.Log("¶Ç ½ò ¼ö ¾øÀ½");
+        //else if(controller.Target != null)
+        //{
+
+        //}
         else
         {
             // [ÇÁ·ÎÅäÄÝ][BANG][Å¸±ê ÀÎµ¦½º]
             CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
             msg.push("BANG");
             msg.push(targetIndex);
-            networkManager.send(msg);
+            controller.network_manager.send(msg);
+
+            //controller.myState = PlayerController.PlayerState.BANG;
+            //controller.setTargetUi.SetActive(true);
         }
     }
 

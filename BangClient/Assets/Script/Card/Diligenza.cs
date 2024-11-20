@@ -7,7 +7,7 @@ using BangGameServer;
 
 public class Diligenza : Cards
 {
-    NetworkManager networkManager;
+    //NetworkManager networkManager;
 
     CBattleRoom battleRoom;
     //Transform viewUi;
@@ -36,7 +36,7 @@ public class Diligenza : Cards
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push("DILIGENZA");
         msg.push(controller.player_me_index);                       // 그냥 서버에서 현재 턴인 플레이어 체력 올려도 되지 않나?
-        networkManager.send(msg);
+        controller.network_manager.send(msg);
     }
 
     public override void MouseIn_ViewCardFunc() { }
