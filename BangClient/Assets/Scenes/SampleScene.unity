@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 57964585}
   - component: {fileID: 57964584}
   m_Layer: 5
-  m_Name: ReactGatling
+  m_Name: ReactBang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9020,10 +9020,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 605197547}
-        m_TargetAssemblyTypeName: React, Assembly-CSharp
-        m_MethodName: DenyReact
-        m_Mode: 5
+      - m_Target: {fileID: 1834697931}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Deny
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10286,10 +10286,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 605197547}
-        m_TargetAssemblyTypeName: React, Assembly-CSharp
-        m_MethodName: DenyReact
-        m_Mode: 5
+      - m_Target: {fileID: 1834697931}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Deny
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -14225,7 +14225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &782628376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16310,9 +16310,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 605197547}
-        m_TargetAssemblyTypeName: React, Assembly-CSharp
-        m_MethodName: Banged
+      - m_Target: {fileID: 1834697931}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: EventMincato
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20405,7 +20405,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBE57\uB098\uAC10\uC744 \uC0AC\uC6A9\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
+  m_text: "\uBC45\uC744 \uC0AC\uC6A9\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c14c0d0c4d7beb542a2269402b84e643, type: 2}
   m_sharedMaterial: {fileID: 511220822570362807, guid: c14c0d0c4d7beb542a2269402b84e643, type: 2}
@@ -23636,9 +23636,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 605197547}
-        m_TargetAssemblyTypeName: React, Assembly-CSharp
-        m_MethodName: Gatlinged
+      - m_Target: {fileID: 1834697931}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: EventBang
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25714,25 +25714,18 @@ MonoBehaviour:
   - {fileID: 798272945}
   player_me_index: 0
   player: {fileID: 920525907}
-  mePlayer: {fileID: 0}
+  current_player_index: 0
   Target: 0
-  equips:
-  - {fileID: 1734569706}
-  - {fileID: 687775170}
-  - {fileID: 490429927}
-  - {fileID: 1645289345}
-  - {fileID: 1278552047}
-  - {fileID: 126459387}
-  - {fileID: 237931689}
   chat: {fileID: 356415123}
   inputField: {fileID: 1954015129}
   network_manager: {fileID: 0}
-  current_player_index: 0
   CanDraw: 0
+  canBang: 0
   explaneBox: {fileID: 1797574691}
   explaneText: {fileID: 499102573}
   targetCard: 
   targetEquip: 
+  ReactMancato: {fileID: 1183594037}
   myEventState: 0
   myState: 0
   setTargetUi: {fileID: 106060665}

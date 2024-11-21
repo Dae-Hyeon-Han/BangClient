@@ -195,6 +195,11 @@ public class CBattleRoom : MonoBehaviour
                     Debug.Log("카드 사용!");
                 }
                 break;
+            case PROTOCOL.REQUEST:
+                {
+                    controller.Request(msg);
+                }
+                break;
             case PROTOCOL.CHAT:
                 {
                     controller.ChatReceive(msg.pop_string());

@@ -15,18 +15,20 @@ public class PlayerController : MonoBehaviour
     // 1번 = 술통
     // 2번 = 조랑말
     // 3번 = 조준경
+    [Header("User Equipment")]
     public List<Image> equipIcon = new List<Image>();
 
     // 캐릭터
     Characters myChar;
     TextMeshProUGUI charExplaneBox;
-    public byte player_me_index;
 
     // 유저
+    [Header("User Information")]
+    public byte player_me_index;
     public Transform player;
-    public CPlayer mePlayer;
+    //public CPlayer mePlayer;
+    public byte current_player_index;
     public byte Target;
-
 
     // 손에 든 카드
     #region 이 셋은 세트
@@ -39,42 +41,48 @@ public class PlayerController : MonoBehaviour
     Image card;
 
     // 다른 플레이어들이 장착중인 장비. 설명을 보기 위해 필요
-    public List<Transform> equips;
+    //public List<Transform> equips;
 
     // 채팅
+    [Header("Chat func")]
     [SerializeField] TextMeshProUGUI chat;
     [SerializeField] TextMeshProUGUI inputField;
     List<string> chatList = new List<string>();
     string chatText;
 
     // 통신용
+    [Header("Network")]
     public CNetworkManager network_manager;
 
-    // 턴
-    public byte current_player_index;
-
     // 게임 진행용
+    [Header("Game Help")]
     public bool CanDraw;            // 드로우 할 수 있는지
+    public bool canBang;            // 뱅을 쏠 수 있는지. 턴 시작시 true가 되고, 뱅 쏜 후에 false
     //public bool CanBang;            // 뱅 쏠 수 있는지
     Cards cards;
+    List<string> findCard = new List<string>();
     [SerializeField] Image explaneBox;
     [SerializeField] TextMeshProUGUI explaneText;
     Card explaneSample;
     Dictionary<string, string> explaneWord = new Dictionary<string, string>();
-    private bool canBang;            // 뱅을 쏠 수 있는지. 턴 시작시 true가 되고, 뱅 쏜 후에 false
 
     // 타깃 설정을 위해 on/off 되어야 하는 부분(클릭 가능 여부 => 뱅을 쏠 때, 플레이어 타깃 버튼의 콜라이더가 너무 커서 필요함)
     // 강탈 및 캣 벌로우 사용을 위해 필요
+    [Header("Target Check")]
     public string targetCard;
     public string targetEquip;
 
+    // 리액션 용
+    [Header("Reaction")]
+    [SerializeField] Transform ReactMancato;
+
     // 뱅을 쏠 수 있는지 확인 여부용. 턴 시작 시 true로 교체
-    public bool CanBang 
+    public bool CanBang
     {
         get { return canBang; }
-        set 
+        set
         {
-            canBang = value; 
+            canBang = value;
 
             // 플레이어 캐릭터가 윌리 더 키드인 경우, 볼캐닉을 장착 중인 경우 canBang을 다시 true로 바꿀 것
         }
@@ -195,27 +203,6 @@ public class PlayerController : MonoBehaviour
     // 패 추가
     public void PlusCard(string cardName, string shape, string number)
     {
-        //Debug.Log($"{cardName},{shape},{number}");
-
-        #region
-        //for(int i=0; i<myCardPool.Count; i++)
-        //{
-        //    if(myCardPool[i].gameObject.activeSelf == false)
-        //    {
-        //        myCardPool[i].gameObject.SetActive(true);
-        //        myCardPool[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/CardImage/" + cardName);
-        //        myCardShape[i].sprite = Resources.Load<Sprite>("Images/CardImage/" + shape);
-        //        myCardNumber[i].text = number;
-
-        //        // 글자색 셋팅
-        //        if (shape == "DIAMOND" || shape == "HEART")
-        //            myCardNumber[i].color = Color.red;
-        //        else
-        //            myCardNumber[i].color = Color.black;
-        //    }
-        //}
-        #endregion
-
         // fullCard는 리스트의 사용 중이지 않은 인덱스 번호를 찾기 위한 수단
         for (int i = 0; i < useCard.Count; i++)
         {
@@ -224,6 +211,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 myCardPool[i].gameObject.SetActive(true);
+                findCard.Add(cardName);                     // 빗나감 등 카드 찾기 기능에 사용할 용도
                 myCardPool[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/CardImage/" + cardName);
                 myCardShape[i].sprite = Resources.Load<Sprite>("Images/CardImage/" + shape);
                 myCardNumber[i].text = number;
@@ -237,119 +225,64 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // 카드 사용시 호출
+    public void RemoveCard(int index, string cardName, string shape, string number)
+    {
+        // 카드 안 보이게 하고, 카드 사용 가능 여부 false로 변경
+        myCardPool[index].gameObject.SetActive(false);
+        useCard[index] = false;
+        findCard.RemoveAt(index);
+
+        // 사용된 카드 더미에 추가하는건 서버에서 처리
+    }
+
     public void AddEventOnCard(string cardName, int i)
     {
         //Debug.Log($"리스너 {cardName},{i}");
         // 뱅
-        if (cardName == "BANG")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Bang>();
-        }
+        if (cardName == "BANG") { cards = myCardPool[i].gameObject.AddComponent<Bang>(); }
         // 빗나감
-        else if(cardName == "MANCATO")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Mancato>();
-        }
+        else if (cardName == "MANCATO") { cards = myCardPool[i].gameObject.AddComponent<Mancato>(); }
         // 맥주
-        else if (cardName == "BIRRA")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Birra>();
-        }
+        else if (cardName == "BIRRA") { cards = myCardPool[i].gameObject.AddComponent<Birra>(); }
         // 기관총
-        else if (cardName == "GATLING")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Gatling>();
-        }
+        else if (cardName == "GATLING") { cards = myCardPool[i].gameObject.AddComponent<Gatling>(); }
         // 결투
-        else if (cardName == "DUELLO")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Duello>();
-        }
+        else if (cardName == "DUELLO") { cards = myCardPool[i].gameObject.AddComponent<Duello>(); }
         // 인디언
-        else if (cardName == "INDIANI")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Indiani>();
-        }
+        else if (cardName == "INDIANI") { cards = myCardPool[i].gameObject.AddComponent<Indiani>(); }
         // 주점
-        else if (cardName == "SALOON")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Saloon>();
-        }
+        else if (cardName == "SALOON") { cards = myCardPool[i].gameObject.AddComponent<Saloon>(); }
         // 강탈
-        else if (cardName == "PANICO")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Panico>();
-        }
+        else if (cardName == "PANICO") { cards = myCardPool[i].gameObject.AddComponent<Panico>(); }
         // 캣 벌로우
-        else if (cardName == "CAT BALOU")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<CatBalou>();
-        }
+        else if (cardName == "CAT BALOU") { cards = myCardPool[i].gameObject.AddComponent<CatBalou>(); }
         // 잡화점
-        else if (cardName == "EMPORIO")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Emporio>();
-        }
+        else if (cardName == "EMPORIO") { cards = myCardPool[i].gameObject.AddComponent<Emporio>(); }
         // 역마차
-        else if (cardName == "DILIGENZA")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Diligenza>();
-        }
+        else if (cardName == "DILIGENZA") { cards = myCardPool[i].gameObject.AddComponent<Diligenza>(); }
         // 웰스파고 은행
-        else if (cardName == "WELLS FARGO")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<WellsFargo>();
-        }
+        else if (cardName == "WELLS FARGO") { cards = myCardPool[i].gameObject.AddComponent<WellsFargo>(); }
         // 스코필드
-        else if (cardName == "SCHOFIELD")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Schofield>();
-        }
+        else if (cardName == "SCHOFIELD") { cards = myCardPool[i].gameObject.AddComponent<Schofield>(); }
         // 레밍턴
-        else if (cardName == "REMINGTON")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Remington>();
-        }
+        else if (cardName == "REMINGTON") { cards = myCardPool[i].gameObject.AddComponent<Remington>(); }
         // 카빈
-        else if (cardName == "CARABINE")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Carabine>();
-        }
+        else if (cardName == "CARABINE") { cards = myCardPool[i].gameObject.AddComponent<Carabine>(); }
         // 윈체스터
-        else if (cardName == "WINCHESTER")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Winchester>();
-        }
+        else if (cardName == "WINCHESTER") { cards = myCardPool[i].gameObject.AddComponent<Winchester>(); }
         // 볼캐닉
-        else if (cardName == "VOLCANIC")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Volcanic>();
-        }
+        else if (cardName == "VOLCANIC") { cards = myCardPool[i].gameObject.AddComponent<Volcanic>(); }
         // 조준경
-        else if (cardName == "MIRONO")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Mirono>();
-        }
+        else if (cardName == "MIRONO") { cards = myCardPool[i].gameObject.AddComponent<Mirono>(); }
         // 야생마
-        else if (cardName == "MUSTANG")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Mustang>();
-        }
+        else if (cardName == "MUSTANG") { cards = myCardPool[i].gameObject.AddComponent<Mustang>(); }
         // 술통
-        else if (cardName == "BARILE")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Barile>();
-        }
+        else if (cardName == "BARILE") { cards = myCardPool[i].gameObject.AddComponent<Barile>(); }
         // 감옥
-        else if (cardName == "PRIGIONE")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Prigione>();
-        }
+        else if (cardName == "PRIGIONE") { cards = myCardPool[i].gameObject.AddComponent<Prigione>(); }
         // 다이너마이트
-        else if (cardName == "DINAMITE")
-        {
-            cards = myCardPool[i].gameObject.AddComponent<Dinamite>();
-        }
+        else if (cardName == "DINAMITE") { cards = myCardPool[i].gameObject.AddComponent<Dinamite>(); }
 
         //Debug.Log($"오브젝트 이름2: {myCardPool[i].name}");
         //myCardPool[i].gameObject.AddComponent<Button>();
@@ -451,16 +384,66 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
-    //public void SetTarget(int target)
-    //{
-    //    // 해당 플레이어가 살아있늕지 확인, 실제 거리 상으로 쏠 수 있는지 확인
-    //    //bool canAttack = CanAttack();
-    //    if(CanAttack())
-    //    {
+    public void Request(CPacket msg)
+    {
+        string requestCard = msg.pop_string();
 
-    //    }
+        if (requestCard == "MINCATO")
+        {
+            Debug.Log("빗나감을 사용하시겠습니까?");
+            RequestMincato();
+        }
+    }
 
-    //    myState = PlayerState.NONE;
-    //    setTargetUi.SetActive(false);
-    //}
+    public void RequestMincato()
+    {
+        for (int i = 0; i < findCard.Count; i++)
+        {
+            if (findCard[i] == "MINCATO")
+            {
+                ReactMancato.gameObject.SetActive(true);
+            }
+            else
+            {
+                Deny();
+            }
+        }
+    }
+
+    public void RequestBang()
+    {
+        for (int i = 0; i < findCard.Count; i++)
+        {
+            if (findCard[i] == "BANG")
+            {
+                ReactMancato.gameObject.SetActive(true);
+            }
+            else
+            {
+                Deny();
+            }
+        }
+    }
+
+    public void EventMincato()
+    {
+        CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
+        msg.push("MINCATO");
+        network_manager.send(msg);
+    }
+
+    public void EventBang()
+    {
+        CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
+        msg.push("BANG");
+        network_manager.send(msg);
+    }
+
+    public void Deny()
+    {
+        CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
+        msg.push(player_me_index);
+        msg.push("DENY");
+        network_manager.send(msg);
+    }
 }

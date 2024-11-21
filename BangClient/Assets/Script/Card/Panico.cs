@@ -21,6 +21,7 @@ public class Panico : Cards
         //viewUi = transform.GetChild(0);
         //viewUi.transform.gameObject.SetActive(false);
         eventSystem = gameObject.GetComponent<EventSystem>();
+        controller = GameObject.Find("PlayerController").GetComponent<PlayerController>();
 
         cardName = "강탈!";
         funcText = "사정 거리 내의 한 사람에게 공격을 가한다.";
