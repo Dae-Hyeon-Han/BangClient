@@ -207,14 +207,15 @@ public class CBattleRoom : MonoBehaviour
                 break;
             case PROTOCOL.CARDFIRSTSET:
                 {
-                    Debug.Log("셋팅!!");
+                    //Debug.Log("셋팅!!");
                     controller.SetMyCard(msg);
                 }
                 break;
             case PROTOCOL.DRAWCARD:
                 {
                     Debug.Log("드로우!!");
-                    //controller.SetMyCard(msg);
+                    //controller.DrawCard(msg);
+                    controller.SetMyCard(msg);
                 }
                 break;
             case PROTOCOL.ALLPLAYERINFOSET:
@@ -282,7 +283,11 @@ public class CBattleRoom : MonoBehaviour
         byte count = msg.pop_byte();
 
         //PlayerHandCard_FirstSet();
-
+        if(player_me_index == 0)
+        {
+            controller.CanDraw = true;
+            controller.CanBang = true;
+        }
 
         for (byte i = 0; i < count; ++i)
         {
@@ -328,6 +333,9 @@ public class CBattleRoom : MonoBehaviour
 
         this.current_player_index = msg.pop_byte();
         controller.current_player_index = this.current_player_index;
+        controller.turnCheck.text = "현재 턴: " + current_player_index.ToString() + "번";
+        controller.CanDraw = true;
+        controller.CanBang = true;
     }
 
 

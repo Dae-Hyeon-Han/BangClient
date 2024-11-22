@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
     List<Image> myCardShape = new List<Image>();
     List<TextMeshProUGUI> myCardNumber = new List<TextMeshProUGUI>();
     #endregion
-    //List<Card> myCard = new List<Card>();
     List<bool> useCard = new List<bool>();                     // 카드 추가 시 false 인 곳의 인덱스만 사용할 것
+    int deleteIndex;
     Image card;
 
     // 다른 플레이어들이 장착중인 장비. 설명을 보기 위해 필요
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     // 게임 진행용
     [Header("Game Help")]
     public bool CanDraw;            // 드로우 할 수 있는지
-    public bool canBang;            // 뱅을 쏠 수 있는지. 턴 시작시 true가 되고, 뱅 쏜 후에 false
+    private bool canBang;            // 뱅을 쏠 수 있는지. 턴 시작시 true가 되고, 뱅 쏜 후에 false
     //public bool CanBang;            // 뱅 쏠 수 있는지
     Cards cards;
     List<string> findCard = new List<string>();
@@ -65,7 +65,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI explaneText;
     Card explaneSample;
     Dictionary<string, string> explaneWord = new Dictionary<string, string>();
-
+    public TextMeshProUGUI turnCheck;
+    
     // 타깃 설정을 위해 on/off 되어야 하는 부분(클릭 가능 여부 => 뱅을 쏠 때, 플레이어 타깃 버튼의 콜라이더가 너무 커서 필요함)
     // 강탈 및 캣 벌로우 사용을 위해 필요
     [Header("Target Check")]
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
     // 리액션 용
     [Header("Reaction")]
     [SerializeField] Transform ReactMancato;
+    [SerializeField] Transform ReactBang;
 
     // 뱅을 쏠 수 있는지 확인 여부용. 턴 시작 시 true로 교체
     public bool CanBang
@@ -125,7 +127,7 @@ public class PlayerController : MonoBehaviour
     public GameObject setTargetUi;
 
     // 디버그
-    [SerializeField] TextMeshProUGUI debug;
+    //[SerializeField] TextMeshProUGUI debug;
 
     void Start()
     {
@@ -147,7 +149,7 @@ public class PlayerController : MonoBehaviour
         //    equipIcon.Add(equipImage.GetComponent<iamge>);
         //}
 
-        CanBang = true;
+        //CanBang = true;
     }
 
     // game room에서 처리?
@@ -194,7 +196,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                debug.text = $"인덱스: {index}, {player_me_index}";
+                //debug.text = $"인덱스: {index}, {player_me_index}";
             }
 
         }
@@ -226,7 +228,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // 카드 사용시 호출
-    public void RemoveCard(int index, string cardName, string shape, string number)
+    public void RemoveCard(int index)
     {
         // 카드 안 보이게 하고, 카드 사용 가능 여부 false로 변경
         myCardPool[index].gameObject.SetActive(false);
@@ -340,12 +342,18 @@ public class PlayerController : MonoBehaviour
             Debug.Log("드로우!");
             CPacket msg = CPacket.create((short)PROTOCOL.DRAWCARD);
             msg.push(player_me_index);
+            msg.push(2);
             this.network_manager.send(msg);
         }
         else
         {
             Debug.Log($"{current_player_index}의 턴임");
         }
+    }
+
+    public void DrawCard(CPacket msg)
+    {
+
     }
 
     public void UsedDeckClickEvent()
@@ -386,6 +394,14 @@ public class PlayerController : MonoBehaviour
 
     public void Request(CPacket msg)
     {
+        byte target = msg.pop_byte();
+        Debug.Log($"타깃1: {target}");
+
+        if(target != player_me_index)
+        {
+            Debug.Log($"타깃2: {target}");
+            return;
+        }
         string requestCard = msg.pop_string();
 
         if (requestCard == "MINCATO")
@@ -393,14 +409,22 @@ public class PlayerController : MonoBehaviour
             Debug.Log("빗나감을 사용하시겠습니까?");
             RequestMincato();
         }
+        else if(requestCard == "BANG")
+        {
+            Debug.Log("뱅을 사용하시겠습니까?");
+            RequestBang();
+        }
     }
 
     public void RequestMincato()
     {
+        Debug.Log("빗나감 페이지 요청");
+
         for (int i = 0; i < findCard.Count; i++)
         {
             if (findCard[i] == "MINCATO")
             {
+                deleteIndex = i;
                 ReactMancato.gameObject.SetActive(true);
             }
             else
@@ -412,11 +436,14 @@ public class PlayerController : MonoBehaviour
 
     public void RequestBang()
     {
+        Debug.Log("뱅 페이지 요청");
+
         for (int i = 0; i < findCard.Count; i++)
         {
             if (findCard[i] == "BANG")
             {
-                ReactMancato.gameObject.SetActive(true);
+                deleteIndex = 1;
+                ReactBang.gameObject.SetActive(true);
             }
             else
             {
@@ -430,6 +457,8 @@ public class PlayerController : MonoBehaviour
         CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
         msg.push("MINCATO");
         network_manager.send(msg);
+        RemoveCard(deleteIndex);
+        ReactMancato.gameObject.SetActive(false);
     }
 
     public void EventBang()
@@ -437,6 +466,8 @@ public class PlayerController : MonoBehaviour
         CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
         msg.push("BANG");
         network_manager.send(msg);
+        RemoveCard(deleteIndex);
+        ReactBang.gameObject.SetActive(false);
     }
 
     public void Deny()
@@ -445,5 +476,9 @@ public class PlayerController : MonoBehaviour
         msg.push(player_me_index);
         msg.push("DENY");
         network_manager.send(msg);
+        ReactBang.gameObject.SetActive(false);
+        ReactMancato.gameObject.SetActive(false);
+
+        Debug.Log("공격 맞음");
     }
 }
