@@ -37,6 +37,15 @@ public class Birra : Cards
         msg.push("BIRRA");
         msg.push(controller.player_me_index);                       // 그냥 서버에서 현재 턴인 플레이어 체력 올려도 되지 않나?
         controller.network_manager.send(msg);
+
+        controller.RemoveCard(cardIndex, cardName, shape, number);
+    }
+    public override void SetCard(int index, string cardName, string shape, string number)
+    {
+        cardIndex = index;
+        this.cardName = cardName;
+        this.shape = shape;
+        this.number = number;
     }
 
     public override void MouseIn_ViewCardFunc(){}

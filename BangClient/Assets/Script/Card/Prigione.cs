@@ -8,6 +8,7 @@ public class Prigione : Cards
     CBattleRoom battleRoom;
     //Transform viewUi;
     EventSystem eventSystem;
+    PlayerController controller;
 
     void Start()
     {
@@ -15,6 +16,7 @@ public class Prigione : Cards
         //viewUi = transform.GetChild(0);
         //viewUi.transform.gameObject.SetActive(false);
         eventSystem = gameObject.GetComponent<EventSystem>();
+        controller = GameObject.Find("PlayerController").GetComponent<PlayerController>();
 
         cardName = "빗나감!";
         funcText = "사정 거리 내의 한 사람에게 공격을 가한다.";
@@ -24,6 +26,15 @@ public class Prigione : Cards
     {
         //battleRoom.UseCardEvent(cardName);
         Debug.Log("카드가 쏨");
+
+        controller.RemoveCard(cardIndex, cardName, shape, number);
+    }
+    public override void SetCard(int index, string cardName, string shape, string number)
+    {
+        cardIndex = index;
+        this.cardName = cardName;
+        this.shape = shape;
+        this.number = number;
     }
 
     public override void MouseIn_ViewCardFunc()

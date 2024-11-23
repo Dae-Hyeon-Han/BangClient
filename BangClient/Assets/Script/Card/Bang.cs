@@ -18,7 +18,7 @@ public class Bang : Cards
     //public byte currnt_player_index;            // 이 두 값이 일치하면 my turn.
     public PlayerController controller;           // 뱅을 쓸 때, 어떤 상태에서 쓰이는지 확인하기 위함
     public byte targetIndex;
-    public int cardIndex;
+    //public int cardIndex;
 
     void Start()
     {
@@ -30,12 +30,6 @@ public class Bang : Cards
 
         cardName = "뱅!";
         funcText = "사정 거리 내의 한 사람에게 공격을 가한다.";
-    }
-
-    // 오버라이딩 필요할지도?
-    public void setCard(int index)
-    {
-        cardIndex = index;
     }
 
     public override void UseCard()
@@ -60,8 +54,17 @@ public class Bang : Cards
             //controller.myState = PlayerController.PlayerState.BANG;
             //controller.setTargetUi.SetActive(true);
 
-            controller.RemoveCard(cardIndex);
+            controller.RemoveCard(cardIndex, cardName, shape, number);
         }
+    }
+
+    // 오버라이딩 필요할지도?
+    public override void SetCard(int index, string cardName, string shape, string number)
+    {
+        cardIndex = index;
+        this.cardName = cardName;
+        this.shape = shape;
+        this.number = number;
     }
 
     public override void MouseIn_ViewCardFunc()

@@ -66,6 +66,9 @@ namespace BangGameServer
         // 대응 실패 시 사용하는 것
         REQUESTFAIL = 20,
 
+        // 카드 사용 시 버리는 용도
+        DROPCARD = 21,
+
         //// 인디언 사용
         //INDIANS_REQ = 15,
 

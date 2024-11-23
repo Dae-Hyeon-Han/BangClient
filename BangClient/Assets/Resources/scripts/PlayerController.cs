@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
     #endregion
     List<bool> useCard = new List<bool>();                     // 카드 추가 시 false 인 곳의 인덱스만 사용할 것
     int deleteIndex;
+    string deleteCardName;
+    string deleteCardShape;
+    string deleteCardNumber;
     Image card;
 
     // 다른 플레이어들이 장착중인 장비. 설명을 보기 위해 필요
@@ -60,7 +63,9 @@ public class PlayerController : MonoBehaviour
     private bool canBang;            // 뱅을 쏠 수 있는지. 턴 시작시 true가 되고, 뱅 쏜 후에 false
     //public bool CanBang;            // 뱅 쏠 수 있는지
     Cards cards;
-    List<string> findCard = new List<string>();
+    List<string> findCardName = new List<string>();
+    List<string> findCardShape = new List<string>();
+    List<string> findCardNumber = new List<string>();
     [SerializeField] Image explaneBox;
     [SerializeField] TextMeshProUGUI explaneText;
     Card explaneSample;
@@ -150,6 +155,8 @@ public class PlayerController : MonoBehaviour
         //}
 
         //CanBang = true;
+
+        Target = 100;
     }
 
     // game room에서 처리?
@@ -206,6 +213,7 @@ public class PlayerController : MonoBehaviour
     public void PlusCard(string cardName, string shape, string number)
     {
         // fullCard는 리스트의 사용 중이지 않은 인덱스 번호를 찾기 위한 수단
+        // usedCard의 반복문 시작값을 리스트 마지막 값으로 셋팅하는 방법?
         for (int i = 0; i < useCard.Count; i++)
         {
             if (useCard[i])
@@ -213,7 +221,9 @@ public class PlayerController : MonoBehaviour
             else
             {
                 myCardPool[i].gameObject.SetActive(true);
-                findCard.Add(cardName);                     // 빗나감 등 카드 찾기 기능에 사용할 용도
+                findCardName.Add(cardName);                     // 빗나감 등 카드 찾기 기능에 사용할 용도
+                findCardShape.Add(shape);
+                findCardNumber.Add(number);
                 myCardPool[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/CardImage/" + cardName);
                 myCardShape[i].sprite = Resources.Load<Sprite>("Images/CardImage/" + shape);
                 myCardNumber[i].text = number;
@@ -228,14 +238,22 @@ public class PlayerController : MonoBehaviour
     }
 
     // 카드 사용시 호출
-    public void RemoveCard(int index)
+    public void RemoveCard(int index, string cardName, string shape, string number)
     {
         // 카드 안 보이게 하고, 카드 사용 가능 여부 false로 변경
         myCardPool[index].gameObject.SetActive(false);
         useCard[index] = false;
-        findCard.RemoveAt(index);
 
         // 사용된 카드 더미에 추가하는건 서버에서 처리
+        CPacket msg = CPacket.create((short)PROTOCOL.DROPCARD);
+        msg.push(findCardName[index]);
+        msg.push(findCardShape[index]);
+        msg.push(findCardNumber[index]);
+        network_manager.send(msg);
+
+        findCardName.RemoveAt(index);
+        findCardShape.RemoveAt(index);
+        findCardNumber.RemoveAt(index);
     }
 
     public void AddEventOnCard(string cardName, int i)
@@ -420,11 +438,14 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("빗나감 페이지 요청");
 
-        for (int i = 0; i < findCard.Count; i++)
+        for (int i = 0; i < findCardName.Count; i++)
         {
-            if (findCard[i] == "MINCATO")
+            if (findCardName[i] == "MINCATO")
             {
                 deleteIndex = i;
+                deleteCardName = findCardName[i];
+                deleteCardShape = findCardShape[i];
+                deleteCardNumber = findCardNumber[i];
                 ReactMancato.gameObject.SetActive(true);
             }
             else
@@ -438,11 +459,14 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("뱅 페이지 요청");
 
-        for (int i = 0; i < findCard.Count; i++)
+        for (int i = 0; i < findCardName.Count; i++)
         {
-            if (findCard[i] == "BANG")
+            if (findCardName[i] == "BANG")
             {
                 deleteIndex = 1;
+                deleteCardName = findCardName[i];
+                deleteCardShape = findCardShape[i];
+                deleteCardNumber = findCardNumber[i];
                 ReactBang.gameObject.SetActive(true);
             }
             else
@@ -457,7 +481,7 @@ public class PlayerController : MonoBehaviour
         CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
         msg.push("MINCATO");
         network_manager.send(msg);
-        RemoveCard(deleteIndex);
+        RemoveCard(deleteIndex, deleteCardName, deleteCardShape, deleteCardNumber);
         ReactMancato.gameObject.SetActive(false);
     }
 
@@ -466,7 +490,7 @@ public class PlayerController : MonoBehaviour
         CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
         msg.push("BANG");
         network_manager.send(msg);
-        RemoveCard(deleteIndex);
+        RemoveCard(deleteIndex, deleteCardName, deleteCardShape, deleteCardNumber);
         ReactBang.gameObject.SetActive(false);
     }
 

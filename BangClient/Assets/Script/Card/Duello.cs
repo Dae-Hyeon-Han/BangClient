@@ -37,6 +37,16 @@ public class Duello : Cards
         msg.push("DUELLO");
         msg.push(controller.Target);                       // 
         controller.network_manager.send(msg);
+
+        controller.RemoveCard(cardIndex, cardName, shape, number);
+    }
+
+    public override void SetCard(int index, string cardName, string shape, string number)
+    {
+        cardIndex = index;
+        this.cardName = cardName;
+        this.shape = shape;
+        this.number = number;
     }
 
     public override void MouseIn_ViewCardFunc() { }

@@ -81,6 +81,8 @@ public class CBattleRoom : MonoBehaviour
     // 플레잉 카드 사용시 구분용
     public List<GameObject> Cards = new List<GameObject>();
     List<Card> HandCard = new List<Card>();
+    //Cards usedCard = new Cards();
+    [SerializeField] Transform usedDeck;
 
     // 디버그 용
     Cards card;
@@ -216,6 +218,18 @@ public class CBattleRoom : MonoBehaviour
                     Debug.Log("드로우!!");
                     //controller.DrawCard(msg);
                     controller.SetMyCard(msg);
+                }
+                break;
+            case PROTOCOL.DROPCARD:
+                {
+                    Debug.Log("카드 버리거나 사용함");
+
+                    if (usedDeck.gameObject.activeSelf == false)
+                        usedDeck.gameObject.SetActive(true);
+
+                    usedDeck.GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/CardImage/" + msg.pop_string());
+                    usedDeck.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/CardImage/" + msg.pop_string());
+                    usedDeck.GetChild(1).GetComponent<TextMeshProUGUI>().text = msg.pop_string();
                 }
                 break;
             case PROTOCOL.ALLPLAYERINFOSET:
