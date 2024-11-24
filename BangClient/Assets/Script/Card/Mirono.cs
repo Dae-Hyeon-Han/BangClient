@@ -30,7 +30,7 @@ public class Mirono : Cards
     public override void UseCard()
     {
         //battleRoom.UseCardEvent(cardName);
-        Debug.Log("카드가 쏨");
+        //Debug.Log("카드가 쏨");
 
         // 조준경 이미지 보이기
         //controller.equipIcon[3].gameObject.SetActive(true);
@@ -41,7 +41,9 @@ public class Mirono : Cards
         msg.push(controller.player_me_index);
         controller.network_manager.send(msg);
 
-        controller.RemoveCard(cardIndex,cardName,shape,number);
+        //controller.RemoveCard(cardIndex,cardName,shape,number);
+        controller.EquipCard(cardIndex, cardName, shape, number);
+        Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
     }
     public override void SetCard(int index, string cardName, string shape, string number)
     {

@@ -25,7 +25,7 @@ public class Mancato : Cards
     public override void UseCard()
     {
         //battleRoom.UseCardEvent(cardName);
-        Debug.Log("Ä«µå°¡ ½ô");
+        //Debug.Log("Ä«µå°¡ ½ô");
 
         controller.RemoveCard(cardIndex, cardName, shape, number);
     }

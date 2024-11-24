@@ -30,7 +30,7 @@ public class CatBalou : Cards
     public override void UseCard()
     {
         //battleRoom.UseCardEvent(cardName);
-        Debug.Log("Ä¹ ¹ú·Î¿ì");
+        //Debug.Log("Ä¹ ¹ú·Î¿ì");
 
         //[ÇÁ·ÎÅäÄÝ][CAT BALOU][Å¸±ê index]
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
@@ -39,6 +39,8 @@ public class CatBalou : Cards
         controller.network_manager.send(msg);
 
         controller.RemoveCard(cardIndex, cardName, shape, number);
+
+        Debug.Log($"»ç¿ëÇÑ Ä«µå ÀÎµ¦½º: {cardIndex}. {cardName}");
     }
     public override void SetCard(int index, string cardName, string shape, string number)
     {

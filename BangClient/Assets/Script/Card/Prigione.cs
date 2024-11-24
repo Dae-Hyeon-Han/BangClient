@@ -25,9 +25,10 @@ public class Prigione : Cards
     public override void UseCard()
     {
         //battleRoom.UseCardEvent(cardName);
-        Debug.Log("카드가 쏨");
+        //Debug.Log("카드가 쏨");
 
-        controller.RemoveCard(cardIndex, cardName, shape, number);
+        //controller.RemoveCard(cardIndex, cardName, shape, number);
+        Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
     }
     public override void SetCard(int index, string cardName, string shape, string number)
     {

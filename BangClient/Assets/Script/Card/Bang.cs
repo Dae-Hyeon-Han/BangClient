@@ -55,6 +55,8 @@ public class Bang : Cards
             //controller.setTargetUi.SetActive(true);
 
             controller.RemoveCard(cardIndex, cardName, shape, number);
+
+            Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
         }
     }
 

@@ -216,9 +216,7 @@ public class PlayerController : MonoBehaviour
         // usedCard의 반복문 시작값을 리스트 마지막 값으로 셋팅하는 방법?
         for (int i = 0; i < useCard.Count; i++)
         {
-            if (useCard[i])
-                continue;
-            else
+            if (useCard[i] == false)
             {
                 myCardPool[i].gameObject.SetActive(true);
                 findCardName.Add(cardName);                     // 빗나감 등 카드 찾기 기능에 사용할 용도
@@ -246,6 +244,7 @@ public class PlayerController : MonoBehaviour
 
         // 사용된 카드 더미에 추가하는건 서버에서 처리
         CPacket msg = CPacket.create((short)PROTOCOL.DROPCARD);
+        msg.push(player_me_index);
         msg.push(findCardName[index]);
         msg.push(findCardShape[index]);
         msg.push(findCardNumber[index]);
@@ -254,6 +253,13 @@ public class PlayerController : MonoBehaviour
         findCardName.RemoveAt(index);
         findCardShape.RemoveAt(index);
         findCardNumber.RemoveAt(index);
+    }
+
+    public void EquipCard(int index, string cardName, string shape, string number)
+    {
+        // 카드 안 보이게 하고, 카드 사용 가능 여부 false로 변경
+        myCardPool[index].gameObject.SetActive(false);
+        useCard[index] = false;
     }
 
     public void AddEventOnCard(string cardName, int i)
@@ -357,7 +363,7 @@ public class PlayerController : MonoBehaviour
         // 내 턴에만 드로우 가능
         if (CanDraw)
         {
-            Debug.Log("드로우!");
+            //Debug.Log("드로우!");
             CPacket msg = CPacket.create((short)PROTOCOL.DRAWCARD);
             msg.push(player_me_index);
             msg.push(2);

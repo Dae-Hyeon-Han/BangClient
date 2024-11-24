@@ -185,7 +185,7 @@ public class CBattleRoom : MonoBehaviour
         {
             case PROTOCOL.GAME_START:
                 on_game_start(msg);
-                Debug.Log("게임 시작!");
+                //Debug.Log("게임 시작!");
                 break;
 
             case PROTOCOL.PLAYER_MOVED:         // 다른 플레이어가 움직였을 때?
@@ -215,14 +215,14 @@ public class CBattleRoom : MonoBehaviour
                 break;
             case PROTOCOL.DRAWCARD:
                 {
-                    Debug.Log("드로우!!");
+                    //Debug.Log("드로우!!");
                     //controller.DrawCard(msg);
                     controller.SetMyCard(msg);
                 }
                 break;
             case PROTOCOL.DROPCARD:
                 {
-                    Debug.Log("카드 버리거나 사용함");
+                    //Debug.Log("카드 버리거나 사용함");
 
                     if (usedDeck.gameObject.activeSelf == false)
                         usedDeck.gameObject.SetActive(true);
@@ -234,7 +234,7 @@ public class CBattleRoom : MonoBehaviour
                 break;
             case PROTOCOL.ALLPLAYERINFOSET:
                 {
-                    Debug.Log("모든 플레이어의 인포 리셋!");
+                    RefreshPlayerInfo(msg);
                 }
                 break;
             case PROTOCOL.START_PLAYER_TURN:
@@ -295,6 +295,7 @@ public class CBattleRoom : MonoBehaviour
     void on_game_start(CPacket msg)
     {
         byte count = msg.pop_byte();
+        controller.turnCheck.text = "현재 턴: " + current_player_index.ToString() + "번";
 
         //PlayerHandCard_FirstSet();
         if(player_me_index == 0)
@@ -350,6 +351,7 @@ public class CBattleRoom : MonoBehaviour
         controller.turnCheck.text = "현재 턴: " + current_player_index.ToString() + "번";
         controller.CanDraw = true;
         controller.CanBang = true;
+        controller.Target = 100;                // 타깃 재 조정을 위해 필수
     }
 
 
@@ -485,27 +487,27 @@ public class CBattleRoom : MonoBehaviour
         List<string> charName = new List<string>();
     }
 
-    // 디버그용. 카드 이벤트 확인용
-    public void PlayerHandCard_FirstSet()
-    {
-        //Debug.Log($"숫자: {playerObj["player0"].GetChild(4).childCount}");
+    //// 디버그용. 카드 이벤트 확인용
+    //public void PlayerHandCard_FirstSet()
+    //{
+    //    //Debug.Log($"숫자: {playerObj["player0"].GetChild(4).childCount}");
 
-        for (int i = 0; i < playerObj["player0"].GetChild(4).childCount; i++)
-        {
-            // 카드 기능
-            Cards.Add(playerObj["player0"].GetChild(4).GetChild(i).gameObject);                     // 손패 리스트 push
-            card = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<Bang>();
-            Debug.Log($"오브젝트 이름1: {playerObj["player0"].GetChild(4).GetChild(i).name}");
-            playerObj["player0"].GetChild(4).GetChild(i).gameObject.GetComponent<Button>()
-                .onClick.AddListener(card.UseCard);
+    //    for (int i = 0; i < playerObj["player0"].GetChild(4).childCount; i++)
+    //    {
+    //        // 카드 기능
+    //        Cards.Add(playerObj["player0"].GetChild(4).GetChild(i).gameObject);                     // 손패 리스트 push
+    //        card = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<Bang>();
+    //        Debug.Log($"오브젝트 이름1: {playerObj["player0"].GetChild(4).GetChild(i).name}");
+    //        playerObj["player0"].GetChild(4).GetChild(i).gameObject.GetComponent<Button>()
+    //            .onClick.AddListener(card.UseCard);
 
-            // 카드 기능 뷰
-            trigger = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<EventTrigger>();
-            entry_PointerEnter.eventID = EventTriggerType.PointerEnter;
-            entry_PointerEnter.callback.AddListener((data) => { UseViewUi((PointerEventData)data); });
-            trigger.triggers.Add(entry_PointerEnter);
-        }
-    }
+    //        // 카드 기능 뷰
+    //        trigger = playerObj["player0"].GetChild(4).GetChild(i).gameObject.AddComponent<EventTrigger>();
+    //        entry_PointerEnter.eventID = EventTriggerType.PointerEnter;
+    //        entry_PointerEnter.callback.AddListener((data) => { UseViewUi((PointerEventData)data); });
+    //        trigger.triggers.Add(entry_PointerEnter);
+    //    }
+    //}
 
     //// 이게 아닌거 같은디....;;
     //public void PlayerHandCard_Set(string cardName)
@@ -517,23 +519,33 @@ public class CBattleRoom : MonoBehaviour
     //    }
     //}
 
-    public void OtherPlayerCardSet(CPacket msg)
-    {
-        // 프로토콜 확정 시 작성
-    }
+    //public void OtherPlayerCardSet(CPacket msg)
+    //{
+    //    // 프로토콜 확정 시 작성
+    //}
 
-    public void UseCardEvent()
-    {
-        Debug.Log("실제로 쏨");
+    //public void UseCardEvent()
+    //{
+    //    Debug.Log("실제로 쏨");
 
-        //CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
+    //    //CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
 
-        //if()
-    }
+    //    //if()
+    //}
 
     public void RefreshPlayerInfo(CPacket msg)
     {
-        Debug.Log("정보 최신화");
+        //for (byte i = 0; i < count; ++i)
+        //{
+        //    byte player_index = msg.pop_byte();
+        //    string charName = msg.pop_string();
+        //    string job = msg.pop_string();
+        //    int life = msg.pop_int32();
+        //    int range = msg.pop_int32();
+        //    int depth = msg.pop_int32();
+
+        //    players[i].initialize(player_me_index, player_index, charName, job, life, range, depth);                   // 버그 원인: 서버는 무조건 0번 부터 뿌려주기 때문에, 무조건 0번 접근자가 받을 정보를 내(모든 플레이어)가 받게 됨            
+        //}
     }
 
     // 왜 11개가 호출되지?

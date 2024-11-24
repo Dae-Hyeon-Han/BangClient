@@ -37,6 +37,7 @@ public class WellsFargo : Cards
         controller.network_manager.send(msg);
 
         controller.RemoveCard(cardIndex, cardName, shape, number);
+        Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
     }
     public override void SetCard(int index, string cardName, string shape, string number)
     {

@@ -37,6 +37,7 @@ public class Panico : Cards
         msg.push("PANICO");
         msg.push(controller.Target);
         controller.network_manager.send(msg);
+        Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
 
         controller.RemoveCard(cardIndex, cardName, shape, number);
     }

@@ -30,7 +30,7 @@ public class Volcanic : Cards
     public override void UseCard()
     {
         //battleRoom.UseCardEvent(cardName);
-        Debug.Log("카드가 쏨");
+        //Debug.Log("카드가 쏨");
 
         //[프로토콜][카드 이름][나의 인덱스]
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
@@ -38,7 +38,9 @@ public class Volcanic : Cards
         msg.push(controller.player_me_index);
         controller.network_manager.send(msg);
 
-        controller.RemoveCard(cardIndex, cardName, shape, number);
+        //controller.RemoveCard(cardIndex, cardName, shape, number);
+        controller.EquipCard(cardIndex, cardName, shape, number);
+        Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
     }
     public override void SetCard(int index, string cardName, string shape, string number)
     {
