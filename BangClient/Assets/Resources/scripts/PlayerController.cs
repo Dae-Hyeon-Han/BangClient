@@ -419,7 +419,7 @@ public class PlayerController : MonoBehaviour
     public void Request(CPacket msg)
     {
         byte target = msg.pop_byte();
-        Debug.Log($"Å¸±ê1: {target}");
+        Debug.Log($"Å¸±ê1: {target}, {player_me_index}");
 
         if(target != player_me_index)
         {

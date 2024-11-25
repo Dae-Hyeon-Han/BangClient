@@ -21,17 +21,104 @@ public class CPlayer : MonoBehaviour
     CPlayerAgent agent;
 
     #region 뱅 용
+    [Header("Player Information")]
     public string charName;             // 캐릭터 이름
     public string job;                  // 직업
-    public int cardInHand;              // 손패
-    public string weapon;               // 장착중인 무기
+    //public int cardInHand;              // 손패
+    [SerializeField] int cardCount;         // 손패 수
+    //public string weapon;               // 장착중인 무기
     public List<string> Equipment;      // 술통, 야생마, 조준경
     public int positionFlag;            // 게임 중 거리 계산용으로 사용할 것.
     public int maxLife;                 // 최대 체력
     public int extraLife;               // 현재 체력
     public int range;                 // 내 사거리
     public int depth;                // 내가 멀어질 경우(캐릭터 특성 or 조랑말 효과)
+    [SerializeField]private string gun;                  // 총
+    [SerializeField]private string mirono;               // 조준경
+    [SerializeField]private string mustang;              // 야생마
+    [SerializeField]private string barile;               // 술통
+    [SerializeField] Transform equips;
+    [SerializeField] Image gunImage;
+    [SerializeField] List<Transform> equip;             // 총은 이미지 변경하고, 나머지는 on/off
 
+    #region 손패 수 정리
+    public int CardCount
+    {
+        get { return cardCount; }
+        set 
+        {
+            cardCount = value;
+
+            if (gameObject.name == "player0")
+                return;
+            else
+            {
+                for (int i = 0; i < cardCount; i++)
+                {
+                    handCardPool[i].gameObject.SetActive(true);
+                }
+            }
+        }
+    }
+    #endregion
+
+    #region 장비
+    public string Gun
+    {
+        get { return gun; }
+        set
+        {
+            gun = value;
+
+            gunImage.sprite = Resources.Load<Sprite>("Images/CardImage" + gun);
+        }
+    }
+
+    public string Mirono
+    {
+        get { return mirono; }
+        set
+        {
+            mirono = value;
+
+            // 대소문자 주의
+            if (mirono == "true")
+                equip[1].gameObject.SetActive(true);
+            else if (mirono == "false")
+                equip[1].gameObject.SetActive(false);
+        }
+    }
+
+    public string Mustang
+    {
+        get { return mustang; }
+        set
+        {
+            mustang = value;
+
+            if (mirono == "true")
+                equip[2].gameObject.SetActive(true);
+            else if (mirono == "false")
+                equip[2].gameObject.SetActive(false);
+        }
+    }
+
+    public string Barile
+    {
+        get { return barile; }
+        set
+        {
+            barile = value;
+
+            if (mirono == "true")
+                equip[3].gameObject.SetActive(true);
+            else if (mirono == "false")
+                equip[3].gameObject.SetActive(false);
+        }
+    }
+    #endregion
+
+    [Header("Controller")]
     public PlayerController controller;
 
     [SerializeField] int indexNum;      // 인스펙터 확인용. 쓰진 않음
@@ -45,7 +132,7 @@ public class CPlayer : MonoBehaviour
     Image jobImage;
     TextMeshProUGUI life;
     //Transform handsCard;
-    Transform equips;
+    //Transform equips;
     Characters myCharacter;
 
     // 손에 든 카드
@@ -85,11 +172,26 @@ public class CPlayer : MonoBehaviour
 
         //Debug.Log($"{transform.GetChild(4).name}");
 
+
         foreach (Transform card in transform.GetChild(4))
         {
             card.gameObject.SetActive(false);
             handCardPool.Add(card);
         }
+
+        #region 손패
+        #endregion
+
+        #region 장비
+        equips = transform.GetChild(5);
+
+        foreach(Transform equipment in equips)
+        {
+            equip.Add(equipment);
+        }
+        gunImage = equip[0].GetComponent<Image>();
+        #endregion
+
 
         // 카드 설명용
         //explaneBox = GameObject.Find("ExplaneText").GetComponent<TextMeshProUGUI>();
@@ -129,6 +231,19 @@ public class CPlayer : MonoBehaviour
             gameObject.GetComponent<Button>().onClick.AddListener(SetTarget);
         //Debug.Log($"{player_index}");
     }
+
+    public void RefreshInfo(byte player_index, int life, int cardCount, int range, int depth, string gun, string mirono, string mustang, string barile)
+    {
+        this.player_index = player_index;
+        this.maxLife = life;
+        CardCount = cardCount;
+        this.range = range;
+        this.depth = depth;
+        Gun = gun;
+        Mirono = mirono;
+        Mustang = mustang;
+        Barile = barile;
+    }    
 
     public void AddCharacterComponent()
     {

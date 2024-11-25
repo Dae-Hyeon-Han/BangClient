@@ -535,17 +535,19 @@ public class CBattleRoom : MonoBehaviour
 
     public void RefreshPlayerInfo(CPacket msg)
     {
-        //for (byte i = 0; i < count; ++i)
-        //{
-        //    byte player_index = msg.pop_byte();
-        //    string charName = msg.pop_string();
-        //    string job = msg.pop_string();
-        //    int life = msg.pop_int32();
-        //    int range = msg.pop_int32();
-        //    int depth = msg.pop_int32();
+        byte count = msg.pop_byte();
 
-        //    players[i].initialize(player_me_index, player_index, charName, job, life, range, depth);                   // 버그 원인: 서버는 무조건 0번 부터 뿌려주기 때문에, 무조건 0번 접근자가 받을 정보를 내(모든 플레이어)가 받게 됨            
-        //}
+        for (byte i = 0; i < count; ++i)
+        {
+            byte player_index = msg.pop_byte();
+            string charName = msg.pop_string();
+            string job = msg.pop_string();
+            int life = msg.pop_int32();
+            int range = msg.pop_int32();
+            int depth = msg.pop_int32();
+
+            players[i].initialize(player_me_index, player_index, charName, job, life, range, depth);                   // 버그 원인: 서버는 무조건 0번 부터 뿌려주기 때문에, 무조건 0번 접근자가 받을 정보를 내(모든 플레이어)가 받게 됨            
+        }
     }
 
     // 왜 11개가 호출되지?
