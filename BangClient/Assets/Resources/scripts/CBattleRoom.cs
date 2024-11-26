@@ -352,6 +352,7 @@ public class CBattleRoom : MonoBehaviour
         controller.CanDraw = true;
         controller.CanBang = true;
         controller.Target = 100;                // 타깃 재 조정을 위해 필수
+        controller.targetCheck.text = $"지정된 타깃: 없음";
     }
 
 
@@ -540,13 +541,16 @@ public class CBattleRoom : MonoBehaviour
         for (byte i = 0; i < count; ++i)
         {
             byte player_index = msg.pop_byte();
-            string charName = msg.pop_string();
-            string job = msg.pop_string();
             int life = msg.pop_int32();
+            int cardCount = msg.pop_int32();
             int range = msg.pop_int32();
             int depth = msg.pop_int32();
+            string gun = msg.pop_string();
+            string mirono = msg.pop_string();
+            string mustang = msg.pop_string();
+            string barile = msg.pop_string();
 
-            players[i].initialize(player_me_index, player_index, charName, job, life, range, depth);                   // 버그 원인: 서버는 무조건 0번 부터 뿌려주기 때문에, 무조건 0번 접근자가 받을 정보를 내(모든 플레이어)가 받게 됨            
+            players[i].RefreshInfo(player_me_index, life, cardCount, range, depth, gun, mirono, mustang, barile);                   // 버그 원인: 서버는 무조건 0번 부터 뿌려주기 때문에, 무조건 0번 접근자가 받을 정보를 내(모든 플레이어)가 받게 됨            
         }
     }
 

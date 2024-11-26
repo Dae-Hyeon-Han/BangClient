@@ -71,6 +71,7 @@ public class CPlayer : MonoBehaviour
             gun = value;
 
             gunImage.sprite = Resources.Load<Sprite>("Images/CardImage" + gun);
+            //equip[0].gameObject.SetActive(true);
         }
     }
 
@@ -316,7 +317,7 @@ public class CPlayer : MonoBehaviour
     public void SetTarget()
     {
         controller.Target = this.player_index;
-
+        controller.targetCheck.text = $"Å¸±ê: {this.player_index}¹ø ÇÃ·¹ÀÌ¾î";
         Debug.Log($"Å¸±ê ÀÎµ¦½º: {controller.Target}");
     }
     #endregion

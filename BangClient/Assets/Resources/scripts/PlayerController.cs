@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     Card explaneSample;
     Dictionary<string, string> explaneWord = new Dictionary<string, string>();
     public TextMeshProUGUI turnCheck;
+    public TextMeshProUGUI targetCheck;
     
     // 타깃 설정을 위해 on/off 되어야 하는 부분(클릭 가능 여부 => 뱅을 쏠 때, 플레이어 타깃 버튼의 콜라이더가 너무 커서 필요함)
     // 강탈 및 캣 벌로우 사용을 위해 필요
@@ -228,7 +229,10 @@ public class PlayerController : MonoBehaviour
                 useCard[i] = true;
 
                 // 여기에 카드 이벤트 추가
-                AddEventOnCard(cardName, i);
+                AddEventOnCard(i, cardName, shape, number);
+
+                // 각 카드에 인덱스 부여
+                //SetCard
 
                 return;
             }
@@ -262,11 +266,15 @@ public class PlayerController : MonoBehaviour
         useCard[index] = false;
     }
 
-    public void AddEventOnCard(string cardName, int i)
+    public void AddEventOnCard(int i, string cardName, string shape, string number)
     {
         //Debug.Log($"리스너 {cardName},{i}");
         // 뱅
-        if (cardName == "BANG") { cards = myCardPool[i].gameObject.AddComponent<Bang>(); }
+        if (cardName == "BANG") 
+        {
+            cards = myCardPool[i].gameObject.AddComponent<Bang>();
+            //cards.SetCard(i, cardName, shape, number);
+        }
         // 빗나감
         else if (cardName == "MANCATO") { cards = myCardPool[i].gameObject.AddComponent<Mancato>(); }
         // 맥주
@@ -312,6 +320,7 @@ public class PlayerController : MonoBehaviour
 
         //Debug.Log($"오브젝트 이름2: {myCardPool[i].name}");
         //myCardPool[i].gameObject.AddComponent<Button>();
+        cards.SetCard(i, cardName, shape, number);
         myCardPool[i].gameObject.GetComponent<Button>().onClick.AddListener(cards.UseCard);
     }
 
@@ -453,6 +462,8 @@ public class PlayerController : MonoBehaviour
                 deleteCardShape = findCardShape[i];
                 deleteCardNumber = findCardNumber[i];
                 ReactMancato.gameObject.SetActive(true);
+                EventMincato();
+                return;
             }
             else
             {
@@ -474,6 +485,8 @@ public class PlayerController : MonoBehaviour
                 deleteCardShape = findCardShape[i];
                 deleteCardNumber = findCardNumber[i];
                 ReactBang.gameObject.SetActive(true);
+                EventBang();
+                return;
             }
             else
             {
@@ -502,7 +515,7 @@ public class PlayerController : MonoBehaviour
 
     public void Deny()
     {
-        CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
+        CPacket msg = CPacket.create((short)PROTOCOL.REQUESTFAIL);
         msg.push(player_me_index);
         msg.push("DENY");
         network_manager.send(msg);
