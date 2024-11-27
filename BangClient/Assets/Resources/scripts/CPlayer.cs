@@ -37,6 +37,8 @@ public class CPlayer : MonoBehaviour
     [SerializeField]private string mirono;               // 조준경
     [SerializeField]private string mustang;              // 야생마
     [SerializeField]private string barile;               // 술통
+    [SerializeField] string prigione;
+    [SerializeField] string dinamite;
     [SerializeField] Transform equips;
     [SerializeField] Image gunImage;
     [SerializeField] List<Transform> equip;             // 총은 이미지 변경하고, 나머지는 on/off
@@ -69,8 +71,9 @@ public class CPlayer : MonoBehaviour
         set
         {
             gun = value;
+            Debug.Log($"총: {gun}");
 
-            gunImage.sprite = Resources.Load<Sprite>("Images/CardImage" + gun);
+            gunImage.sprite = Resources.Load<Sprite>("Images/CardImage/" + gun);
             //equip[0].gameObject.SetActive(true);
         }
     }
@@ -117,6 +120,19 @@ public class CPlayer : MonoBehaviour
                 equip[3].gameObject.SetActive(false);
         }
     }
+
+    public string Prigione
+    {
+        get { return prigione; }
+        set { prigione = value; }
+    }
+
+    public string Dinamite
+    {
+        get { return dinamite; }
+        set { dinamite = value; }
+    }
+
     #endregion
 
     [Header("Controller")]
@@ -233,7 +249,7 @@ public class CPlayer : MonoBehaviour
         //Debug.Log($"{player_index}");
     }
 
-    public void RefreshInfo(byte player_index, int life, int cardCount, int range, int depth, string gun, string mirono, string mustang, string barile)
+    public void RefreshInfo(byte player_index, int life, int cardCount, int range, int depth, string gun, string mirono, string mustang, string barile, string prigione, string dinamite)
     {
         this.player_index = player_index;
         this.maxLife = life;
@@ -244,6 +260,8 @@ public class CPlayer : MonoBehaviour
         Mirono = mirono;
         Mustang = mustang;
         Barile = barile;
+        Prigione = prigione;
+        Dinamite = dinamite;
     }    
 
     public void AddCharacterComponent()
@@ -287,31 +305,9 @@ public class CPlayer : MonoBehaviour
         //handCardPool.Dequeue().SetActive(true);
     }
 
-    public void MinusCard()
-    {
-        //handCardPool.Enqueue().SetActive(false);
-    }
-
     public void CharacterExplaine()
     {
 
-    }
-
-    // 뱅 사용
-    public void UseBang()
-    {
-
-    }
-
-    // 빗나감 사용
-    public void UseMissed()
-    {
-
-    }
-
-    public List<string> MyCard()
-    {
-        return null;
     }
 
     public void SetTarget()

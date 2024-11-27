@@ -14,6 +14,7 @@ public abstract class Cards : MonoBehaviour
 
 
     public abstract void UseCard();
+    public abstract void DelEvent();
     public abstract void SetCard(int index, string cardName, string shape, string number);
     public abstract void MouseIn_ViewCardFunc();
     public abstract void MouseOut_ViewCardFunc();

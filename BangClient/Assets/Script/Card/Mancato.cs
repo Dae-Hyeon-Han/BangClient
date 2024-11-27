@@ -28,7 +28,14 @@ public class Mancato : Cards
         //Debug.Log("Ä«µå°¡ ½ô");
 
         controller.RemoveCard(cardIndex, cardName, shape, number);
+        DelEvent();
     }
+
+    public override void DelEvent()
+    {
+        Destroy(this);
+    }
+
     public override void SetCard(int index, string cardName, string shape, string number)
     {
         cardIndex = index;

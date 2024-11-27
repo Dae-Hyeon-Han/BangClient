@@ -4592,6 +4592,8 @@ GameObject:
   - component: {fileID: 276876863}
   - component: {fileID: 276876864}
   - component: {fileID: 276876865}
+  - component: {fileID: 276876867}
+  - component: {fileID: 276876866}
   m_Layer: 5
   m_Name: player4
   m_TagString: Untagged
@@ -4706,12 +4708,52 @@ MonoBehaviour:
   mirono: 
   mustang: 
   barile: 
+  prigione: 
+  dinamite: 
   equips: {fileID: 0}
   gunImage: {fileID: 0}
   equip: []
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+--- !u!114 &276876866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276876862}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a06a04e08379d644caf6f7233e1f84dd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &276876867
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276876862}
+  m_CullTransparentMesh: 1
 --- !u!1 &282557414
 GameObject:
   m_ObjectHideFlags: 0
@@ -6008,6 +6050,8 @@ GameObject:
   - component: {fileID: 360689522}
   - component: {fileID: 360689523}
   - component: {fileID: 360689524}
+  - component: {fileID: 360689526}
+  - component: {fileID: 360689525}
   m_Layer: 5
   m_Name: player2
   m_TagString: Untagged
@@ -6122,12 +6166,52 @@ MonoBehaviour:
   mirono: 
   mustang: 
   barile: 
+  prigione: 
+  dinamite: 
   equips: {fileID: 0}
   gunImage: {fileID: 0}
   equip: []
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+--- !u!114 &360689525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360689521}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a06a04e08379d644caf6f7233e1f84dd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &360689526
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360689521}
+  m_CullTransparentMesh: 1
 --- !u!1 &361409083
 GameObject:
   m_ObjectHideFlags: 0
@@ -14580,6 +14664,8 @@ GameObject:
   - component: {fileID: 783092730}
   - component: {fileID: 783092731}
   - component: {fileID: 783092732}
+  - component: {fileID: 783092734}
+  - component: {fileID: 783092733}
   m_Layer: 5
   m_Name: player1
   m_TagString: Untagged
@@ -14694,12 +14780,52 @@ MonoBehaviour:
   mirono: 
   mustang: 
   barile: 
+  prigione: 
+  dinamite: 
   equips: {fileID: 0}
   gunImage: {fileID: 0}
   equip: []
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+--- !u!114 &783092733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783092729}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a06a04e08379d644caf6f7233e1f84dd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &783092734
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783092729}
+  m_CullTransparentMesh: 1
 --- !u!1 &785619573
 GameObject:
   m_ObjectHideFlags: 0
@@ -16602,6 +16728,8 @@ GameObject:
   m_Component:
   - component: {fileID: 920525907}
   - component: {fileID: 920525908}
+  - component: {fileID: 920525910}
+  - component: {fileID: 920525909}
   m_Layer: 5
   m_Name: player0
   m_TagString: Untagged
@@ -16660,12 +16788,52 @@ MonoBehaviour:
   mirono: 
   mustang: 
   barile: 
+  prigione: 
+  dinamite: 
   equips: {fileID: 0}
   gunImage: {fileID: 0}
   equip: []
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+--- !u!114 &920525909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920525906}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a06a04e08379d644caf6f7233e1f84dd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &920525910
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920525906}
+  m_CullTransparentMesh: 1
 --- !u!1 &932966890
 GameObject:
   m_ObjectHideFlags: 0
@@ -22361,6 +22529,8 @@ GameObject:
   - component: {fileID: 1403116337}
   - component: {fileID: 1403116338}
   - component: {fileID: 1403116339}
+  - component: {fileID: 1403116341}
+  - component: {fileID: 1403116340}
   m_Layer: 5
   m_Name: player5
   m_TagString: Untagged
@@ -22475,12 +22645,52 @@ MonoBehaviour:
   mirono: 
   mustang: 
   barile: 
+  prigione: 
+  dinamite: 
   equips: {fileID: 0}
   gunImage: {fileID: 0}
   equip: []
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+--- !u!114 &1403116340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403116336}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a06a04e08379d644caf6f7233e1f84dd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1403116341
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403116336}
+  m_CullTransparentMesh: 1
 --- !u!1 &1430499221
 GameObject:
   m_ObjectHideFlags: 0
@@ -25257,6 +25467,8 @@ GameObject:
   - component: {fileID: 1731551471}
   - component: {fileID: 1731551472}
   - component: {fileID: 1731551473}
+  - component: {fileID: 1731551475}
+  - component: {fileID: 1731551474}
   m_Layer: 5
   m_Name: player3
   m_TagString: Untagged
@@ -25371,12 +25583,52 @@ MonoBehaviour:
   mirono: 
   mustang: 
   barile: 
+  prigione: 
+  dinamite: 
   equips: {fileID: 0}
   gunImage: {fileID: 0}
   equip: []
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+--- !u!114 &1731551474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731551470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a06a04e08379d644caf6f7233e1f84dd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1731551475
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731551470}
+  m_CullTransparentMesh: 1
 --- !u!1 &1733188591
 GameObject:
   m_ObjectHideFlags: 0
@@ -26245,6 +26497,7 @@ MonoBehaviour:
   explaneBox: {fileID: 1797574691}
   explaneText: {fileID: 499102573}
   turnCheck: {fileID: 1175937365}
+  targetCheck: {fileID: 362802043}
   targetCard: 
   targetEquip: 
   ReactMancato: {fileID: 1183594037}
@@ -30362,6 +30615,8 @@ GameObject:
   - component: {fileID: 2115052260}
   - component: {fileID: 2115052261}
   - component: {fileID: 2115052262}
+  - component: {fileID: 2115052264}
+  - component: {fileID: 2115052263}
   m_Layer: 5
   m_Name: player6
   m_TagString: Untagged
@@ -30476,12 +30731,52 @@ MonoBehaviour:
   mirono: 
   mustang: 
   barile: 
+  prigione: 
+  dinamite: 
   equips: {fileID: 0}
   gunImage: {fileID: 0}
   equip: []
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+--- !u!114 &2115052263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115052259}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a06a04e08379d644caf6f7233e1f84dd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2115052264
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115052259}
+  m_CullTransparentMesh: 1
 --- !u!1 &2117393731
 GameObject:
   m_ObjectHideFlags: 0

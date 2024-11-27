@@ -36,7 +36,14 @@ public class Saloon : Cards
 
         controller.RemoveCard(cardIndex, cardName, shape, number);
         Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
+        DelEvent();
     }
+
+    public override void DelEvent()
+    {
+        Destroy(this);
+    }
+
     public override void SetCard(int index, string cardName, string shape, string number)
     {
         cardIndex = index;

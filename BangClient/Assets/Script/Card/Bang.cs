@@ -57,7 +57,13 @@ public class Bang : Cards
             controller.RemoveCard(cardIndex, cardName, shape, number);
 
             Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
+            DelEvent();
         }
+    }
+
+    public override void DelEvent()
+    {
+        Destroy(this);
     }
 
     // 오버라이딩 필요할지도?
