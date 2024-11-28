@@ -40,7 +40,7 @@ public class Panico : Cards
         Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
 
         controller.RemoveCard(cardIndex, cardName, shape, number);
-        DelEvent();
+        //DelEvent();
     }
 
     public override void DelEvent()

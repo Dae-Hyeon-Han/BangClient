@@ -57,7 +57,7 @@ public class Bang : Cards
             controller.RemoveCard(cardIndex, cardName, shape, number);
 
             Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
-            DelEvent();
+            //DelEvent();
         }
     }
 

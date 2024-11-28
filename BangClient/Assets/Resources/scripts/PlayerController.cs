@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     List<Transform> myCardPool = new List<Transform>();
     List<Image> myCardShape = new List<Image>();
     List<TextMeshProUGUI> myCardNumber = new List<TextMeshProUGUI>();
+    //[SerializeField] Transform myCardObj;
+    [SerializeField] List<Transform> myCardObj = new List<Transform>();
     #endregion
     List<bool> useCard = new List<bool>();                     // 카드 추가 시 false 인 곳의 인덱스만 사용할 것
     int deleteIndex;
@@ -147,6 +149,9 @@ public class PlayerController : MonoBehaviour
         }
 
         this.network_manager = GameObject.Find("NetworkManager").GetComponent<CNetworkManager>();
+
+        //foreach(Transform myCardObj in )
+
         //explaneWord = explaneSample.playingCardDictionary;
 
         // 장비
@@ -257,6 +262,8 @@ public class PlayerController : MonoBehaviour
         findCardName.RemoveAt(index);
         findCardShape.RemoveAt(index);
         findCardNumber.RemoveAt(index);
+
+        Destroy(myCardPool[index].GetComponent<Cards>());
     }
 
     public void EquipCard(int index, string cardName, string shape, string number)
@@ -377,16 +384,12 @@ public class PlayerController : MonoBehaviour
             msg.push(player_me_index);
             msg.push(2);
             this.network_manager.send(msg);
+            CanDraw = false;
         }
         else
         {
             Debug.Log($"{current_player_index}의 턴임");
         }
-    }
-
-    public void DrawCard(CPacket msg)
-    {
-
     }
 
     public void UsedDeckClickEvent()
@@ -430,11 +433,11 @@ public class PlayerController : MonoBehaviour
         byte target = msg.pop_byte();
         Debug.Log($"타깃1: {target}, {player_me_index}");
 
-        if(target != player_me_index)
-        {
-            Debug.Log($"타깃2: {target}");
-            return;
-        }
+        //if (target != player_me_index)
+        //{
+        //    Debug.Log($"타깃2: {target}");
+        //    return;
+        //}
         string requestCard = msg.pop_string();
 
         if (requestCard == "MINCATO")
@@ -462,7 +465,7 @@ public class PlayerController : MonoBehaviour
                 deleteCardShape = findCardShape[i];
                 deleteCardNumber = findCardNumber[i];
                 ReactMancato.gameObject.SetActive(true);
-                EventMincato();
+                EventMincato(i);
                 return;
             }
             else
@@ -485,7 +488,7 @@ public class PlayerController : MonoBehaviour
                 deleteCardShape = findCardShape[i];
                 deleteCardNumber = findCardNumber[i];
                 ReactBang.gameObject.SetActive(true);
-                EventBang();
+                EventBang(i);
                 return;
             }
             else
@@ -495,7 +498,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void EventMincato()
+    public void EventMincato(int index)
     {
         CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
         msg.push("MINCATO");
@@ -504,13 +507,14 @@ public class PlayerController : MonoBehaviour
         ReactMancato.gameObject.SetActive(false);
     }
 
-    public void EventBang()
+    public void EventBang(int index)
     {
         CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
         msg.push("BANG");
         network_manager.send(msg);
         RemoveCard(deleteIndex, deleteCardName, deleteCardShape, deleteCardNumber);
         ReactBang.gameObject.SetActive(false);
+
     }
 
     public void Deny()

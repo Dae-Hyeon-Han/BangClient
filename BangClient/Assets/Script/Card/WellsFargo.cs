@@ -21,6 +21,7 @@ public class WellsFargo : Cards
         //viewUi = transform.GetChild(0);
         //viewUi.transform.gameObject.SetActive(false);
         eventSystem = gameObject.GetComponent<EventSystem>();
+        controller = GameObject.Find("PlayerController").GetComponent<PlayerController>();
 
         cardName = "웰스파고 은행";
         funcText = "사정 거리 내의 한 사람에게 공격을 가한다.";
@@ -38,7 +39,7 @@ public class WellsFargo : Cards
 
         controller.RemoveCard(cardIndex, cardName, shape, number);
         Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
-        DelEvent();
+        //DelEvent();
     }
     public override void DelEvent()
     {
