@@ -26490,6 +26490,7 @@ MonoBehaviour:
   player: {fileID: 920525907}
   current_player_index: 0
   Target: 0
+  myCardObj: []
   chat: {fileID: 356415123}
   inputField: {fileID: 1954015129}
   network_manager: {fileID: 0}
