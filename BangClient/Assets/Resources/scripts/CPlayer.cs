@@ -27,16 +27,16 @@ public class CPlayer : MonoBehaviour
     //public int cardInHand;              // 손패
     [SerializeField] int cardCount;         // 손패 수
     //public string weapon;               // 장착중인 무기
-    public List<string> Equipment;      // 술통, 야생마, 조준경
+    //public List<string> Equipment;      // 술통, 야생마, 조준경
     public int positionFlag;            // 게임 중 거리 계산용으로 사용할 것.
     public int maxLife;                 // 최대 체력
     public int extraLife;               // 현재 체력
     public int range;                 // 내 사거리
     public int depth;                // 내가 멀어질 경우(캐릭터 특성 or 조랑말 효과)
-    [SerializeField]private string gun;                  // 총
-    [SerializeField]private string mirono;               // 조준경
-    [SerializeField]private string mustang;              // 야생마
-    [SerializeField]private string barile;               // 술통
+    [SerializeField] private string gun;                  // 총
+    [SerializeField] private string mirono;               // 조준경
+    [SerializeField] private string mustang;              // 야생마
+    [SerializeField] private string barile;               // 술통
     [SerializeField] string prigione;
     [SerializeField] string dinamite;
     [SerializeField] Transform equips;
@@ -47,7 +47,7 @@ public class CPlayer : MonoBehaviour
     public int CardCount
     {
         get { return cardCount; }
-        set 
+        set
         {
             cardCount = value;
 
@@ -57,6 +57,7 @@ public class CPlayer : MonoBehaviour
             {
                 for (int i = 0; i < cardCount; i++)
                 {
+                    //Debug.Log($"카드: {handCardPool[i].gameObject.name}");
                     handCardPool[i].gameObject.SetActive(true);
                 }
             }
@@ -71,7 +72,7 @@ public class CPlayer : MonoBehaviour
         set
         {
             gun = value;
-            Debug.Log($"총: {gun}");
+            Debug.Log($"총: {player_index},{gun}");
 
             gunImage.sprite = Resources.Load<Sprite>("Images/CardImage/" + gun);
             //equip[0].gameObject.SetActive(true);
@@ -84,6 +85,7 @@ public class CPlayer : MonoBehaviour
         set
         {
             mirono = value;
+            Debug.Log($"조준경: {player_index},{mirono}");
 
             // 대소문자 주의
             if (mirono == "true")
@@ -99,6 +101,7 @@ public class CPlayer : MonoBehaviour
         set
         {
             mustang = value;
+            Debug.Log($"야생마: {player_index},{mustang}");
 
             if (mirono == "true")
                 equip[2].gameObject.SetActive(true);
@@ -113,6 +116,7 @@ public class CPlayer : MonoBehaviour
         set
         {
             barile = value;
+            Debug.Log($"술통: {player_index},{barile}");
 
             if (mirono == "true")
                 equip[3].gameObject.SetActive(true);
@@ -153,7 +157,7 @@ public class CPlayer : MonoBehaviour
     Characters myCharacter;
 
     // 손에 든 카드
-    List<Transform> handCardPool = new List<Transform>();
+    [SerializeField] List<Transform> handCardPool = new List<Transform>();
     Image card;
 
     // ui interaction
@@ -202,7 +206,7 @@ public class CPlayer : MonoBehaviour
         #region 장비
         equips = transform.GetChild(5);
 
-        foreach(Transform equipment in equips)
+        foreach (Transform equipment in equips)
         {
             equip.Add(equipment);
         }
@@ -235,25 +239,23 @@ public class CPlayer : MonoBehaviour
         playerCharImage.sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
         jobImage.sprite = Resources.Load<Sprite>("Images/Job/" + job);
         this.life.text = "hp: " + this.maxLife;
-        //handsCard
-
-        //Debug.Log($"목록: {player_me_index}, {player_index}, {charName}, {job}, {life}");
-        //AddCharacterComponent();
-
-        for(int i=0; i<4; i++)
+        
+        for (int i = 0; i < 4; i++)
             PlusCard();
 
         // 카드 선택 이벤트 등록
-        if(gameObject.name != "player0")
+        if (gameObject.name != "player0")
             gameObject.GetComponent<Button>().onClick.AddListener(SetTarget);
-        //Debug.Log($"{player_index}");
     }
 
     public void RefreshInfo(byte player_index, int life, int cardCount, int range, int depth, string gun, string mirono, string mustang, string barile, string prigione, string dinamite)
     {
         this.player_index = player_index;
         this.maxLife = life;
-        CardCount = cardCount;
+
+        if (gameObject.name != "player0")
+            CardCount = cardCount;
+
         this.range = range;
         this.depth = depth;
         Gun = gun;
@@ -262,7 +264,7 @@ public class CPlayer : MonoBehaviour
         Barile = barile;
         Prigione = prigione;
         Dinamite = dinamite;
-    }    
+    }
 
     public void AddCharacterComponent()
     {
@@ -296,7 +298,7 @@ public class CPlayer : MonoBehaviour
             return;
         else
         {
-            for(int i=0;i<4;i++)
+            for (int i = 0; i < 4; i++)
             {
                 handCardPool[i].gameObject.SetActive(true);
             }

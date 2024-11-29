@@ -439,6 +439,7 @@ public class PlayerController : MonoBehaviour
         //    return;
         //}
         string requestCard = msg.pop_string();
+        Debug.Log($"¹ð ¸Þ½ÃÁö: {requestCard}");
 
         if (requestCard == "MINCATO")
         {
@@ -522,7 +523,7 @@ public class PlayerController : MonoBehaviour
         CPacket msg = CPacket.create((short)PROTOCOL.REQUESTFAIL);
         msg.push(player_me_index);
         msg.push("DENY");
-        network_manager.send(msg);
+        //network_manager.send(msg);
         ReactBang.gameObject.SetActive(false);
         ReactMancato.gameObject.SetActive(false);
 
