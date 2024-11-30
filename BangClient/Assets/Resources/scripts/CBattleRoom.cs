@@ -351,7 +351,7 @@ public class CBattleRoom : MonoBehaviour
         controller.turnCheck.text = "현재 턴: " + current_player_index.ToString() + "번";
         controller.CanDraw = true;
         controller.CanBang = true;
-        controller.Target = 100;                // 타깃 재 조정을 위해 필수
+        controller.Target = 0;                // 타깃 재 조정을 위해 필수
         controller.targetCheck.text = $"타깃: 없음";
     }
 
@@ -553,7 +553,7 @@ public class CBattleRoom : MonoBehaviour
             string dinamite = msg.pop_string();
 
             // 버그 원인: 서버는 무조건 0번 부터 뿌려주기 때문에, 무조건 0번 접근자가 받을 정보를 내(모든 플레이어)가 받게 됨            
-            players[i].RefreshInfo(player_me_index, life, cardCount, range, depth, gun, mirono, mustang, barile, prigione, dinamite);
+            players[i].RefreshInfo(player_index, life, cardCount, range, depth, gun, mirono, mustang, barile, prigione, dinamite);
         }
     }
 

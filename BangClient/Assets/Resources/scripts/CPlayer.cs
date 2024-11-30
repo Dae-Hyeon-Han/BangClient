@@ -30,7 +30,8 @@ public class CPlayer : MonoBehaviour
     //public List<string> Equipment;      // 술통, 야생마, 조준경
     public int positionFlag;            // 게임 중 거리 계산용으로 사용할 것.
     public int maxLife;                 // 최대 체력
-    public int extraLife;               // 현재 체력
+    //public int extraLife;               // 현재 체력
+    public int life;
     public int range;                 // 내 사거리
     public int depth;                // 내가 멀어질 경우(캐릭터 특성 or 조랑말 효과)
     [SerializeField] private string gun;                  // 총
@@ -151,7 +152,7 @@ public class CPlayer : MonoBehaviour
     TextMeshProUGUI myId;
     Image playerCharImage;
     Image jobImage;
-    TextMeshProUGUI life;
+    TextMeshProUGUI lifeText;
     //Transform handsCard;
     //Transform equips;
     Characters myCharacter;
@@ -183,7 +184,7 @@ public class CPlayer : MonoBehaviour
         myId = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         playerCharImage = transform.GetChild(1).GetComponent<Image>();
         jobImage = transform.GetChild(2).GetComponent<Image>();
-        life = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+        lifeText = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
         //handsCard = transform.GetChild(4).GetComponent<Transform>();
         //equips = transform.GetChild(5).GetComponent<Transform>();
 
@@ -238,7 +239,7 @@ public class CPlayer : MonoBehaviour
         myId.text = this.player_index + "번 플레이어";
         playerCharImage.sprite = Resources.Load<Sprite>("Images/Char/Char_" + charName);
         jobImage.sprite = Resources.Load<Sprite>("Images/Job/" + job);
-        this.life.text = "hp: " + this.maxLife;
+        this.lifeText.text = "hp: " + this.maxLife;
         
         for (int i = 0; i < 4; i++)
             PlusCard();
@@ -264,6 +265,19 @@ public class CPlayer : MonoBehaviour
         Barile = barile;
         Prigione = prigione;
         Dinamite = dinamite;
+
+        Debug.Log($"-------------------------------------------------\n" +
+            $"인덱스: {this.player_index}\n" +
+            $"라이프: {this.life}\n" +
+            $"손패수: {this.CardCount}\n" +
+            $"사거리: {this.range}\n" +
+            $"거리감: {this.depth}\n" +
+            $"총종류: {this.gun}\n" +
+            $"조준경: {this.mirono}\n" +
+            $"야생마: {this.mustang}\n" +
+            $"술  통: {this.barile}\n" +
+            $"감  옥: {this.prigione}\n" +
+            $"폭  탄: {this.dinamite}\n");
     }
 
     public void AddCharacterComponent()
