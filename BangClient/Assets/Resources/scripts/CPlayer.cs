@@ -34,6 +34,7 @@ public class CPlayer : MonoBehaviour
     public int life;
     public int range;                 // 내 사거리
     public int depth;                // 내가 멀어질 경우(캐릭터 특성 or 조랑말 효과)
+    [SerializeField] TextMeshProUGUI lifeTextUi;
     [SerializeField] private string gun;                  // 총
     [SerializeField] private string mirono;               // 조준경
     [SerializeField] private string mustang;              // 야생마
@@ -44,7 +45,7 @@ public class CPlayer : MonoBehaviour
     [SerializeField] Image gunImage;
     [SerializeField] List<Transform> equip;             // 총은 이미지 변경하고, 나머지는 on/off
 
-    #region 손패 수 정리
+    #region 캐릭터 정리
     public int CardCount
     {
         get { return cardCount; }
@@ -62,6 +63,16 @@ public class CPlayer : MonoBehaviour
                     handCardPool[i].gameObject.SetActive(true);
                 }
             }
+        }
+    }
+
+    public int Life
+    {
+        get { return life; }
+        set
+        {
+            life = value;
+            lifeTextUi.text = life.ToString();
         }
     }
     #endregion
@@ -200,6 +211,10 @@ public class CPlayer : MonoBehaviour
             card.gameObject.SetActive(false);
             handCardPool.Add(card);
         }
+
+        #region 체력 표시
+        lifeTextUi = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+        #endregion
 
         #region 손패
         #endregion

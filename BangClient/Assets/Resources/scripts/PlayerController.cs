@@ -271,6 +271,13 @@ public class PlayerController : MonoBehaviour
         // 카드 안 보이게 하고, 카드 사용 가능 여부 false로 변경
         myCardPool[index].gameObject.SetActive(false);
         useCard[index] = false;
+        
+        // 추가분
+        findCardName.RemoveAt(index);
+        findCardShape.RemoveAt(index);
+        findCardNumber.RemoveAt(index);
+
+        Destroy(myCardPool[index].GetComponent<Cards>());
     }
 
     public void AddEventOnCard(int i, string cardName, string shape, string number)

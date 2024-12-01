@@ -4698,12 +4698,12 @@ MonoBehaviour:
   charName: 
   job: 
   cardCount: 0
-  Equipment: []
   positionFlag: 0
   maxLife: 0
-  extraLife: 0
+  life: 0
   range: 0
   depth: 0
+  lifeTextUi: {fileID: 0}
   gun: 
   mirono: 
   mustang: 
@@ -4716,6 +4716,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+  handCardPool: []
 --- !u!114 &276876866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6156,12 +6157,12 @@ MonoBehaviour:
   charName: 
   job: 
   cardCount: 0
-  Equipment: []
   positionFlag: 0
   maxLife: 0
-  extraLife: 0
+  life: 0
   range: 0
   depth: 0
+  lifeTextUi: {fileID: 0}
   gun: 
   mirono: 
   mustang: 
@@ -6174,6 +6175,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+  handCardPool: []
 --- !u!114 &360689525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14770,12 +14772,12 @@ MonoBehaviour:
   charName: 
   job: 
   cardCount: 0
-  Equipment: []
   positionFlag: 0
   maxLife: 0
-  extraLife: 0
+  life: 0
   range: 0
   depth: 0
+  lifeTextUi: {fileID: 0}
   gun: 
   mirono: 
   mustang: 
@@ -14788,6 +14790,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+  handCardPool: []
 --- !u!114 &783092733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16778,12 +16781,12 @@ MonoBehaviour:
   charName: 
   job: 
   cardCount: 0
-  Equipment: []
   positionFlag: 0
   maxLife: 0
-  extraLife: 0
+  life: 0
   range: 0
   depth: 0
+  lifeTextUi: {fileID: 0}
   gun: 
   mirono: 
   mustang: 
@@ -16796,6 +16799,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+  handCardPool: []
 --- !u!114 &920525909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22635,12 +22639,12 @@ MonoBehaviour:
   charName: 
   job: 
   cardCount: 0
-  Equipment: []
   positionFlag: 0
   maxLife: 0
-  extraLife: 0
+  life: 0
   range: 0
   depth: 0
+  lifeTextUi: {fileID: 0}
   gun: 
   mirono: 
   mustang: 
@@ -22653,6 +22657,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+  handCardPool: []
 --- !u!114 &1403116340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24661,9 +24666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9152786a09a38a643b78694b8bdcc303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: 
-  shape: 
-  number: 
 --- !u!4 &1680535456
 Transform:
   m_ObjectHideFlags: 0
@@ -25573,12 +25575,12 @@ MonoBehaviour:
   charName: 
   job: 
   cardCount: 0
-  Equipment: []
   positionFlag: 0
   maxLife: 0
-  extraLife: 0
+  life: 0
   range: 0
   depth: 0
+  lifeTextUi: {fileID: 0}
   gun: 
   mirono: 
   mustang: 
@@ -25591,6 +25593,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+  handCardPool: []
 --- !u!114 &1731551474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30722,12 +30725,12 @@ MonoBehaviour:
   charName: 
   job: 
   cardCount: 0
-  Equipment: []
   positionFlag: 0
   maxLife: 0
-  extraLife: 0
+  life: 0
   range: 0
   depth: 0
+  lifeTextUi: {fileID: 0}
   gun: 
   mirono: 
   mustang: 
@@ -30740,6 +30743,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   indexNum: 0
   playerGroup: {fileID: 0}
+  handCardPool: []
 --- !u!114 &2115052263
 MonoBehaviour:
   m_ObjectHideFlags: 0
