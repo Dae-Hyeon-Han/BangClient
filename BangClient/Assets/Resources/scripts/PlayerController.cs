@@ -271,11 +271,12 @@ public class PlayerController : MonoBehaviour
         // 카드 안 보이게 하고, 카드 사용 가능 여부 false로 변경
         myCardPool[index].gameObject.SetActive(false);
         useCard[index] = false;
-        
-        // 추가분
+
+        #region 추가분
         findCardName.RemoveAt(index);
         findCardShape.RemoveAt(index);
         findCardNumber.RemoveAt(index);
+        #endregion
 
         Destroy(myCardPool[index].GetComponent<Cards>());
     }
@@ -342,7 +343,7 @@ public class PlayerController : MonoBehaviour
     {
         if (current_player_index != player_me_index)
         {
-            Debug.Log($"현재 플레이어: {current_player_index}");
+            //Debug.Log($"현재 플레이어: {current_player_index}");
             return;
         }
 
@@ -376,8 +377,8 @@ public class PlayerController : MonoBehaviour
             chatText += text + "\n";
         }
 
-        Debug.Log($"대화 : {msg}");
-        Debug.Log($"대화 목록: {chatText}");
+        //Debug.Log($"대화 : {msg}");
+        //Debug.Log($"대화 목록: {chatText}");
         chat.text = chatText;
     }
 
@@ -402,7 +403,7 @@ public class PlayerController : MonoBehaviour
     public void UsedDeckClickEvent()
     {
         // 사용한 카드 덱
-        Debug.Log("");
+        //Debug.Log("");
     }
 
     public void UseCardEvent()
@@ -446,34 +447,34 @@ public class PlayerController : MonoBehaviour
         //    return;
         //}
         string requestCard = msg.pop_string();
-        Debug.Log($"뱅 메시지: {requestCard}");
+        //Debug.Log($"뱅 메시지: {requestCard}");
 
-        if (requestCard == "MINCATO")
+        if (requestCard == "MANCATO")
         {
-            Debug.Log("빗나감을 사용하시겠습니까?");
+            //Debug.Log("빗나감을 사용하시겠습니까?");
             RequestMincato();
         }
         else if(requestCard == "BANG")
         {
-            Debug.Log("뱅을 사용하시겠습니까?");
+            //Debug.Log("뱅을 사용하시겠습니까?");
             RequestBang();
         }
     }
 
     public void RequestMincato()
     {
-        Debug.Log("빗나감 페이지 요청");
+        //Debug.Log("빗나감 페이지 요청");
 
         for (int i = 0; i < findCardName.Count; i++)
         {
-            if (findCardName[i] == "MINCATO")
+            if (findCardName[i] == "MANCATO")
             {
                 deleteIndex = i;
                 deleteCardName = findCardName[i];
                 deleteCardShape = findCardShape[i];
                 deleteCardNumber = findCardNumber[i];
                 ReactMancato.gameObject.SetActive(true);
-                EventMincato(i);
+                EventMancato(i);
                 return;
             }
             else
@@ -485,7 +486,7 @@ public class PlayerController : MonoBehaviour
 
     public void RequestBang()
     {
-        Debug.Log("뱅 페이지 요청");
+        //Debug.Log("뱅 페이지 요청");
 
         for (int i = 0; i < findCardName.Count; i++)
         {
@@ -506,10 +507,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void EventMincato(int index)
+    public void EventMancato(int index)
     {
         CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
-        msg.push("MINCATO");
+        msg.push("MANCATO");
         network_manager.send(msg);
         RemoveCard(deleteIndex, deleteCardName, deleteCardShape, deleteCardNumber);
         ReactMancato.gameObject.SetActive(false);
@@ -534,6 +535,6 @@ public class PlayerController : MonoBehaviour
         ReactBang.gameObject.SetActive(false);
         ReactMancato.gameObject.SetActive(false);
 
-        Debug.Log("공격 맞음");
+        //Debug.Log("공격 맞음");
     }
 }

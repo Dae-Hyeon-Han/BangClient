@@ -190,11 +190,11 @@ public class CBattleRoom : MonoBehaviour
 
             case PROTOCOL.PLAYER_MOVED:         // 다른 플레이어가 움직였을 때?
                 on_player_moved(msg);
-                Debug.Log("움직임!");
+                //Debug.Log("움직임!");
                 break;
             case PROTOCOL.USECARD:
                 {
-                    Debug.Log("카드 사용!");
+                    //Debug.Log("카드 사용!");
                 }
                 break;
             case PROTOCOL.REQUEST:
@@ -560,7 +560,7 @@ public class CBattleRoom : MonoBehaviour
     // 왜 11개가 호출되지?
     public void UseViewUi(PointerEventData data)
     {
-        Debug.Log("뷰 띄우기");
+        //Debug.Log("뷰 띄우기");
     }
 
     public void UseViewUi(Transform textPro, bool mouseIn, string funcText)
@@ -570,7 +570,7 @@ public class CBattleRoom : MonoBehaviour
 
     public void TurnEnd()
     {
-        Debug.Log("턴 엔드 버튼 이벤트 등록 필요");
+        //Debug.Log("턴 엔드 버튼 이벤트 등록 필요");
 
         CPacket msg = CPacket.create((short)PROTOCOL.TURN_FINISHED_REQ);
         msg.push(player_me_index);

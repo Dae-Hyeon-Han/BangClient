@@ -84,7 +84,7 @@ public class CPlayer : MonoBehaviour
         set
         {
             gun = value;
-            Debug.Log($"총: {player_index},{gun}");
+            //Debug.Log($"총: {player_index},{gun}");
 
             gunImage.sprite = Resources.Load<Sprite>("Images/CardImage/" + gun);
             //equip[0].gameObject.SetActive(true);
@@ -97,12 +97,12 @@ public class CPlayer : MonoBehaviour
         set
         {
             mirono = value;
-            Debug.Log($"조준경: {player_index},{mirono}");
+            //Debug.Log($"조준경: {player_index},{mirono}");
 
             // 대소문자 주의
-            if (mirono == "true")
+            if (mirono == "mirono_true_true")
                 equip[1].gameObject.SetActive(true);
-            else if (mirono == "false")
+            else if (mirono == "mirono_false")
                 equip[1].gameObject.SetActive(false);
         }
     }
@@ -113,11 +113,11 @@ public class CPlayer : MonoBehaviour
         set
         {
             mustang = value;
-            Debug.Log($"야생마: {player_index},{mustang}");
+            //Debug.Log($"야생마: {player_index},{mustang}");
 
-            if (mirono == "true")
+            if (mustang == "true")
                 equip[2].gameObject.SetActive(true);
-            else if (mirono == "false")
+            else if (mustang == "false")
                 equip[2].gameObject.SetActive(false);
         }
     }
@@ -128,11 +128,11 @@ public class CPlayer : MonoBehaviour
         set
         {
             barile = value;
-            Debug.Log($"술통: {player_index},{barile}");
+            //Debug.Log($"술통: {player_index},{barile}");
 
-            if (mirono == "true")
+            if (barile == "true")
                 equip[3].gameObject.SetActive(true);
-            else if (mirono == "false")
+            else if (barile == "false")
                 equip[3].gameObject.SetActive(false);
         }
     }
@@ -281,18 +281,18 @@ public class CPlayer : MonoBehaviour
         Prigione = prigione;
         Dinamite = dinamite;
 
-        Debug.Log($"-------------------------------------------------\n" +
-            $"인덱스: {this.player_index}\n" +
-            $"라이프: {this.life}\n" +
-            $"손패수: {this.CardCount}\n" +
-            $"사거리: {this.range}\n" +
-            $"거리감: {this.depth}\n" +
-            $"총종류: {this.gun}\n" +
-            $"조준경: {this.mirono}\n" +
-            $"야생마: {this.mustang}\n" +
-            $"술  통: {this.barile}\n" +
-            $"감  옥: {this.prigione}\n" +
-            $"폭  탄: {this.dinamite}\n");
+        //Debug.Log($"-------------------------------------------------\n" +
+        //    $"인덱스: {this.player_index}\n" +
+        //    $"라이프: {this.life}\n" +
+        //    $"손패수: {this.CardCount}\n" +
+        //    $"사거리: {this.range}\n" +
+        //    $"거리감: {this.depth}\n" +
+        //    $"총종류: {this.gun}\n" +
+        //    $"조준경: {this.mirono}\n" +
+        //    $"야생마: {this.mustang}\n" +
+        //    $"술  통: {this.barile}\n" +
+        //    $"감  옥: {this.prigione}\n" +
+        //    $"폭  탄: {this.dinamite}\n");
     }
 
     public void AddCharacterComponent()
