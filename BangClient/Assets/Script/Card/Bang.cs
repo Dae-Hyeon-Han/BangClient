@@ -48,7 +48,8 @@ public class Bang : Cards
             // [프로토콜][BANG][타깃 인덱스]
             CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
             msg.push("BANG");
-            msg.push(targetIndex);
+            //msg.push(targetIndex);
+            msg.push(controller.Target);
             controller.network_manager.send(msg);
 
             //controller.myState = PlayerController.PlayerState.BANG;
@@ -56,7 +57,7 @@ public class Bang : Cards
 
             controller.RemoveCard(cardIndex, cardName, shape, number);
 
-            Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
+            //Debug.Log($"사용한 카드 인덱스: {cardIndex}. {cardName}");
             //DelEvent();
         }
     }
