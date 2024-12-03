@@ -65,9 +65,14 @@ public class PlayerController : MonoBehaviour
     private bool canBang;            // 뱅을 쏠 수 있는지. 턴 시작시 true가 되고, 뱅 쏜 후에 false
     //public bool CanBang;            // 뱅 쏠 수 있는지
     Cards cards;
+    List<Cards> myCard = new List<Cards>();
+
+    #region
     List<string> findCardName = new List<string>();
     List<string> findCardShape = new List<string>();
     List<string> findCardNumber = new List<string>();
+    #endregion
+
     [SerializeField] Image explaneBox;
     [SerializeField] TextMeshProUGUI explaneText;
     Card explaneSample;
@@ -224,10 +229,18 @@ public class PlayerController : MonoBehaviour
         {
             if (useCard[i] == false)
             {
-                myCardPool[i].gameObject.SetActive(true);
+                #region
                 findCardName.Add(cardName);                     // 빗나감 등 카드 찾기 기능에 사용할 용도
                 findCardShape.Add(shape);
                 findCardNumber.Add(number);
+                #endregion
+
+                #region
+                //Cards card = new Cards;
+
+                #endregion
+
+                myCardPool[i].gameObject.SetActive(true);
                 myCardPool[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/CardImage/" + cardName);
                 myCardShape[i].sprite = Resources.Load<Sprite>("Images/CardImage/" + shape);
                 myCardNumber[i].text = number;
@@ -247,6 +260,8 @@ public class PlayerController : MonoBehaviour
     // 카드 사용시 호출
     public void RemoveCard(int index, string cardName, string shape, string number)
     {
+        Debug.Log($"버리는 카드: {index},{cardName},{shape},{number}");
+
         // 카드 안 보이게 하고, 카드 사용 가능 여부 false로 변경
         myCardPool[index].gameObject.SetActive(false);
         useCard[index] = false;
@@ -272,10 +287,13 @@ public class PlayerController : MonoBehaviour
         myCardPool[index].gameObject.SetActive(false);
         useCard[index] = false;
 
-        #region 추가분
+        #region 추가분. 서버에 카드 수 줄이는 메시지 요청 필요
         findCardName.RemoveAt(index);
         findCardShape.RemoveAt(index);
         findCardNumber.RemoveAt(index);
+
+        //CPacket msg = CPacket.create((short)PROTOCOL.DROPCARD)
+        //network_manager.send();
         #endregion
 
         Destroy(myCardPool[index].GetComponent<Cards>());
