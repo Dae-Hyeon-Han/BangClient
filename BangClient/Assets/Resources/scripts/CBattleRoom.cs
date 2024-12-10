@@ -80,7 +80,7 @@ public class CBattleRoom : MonoBehaviour
 
     // 플레잉 카드 사용시 구분용
     public List<GameObject> Cards = new List<GameObject>();
-    List<Card> HandCard = new List<Card>();
+    //List<Card> HandCard = new List<Card>();
     //Cards usedCard = new Cards();
     [SerializeField] Transform usedDeck;
 

@@ -9,7 +9,8 @@ using BangGameServer;
 public class PlayerController : MonoBehaviour
 {
     // 손 카드 및 장착 카드 목록
-    List<Card> equipCardList = new List<Card>();
+    //List<Card> equipCardList = new List<Card>();
+    List<Card> myCard = new List<Card>();
 
     // 0번 = 총
     // 1번 = 술통
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
     private bool canBang;            // 뱅을 쏠 수 있는지. 턴 시작시 true가 되고, 뱅 쏜 후에 false
     //public bool CanBang;            // 뱅 쏠 수 있는지
     Cards cards;
-    List<Cards> myCard = new List<Cards>();
+    //List<Cards> myCard = new List<Cards>();
 
     #region
     List<string> findCardName = new List<string>();
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Image explaneBox;
     [SerializeField] TextMeshProUGUI explaneText;
-    Card explaneSample;
+    //Card explaneSample;
     Dictionary<string, string> explaneWord = new Dictionary<string, string>();
     public TextMeshProUGUI turnCheck;
     public TextMeshProUGUI targetCheck;
@@ -212,11 +213,6 @@ public class PlayerController : MonoBehaviour
                     useCard[i] = true;
                 }
             }
-            else
-            {
-                //debug.text = $"인덱스: {index}, {player_me_index}";
-            }
-
         }
     }
 
