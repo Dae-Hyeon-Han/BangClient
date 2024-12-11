@@ -256,8 +256,8 @@ public class CPlayer : MonoBehaviour
         jobImage.sprite = Resources.Load<Sprite>("Images/Job/" + job);
         this.lifeText.text = "hp: " + this.maxLife;
         
-        for (int i = 0; i < 4; i++)
-            PlusCard();
+        //for (int i = 0; i < 4; i++)
+        //    PlusCard();
 
         // 카드 선택 이벤트 등록
         if (gameObject.name != "player0")
@@ -304,19 +304,6 @@ public class CPlayer : MonoBehaviour
 
         //gameObject.AddComponent<Characters>();
     }
-
-    #region 추후 삭제 요망
-    public void change_to_agent()
-    {
-        this.state = PLAYER_STATE.AI;
-    }
-
-    public void change_to_human()
-    {
-        this.state = PLAYER_STATE.HUMAN;
-    }
-
-    #endregion
 
     #region 여기서부터 뱅용. 이 플랜이 맞나...
     // 새로운 턴이 되어 카드 드로우 시

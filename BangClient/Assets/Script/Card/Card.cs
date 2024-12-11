@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using FreeNet;
 using BangGameServer;
+using UnityEngine.UI;
+using TMPro;
 
 public class Card : MonoBehaviour
 {
@@ -61,28 +63,83 @@ public class Card : MonoBehaviour
     //}
     #endregion
 
-    [SerializeField]int cardIndex;
-    [SerializeField] string cardName;
+    [Header("Player Info")]
+    [SerializeField] CPlayer player;
+
+    [Header("Card Info")]
+    [SerializeField] int cardIndex;
+    public string cardName;
     [SerializeField] string cardShape;
     [SerializeField] string cardNumber;
-    [SerializeField] Transform CardObj;
-    PlayerController controller;
 
-    public void SetCard(int index, string name, string shape, string number, Transform obj)
+    PlayerController controller;
+    CBattleRoom battleRoom;
+
+    [Header("Card Object")]
+    public Image cardImage;
+    public Image CardShape;
+    public TextMeshProUGUI CardNumber;
+
+    private void Start()
     {
+        controller = GameObject.Find("PlayerController").GetComponent<PlayerController>();
+        battleRoom = GameObject.Find("BattleRoom").GetComponent<CBattleRoom>();
+    }
+
+    public void SetCard(int index, string name, string shape, string number)
+    {
+        gameObject.SetActive(true);
+
         cardIndex = index;
         cardName = name;
         cardShape = shape;
         cardNumber = number;
-        CardObj = obj;
+
+        cardImage.sprite = Resources.Load<Sprite>("Images/CardImage/" + name);
+        CardShape.sprite = Resources.Load<Sprite>("Images/CardImage/" + shape);
+        CardNumber.text = cardNumber;
     }
 
     public void UseCard()
     {
+        if (cardName == "MANCATO" && player.charName != "Calamity_Janet")
+        {
+            Debug.Log("빗나감은 쓸 수 없습니다.");
+            return;
+        }
+
+        // 사거리 추가할 것
+        if (cardName == "BANG" && !controller.CanBang)
+        {
+            Debug.Log("뱅을 쏠 수 없습니다.");
+            return;
+        }
+
+        // 윌리 더 키드거나, 볼캐닉을 장착 중이라면 뱅을 무한히 쏠 수 있음
+        if(player.charName == "Willy_The_Kid" || player.Gun == "VOLCANIC")
+        {
+            Debug.Log("리로드!");
+            controller.CanBang = true;
+        }
+
+        //[프로토콜][카드이름][타깃(안쓸 때도 있음)]으로 패킷 구성
+        Debug.Log($"{cardName} 사용");
         CPacket msg = CPacket.create((short)PROTOCOL.USECARD);
         msg.push(cardName);
-        msg.push(controller.player_me_index);
+        msg.push(controller.Target);
         controller.network_manager.send(msg);
-        controller.RemoveCard(cardIndex, cardName, cardShape, cardNumber);
+
+        DropCard(cardName, cardShape, cardNumber);
+    }
+
+    public void DropCard(string name, string shape, string number)
+    {
+        CPacket msg = CPacket.create((short)PROTOCOL.DROPCARD);
+        msg.push(controller.player_me_index);
+        msg.push(name);
+        msg.push(shape);
+        msg.push(number);
+        controller.network_manager.send(msg);
+        gameObject.SetActive(false);
     }
 }

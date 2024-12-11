@@ -1342,6 +1342,7 @@ GameObject:
   - component: {fileID: 99126220}
   - component: {fileID: 99126219}
   - component: {fileID: 99126218}
+  - component: {fileID: 99126223}
   m_Layer: 5
   m_Name: HandCard (8)
   m_TagString: Untagged
@@ -1486,9 +1487,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 99126223}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1536,6 +1537,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99126216}
   m_CullTransparentMesh: 1
+--- !u!114 &99126223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99126216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 99126221}
+  CardShape: {fileID: 420636445}
+  CardNumber: {fileID: 300824774}
 --- !u!1 &99547138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,6 +1708,7 @@ GameObject:
   - component: {fileID: 99959597}
   - component: {fileID: 99959596}
   - component: {fileID: 99959595}
+  - component: {fileID: 99959600}
   m_Layer: 5
   m_Name: HandCard (6)
   m_TagString: Untagged
@@ -1831,9 +1853,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 99959600}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1881,6 +1903,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99959593}
   m_CullTransparentMesh: 1
+--- !u!114 &99959600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99959593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 99959598}
+  CardShape: {fileID: 2063830350}
+  CardNumber: {fileID: 605409473}
 --- !u!1 &100490522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2313,6 +2355,7 @@ GameObject:
   - component: {fileID: 125829962}
   - component: {fileID: 125829961}
   - component: {fileID: 125829960}
+  - component: {fileID: 125829965}
   m_Layer: 5
   m_Name: HandCard (10)
   m_TagString: Untagged
@@ -2457,9 +2500,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 125829965}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2507,6 +2550,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125829958}
   m_CullTransparentMesh: 1
+--- !u!114 &125829965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125829958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 125829963}
+  CardShape: {fileID: 1030470330}
+  CardNumber: {fileID: 385086755}
 --- !u!1 &126459386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2875,6 +2938,7 @@ GameObject:
   - component: {fileID: 154816142}
   - component: {fileID: 154816141}
   - component: {fileID: 154816140}
+  - component: {fileID: 154816145}
   m_Layer: 5
   m_Name: HandCard (12)
   m_TagString: Untagged
@@ -3019,9 +3083,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 154816145}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3069,6 +3133,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154816138}
   m_CullTransparentMesh: 1
+--- !u!114 &154816145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154816138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 154816143}
+  CardShape: {fileID: 470935827}
+  CardNumber: {fileID: 388691975}
 --- !u!1 &155377039
 GameObject:
   m_ObjectHideFlags: 0
@@ -3706,8 +3790,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6439,6 +6523,7 @@ GameObject:
   - component: {fileID: 376673155}
   - component: {fileID: 376673154}
   - component: {fileID: 376673153}
+  - component: {fileID: 376673158}
   m_Layer: 5
   m_Name: HandCard (9)
   m_TagString: Untagged
@@ -6583,9 +6668,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 376673158}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6633,6 +6718,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376673151}
   m_CullTransparentMesh: 1
+--- !u!114 &376673158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376673151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 376673156}
+  CardShape: {fileID: 1982679418}
+  CardNumber: {fileID: 2139025741}
 --- !u!1 &380098144
 GameObject:
   m_ObjectHideFlags: 0
@@ -6993,8 +7098,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7421,6 +7526,7 @@ GameObject:
   - component: {fileID: 419149255}
   - component: {fileID: 419149254}
   - component: {fileID: 419149253}
+  - component: {fileID: 419149258}
   m_Layer: 5
   m_Name: HandCard (5)
   m_TagString: Untagged
@@ -7565,9 +7671,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 419149258}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7615,6 +7721,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419149251}
   m_CullTransparentMesh: 1
+--- !u!114 &419149258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419149251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 419149256}
+  CardShape: {fileID: 2146778782}
+  CardNumber: {fileID: 1978636472}
 --- !u!1 &420636443
 GameObject:
   m_ObjectHideFlags: 0
@@ -8545,6 +8671,7 @@ GameObject:
   - component: {fileID: 477948332}
   - component: {fileID: 477948333}
   - component: {fileID: 477948334}
+  - component: {fileID: 477948335}
   m_Layer: 5
   m_Name: HandCard (0)
   m_TagString: Untagged
@@ -8656,9 +8783,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 477948335}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8739,6 +8866,26 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &477948335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477948328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 477948330}
+  CardShape: {fileID: 1948540336}
+  CardNumber: {fileID: 1719345484}
 --- !u!1 &487892992
 GameObject:
   m_ObjectHideFlags: 0
@@ -11808,8 +11955,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -16673,7 +16820,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834697931}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: EventMincato
+        m_MethodName: RequestMincato
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18180,6 +18327,7 @@ GameObject:
   - component: {fileID: 1020078848}
   - component: {fileID: 1020078847}
   - component: {fileID: 1020078846}
+  - component: {fileID: 1020078851}
   m_Layer: 5
   m_Name: HandCard (3)
   m_TagString: Untagged
@@ -18324,9 +18472,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1020078851}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18374,6 +18522,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020078844}
   m_CullTransparentMesh: 1
+--- !u!114 &1020078851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020078844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 1020078849}
+  CardShape: {fileID: 1478421399}
+  CardNumber: {fileID: 761034851}
 --- !u!1 &1024562845
 GameObject:
   m_ObjectHideFlags: 0
@@ -19566,6 +19734,7 @@ GameObject:
   - component: {fileID: 1171161725}
   - component: {fileID: 1171161724}
   - component: {fileID: 1171161723}
+  - component: {fileID: 1171161728}
   m_Layer: 5
   m_Name: HandCard (1)
   m_TagString: Untagged
@@ -19710,9 +19879,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1171161728}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19760,6 +19929,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171161721}
   m_CullTransparentMesh: 1
+--- !u!114 &1171161728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171161721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 1171161726}
+  CardShape: {fileID: 491293272}
+  CardNumber: {fileID: 76978528}
 --- !u!1 &1175937363
 GameObject:
   m_ObjectHideFlags: 0
@@ -20192,6 +20381,7 @@ GameObject:
   - component: {fileID: 1207271745}
   - component: {fileID: 1207271744}
   - component: {fileID: 1207271743}
+  - component: {fileID: 1207271748}
   m_Layer: 5
   m_Name: HandCard (14)
   m_TagString: Untagged
@@ -20336,9 +20526,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1207271748}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20386,6 +20576,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1207271741}
   m_CullTransparentMesh: 1
+--- !u!114 &1207271748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207271741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 1207271746}
+  CardShape: {fileID: 1184884264}
+  CardNumber: {fileID: 131534227}
 --- !u!1 &1212247389
 GameObject:
   m_ObjectHideFlags: 0
@@ -20826,8 +21036,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -21043,6 +21253,7 @@ GameObject:
   - component: {fileID: 1306967053}
   - component: {fileID: 1306967052}
   - component: {fileID: 1306967051}
+  - component: {fileID: 1306967056}
   m_Layer: 5
   m_Name: HandCard (11)
   m_TagString: Untagged
@@ -21187,9 +21398,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1306967056}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21237,6 +21448,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306967049}
   m_CullTransparentMesh: 1
+--- !u!114 &1306967056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306967049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 1306967054}
+  CardShape: {fileID: 1588371374}
+  CardNumber: {fileID: 512140971}
 --- !u!1 &1311423424
 GameObject:
   m_ObjectHideFlags: 0
@@ -21966,6 +22197,7 @@ GameObject:
   - component: {fileID: 1373225815}
   - component: {fileID: 1373225814}
   - component: {fileID: 1373225813}
+  - component: {fileID: 1373225818}
   m_Layer: 5
   m_Name: HandCard (2)
   m_TagString: Untagged
@@ -22110,9 +22342,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1373225818}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22160,6 +22392,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1373225811}
   m_CullTransparentMesh: 1
+--- !u!114 &1373225818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373225811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 1373225816}
+  CardShape: {fileID: 2117393733}
+  CardNumber: {fileID: 811938912}
 --- !u!1 &1381910317
 GameObject:
   m_ObjectHideFlags: 0
@@ -23424,8 +23676,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -23789,8 +24041,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -24369,7 +24621,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834697931}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: EventBang
+        m_MethodName: RequestBang
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24636,63 +24888,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661964685}
   m_CullTransparentMesh: 1
---- !u!1 &1680535454
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1680535456}
-  - component: {fileID: 1680535455}
-  - component: {fileID: 1680535457}
-  m_Layer: 0
-  m_Name: CardManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1680535455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680535454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9152786a09a38a643b78694b8bdcc303, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1680535456
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680535454}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 247.5, y: 180, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1680535457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680535454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1700966672
 GameObject:
   m_ObjectHideFlags: 0
@@ -24707,6 +24902,7 @@ GameObject:
   - component: {fileID: 1700966676}
   - component: {fileID: 1700966675}
   - component: {fileID: 1700966674}
+  - component: {fileID: 1700966679}
   m_Layer: 5
   m_Name: HandCard (7)
   m_TagString: Untagged
@@ -24851,9 +25047,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1700966679}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24901,6 +25097,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700966672}
   m_CullTransparentMesh: 1
+--- !u!114 &1700966679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700966672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 1700966677}
+  CardShape: {fileID: 1874995534}
+  CardNumber: {fileID: 260708451}
 --- !u!1 &1711754902
 GameObject:
   m_ObjectHideFlags: 0
@@ -25789,6 +26005,7 @@ GameObject:
   - component: {fileID: 1758240026}
   - component: {fileID: 1758240025}
   - component: {fileID: 1758240024}
+  - component: {fileID: 1758240029}
   m_Layer: 5
   m_Name: HandCard (4)
   m_TagString: Untagged
@@ -25933,9 +26150,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1758240029}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25983,6 +26200,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758240022}
   m_CullTransparentMesh: 1
+--- !u!114 &1758240029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758240022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 1758240027}
+  CardShape: {fileID: 1041974681}
+  CardNumber: {fileID: 934826496}
 --- !u!1 &1773786760
 GameObject:
   m_ObjectHideFlags: 0
@@ -26493,7 +26730,6 @@ MonoBehaviour:
   player: {fileID: 920525907}
   current_player_index: 0
   Target: 0
-  myCardObj: []
   chat: {fileID: 356415123}
   inputField: {fileID: 1954015129}
   network_manager: {fileID: 0}
@@ -26506,6 +26742,7 @@ MonoBehaviour:
   targetEquip: 
   ReactMancato: {fileID: 1183594037}
   ReactBang: {fileID: 57964583}
+  ReactDuello: {fileID: 1445133207}
   myEventState: 0
   myState: 0
   setTargetUi: {fileID: 106060665}
@@ -30005,6 +30242,7 @@ GameObject:
   - component: {fileID: 2084397786}
   - component: {fileID: 2084397785}
   - component: {fileID: 2084397784}
+  - component: {fileID: 2084397789}
   m_Layer: 5
   m_Name: HandCard (13)
   m_TagString: Untagged
@@ -30149,9 +30387,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UseCard, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 2084397789}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: UseCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -30199,6 +30437,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084397782}
   m_CullTransparentMesh: 1
+--- !u!114 &2084397789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084397782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711972ab887f94447ad9bfe19d2e76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 920525908}
+  cardIndex: 0
+  cardName: 
+  cardShape: 
+  cardNumber: 
+  cardImage: {fileID: 2084397787}
+  CardShape: {fileID: 1168773781}
+  CardNumber: {fileID: 2049844164}
 --- !u!1 &2090026216
 GameObject:
   m_ObjectHideFlags: 0
@@ -30927,8 +31185,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
