@@ -5388,9 +5388,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 605197547}
-        m_TargetAssemblyTypeName: React, Assembly-CSharp
-        m_MethodName: Duelloed
+      - m_Target: {fileID: 1834697931}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: EventDuello
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10532,10 +10532,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 605197547}
-        m_TargetAssemblyTypeName: React, Assembly-CSharp
-        m_MethodName: DenyReact
-        m_Mode: 5
+      - m_Target: {fileID: 1834697931}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Deny
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -16820,7 +16820,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834697931}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: RequestMincato
+        m_MethodName: EventMancato
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24621,7 +24621,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834697931}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: RequestBang
+        m_MethodName: EventBang
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

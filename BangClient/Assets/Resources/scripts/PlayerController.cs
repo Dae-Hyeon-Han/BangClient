@@ -51,14 +51,14 @@ public class PlayerController : MonoBehaviour
     private bool canBang;            // 뱅을 쏠 수 있는지. 턴 시작시 true가 되고, 뱅 쏜 후에 false
     //public bool CanBang;            // 뱅 쏠 수 있는지
     Cards cards;
-    
+
     [SerializeField] Image explaneBox;
     [SerializeField] TextMeshProUGUI explaneText;
     //Card explaneSample;
     Dictionary<string, string> explaneWord = new Dictionary<string, string>();
     public TextMeshProUGUI turnCheck;
     public TextMeshProUGUI targetCheck;
-    
+
     // 타깃 설정을 위해 on/off 되어야 하는 부분(클릭 가능 여부 => 뱅을 쏠 때, 플레이어 타깃 버튼의 콜라이더가 너무 커서 필요함)
     // 강탈 및 캣 벌로우 사용을 위해 필요
     [Header("Target Check")]
@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform ReactBang;
     [SerializeField] Transform ReactDuello;
     Card tempCard;
+    int checkCount;
 
     // 뱅을 쏠 수 있는지 확인 여부용. 턴 시작 시 true로 교체
     public bool CanBang
@@ -128,10 +129,10 @@ public class PlayerController : MonoBehaviour
         // pool setting
         //foreach (Transform myCard in player.GetChild(4))
         //{
-            //myCardPool.Add(myCard);
-            //myCardShape.Add(myCard.GetChild(0).GetComponent<Image>());
-            //myCardNumber.Add(myCard.GetChild(1).GetComponent<TextMeshProUGUI>());
-            //useCard.Add(false);
+        //myCardPool.Add(myCard);
+        //myCardShape.Add(myCard.GetChild(0).GetComponent<Image>());
+        //myCardNumber.Add(myCard.GetChild(1).GetComponent<TextMeshProUGUI>());
+        //useCard.Add(false);
         //}
 
         this.network_manager = GameObject.Find("NetworkManager").GetComponent<CNetworkManager>();
@@ -230,11 +231,11 @@ public class PlayerController : MonoBehaviour
         //}
         #endregion
 
-        for(int i=0; i<myCard.Count; i++)
+        for (int i = 0; i < myCard.Count; i++)
         {
             // 사용할 수 없는 카드라면. 카드 추가 후 return.
             // 사용할 수 있는 카드면 다음 인덱스로.
-            if(myCard[i].gameObject.activeSelf == false)
+            if (myCard[i].gameObject.activeSelf == false)
             {
                 myCard[i].SetCard(i, cardName, shape, number);
                 return;
@@ -459,20 +460,20 @@ public class PlayerController : MonoBehaviour
         if (requestCard == "MANCATO")
         {
             //Debug.Log("빗나감을 사용하시겠습니까?");
-            RequestMincato();
+            RequestMancato();
         }
-        else if(requestCard == "BANG")
+        else if (requestCard == "BANG")
         {
             //Debug.Log("뱅을 사용하시겠습니까?");
             RequestBang();
         }
-        else if(requestCard == "Duello")
+        else if (requestCard == "Duello")
         {
             RequestDuello();
         }
     }
 
-    public void RequestMincato()
+    public void RequestMancato()
     {
         #region
         ////Debug.Log("빗나감 페이지 요청");
@@ -497,9 +498,9 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         // 내 손에 빗나감이 있는지 확인
-        for (int i=0; i<myCard.Count; i++)
+        for (int i = 0; i < myCard.Count; i++)
         {
-            if(myCard[i].cardName == "MANCATO")
+            if (myCard[i].cardName == "MANCATO")
             {
                 // 페이지 요청
                 ReactMancato.gameObject.SetActive(true);
@@ -507,9 +508,14 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Deny();
+                //Deny();
+                checkCount++;
             }
+
+            if (checkCount == myCard.Count)
+                Deny();
         }
+        checkCount = 0;
         // 빗나감 쓸지 페이지 요청
         // 안쓰면 체력--
         // 쓰면 UseCard하기
@@ -528,9 +534,14 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Deny();
+                //Deny();
+                checkCount++;
             }
+
+            if (checkCount == myCard.Count)
+                Deny();
         }
+        checkCount = 0;
     }
     public void RequestDuello()
     {
@@ -545,13 +556,19 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Deny();
+                //Deny();
+                checkCount++;
             }
+
+            if (checkCount == myCard.Count)
+                Deny();
         }
+        checkCount = 0;
     }
 
     public void EventMancato()
     {
+        Debug.Log("빗나감 사용함, 오브젝트 꺼져라!");
         CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
         msg.push(player_me_index);
         msg.push("MANCATO");
@@ -559,6 +576,8 @@ public class PlayerController : MonoBehaviour
 
         tempCard.gameObject.SetActive(false);
         tempCard = null;
+
+        AllReactShutDown();
     }
 
     public void EventBang()
@@ -570,6 +589,8 @@ public class PlayerController : MonoBehaviour
 
         tempCard.gameObject.SetActive(false);
         tempCard = null;
+
+        AllReactShutDown();
     }
 
     public void EventDuello()
@@ -581,15 +602,26 @@ public class PlayerController : MonoBehaviour
 
         tempCard.gameObject.SetActive(false);
         tempCard = null;
+
+        AllReactShutDown();
     }
 
     public void Deny()
     {
-        CPacket msg = CPacket.create((short)PROTOCOL.REQUESTFAIL);
+        CPacket msg = CPacket.create((short)PROTOCOL.REACTION);
         msg.push(player_me_index);
         msg.push("DENY");
-        network_manager.send(msg);;
+        network_manager.send(msg); ;
 
-        Debug.Log("공격 맞음");
+        Debug.Log("공격 맞음. 오브젝트 꺼져라!");
+
+        AllReactShutDown();
+    }
+
+    public void AllReactShutDown()
+    {
+        ReactMancato.gameObject.SetActive(false);
+        ReactBang.gameObject.SetActive(false);
+        ReactDuello.gameObject.SetActive(false);
     }
 }

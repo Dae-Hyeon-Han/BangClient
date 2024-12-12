@@ -100,9 +100,9 @@ public class CPlayer : MonoBehaviour
             //Debug.Log($"조준경: {player_index},{mirono}");
 
             // 대소문자 주의
-            if (mirono == "mirono_true_true")
+            if (mirono == "true")
                 equip[1].gameObject.SetActive(true);
-            else if (mirono == "mirono_false")
+            else if (mirono == "false")
                 equip[1].gameObject.SetActive(false);
         }
     }
@@ -267,7 +267,7 @@ public class CPlayer : MonoBehaviour
     public void RefreshInfo(byte player_index, int life, int cardCount, int range, int depth, string gun, string mirono, string mustang, string barile, string prigione, string dinamite)
     {
         this.player_index = player_index;
-        this.maxLife = life;
+        this.Life = life;
 
         if (gameObject.name != "player0")
             CardCount = cardCount;
